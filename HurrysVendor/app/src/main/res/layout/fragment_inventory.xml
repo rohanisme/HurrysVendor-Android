@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:id="@+id/l1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:fontFamily="@font/cera_pro_bold"
+                android:paddingStart="16dp"
+                android:text="My Inventory"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:gravity="right"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/searchicon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/search"/>
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/l1">
+
+        <RelativeLayout
+            android:id="@+id/rlSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingStart="16dp"
+            android:background="@drawable/border"
+            >
+
+            <ImageView
+                android:id="@+id/search1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:paddingStart="5dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/searchlight" />
+
+            <EditText
+                android:id="@+id/txtSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingStart="10dp"
+                android:hint="Search...."
+                android:maxLines="1"
+                android:inputType="text"
+                android:layout_toRightOf="@+id/search1"
+                android:layout_toLeftOf="@+id/imgSearch"
+                android:background="#00000000"
+                android:ems="10"/>
+
+            <ImageView
+                android:id="@+id/clear"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:paddingEnd="5dp"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_close" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/l10"
+                android:layout_width="match_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/z1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/t1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Categories"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/colorDarkgrey"
+                        android:textSize="14dp"
+                        android:fontFamily="@font/cera_pro_medium"/>
+
+                    <View
+                        android:id="@+id/s1"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="4dp"
+                        android:background="#eaeaea"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/z2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/t2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Products"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/colorDarkgrey"
+                        android:textSize="14dp"
+                        android:fontFamily="@font/cera_pro_medium"/>
+
+                    <View
+                        android:id="@+id/s2"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="4dp"
+                        android:background="#eaeaea"/>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l11"
+                android:layout_width="match_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:visibility="gone"
+                android:weightSum="1"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Products"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp"
+                        android:fontFamily="@font/cera_pro_medium"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@color/colorPrimary"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"
+                android:overScrollMode="never"
+                android:nestedScrollingEnabled="true"/>
+
+            <LinearLayout
+                android:id="@+id/offline"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:layout_marginTop="175dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Your Inventory is Empty!"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/cera_pro_bold"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Click below to start adding products"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/cera_pro_bold"
+                    />
+
+                <Button
+                    android:id="@+id/go"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="32dp"
+                    android:layout_gravity="center"
+                    android:text="Add Products"
+                    android:background="@drawable/addvariation"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/plus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/plus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

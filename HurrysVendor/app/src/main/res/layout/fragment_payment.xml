@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/l1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="15dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:paddingStart="16dp"
+                    android:text="Payment History"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:overScrollMode="never">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bank Details"
+                android:fontFamily="@font/cera_pro_medium"
+                android:textSize="14dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="16dp"
+                android:textColor="#999999"
+                />
+
+            <TextView
+                android:id="@+id/bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/cera_pro_medium"
+                android:textSize="16dp"
+                android:textColor="@color/black"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="16dp"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:background="@drawable/earn_bg"
+                android:layout_alignParentBottom="true"
+                >
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:gravity="center"
+                        android:fontFamily="@font/cera_pro_medium"
+                        android:textColor="@color/white"
+                        android:text="Current Earnings"/>
+                    <TextView
+                        android:id="@+id/earnings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="21dp"
+                        android:paddingStart="16dp"
+                        android:gravity="left"
+                        android:fontFamily="@font/cera_pro_bold"
+                        android:textColor="@color/white"
+                        android:text="￡0.00"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:gravity="center"
+                        android:fontFamily="@font/cera_pro_medium"
+                        android:textColor="@color/white"
+                        android:text="Next Settlement Date"/>
+                    <TextView
+                        android:id="@+id/paymentdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="16dp"
+                        android:paddingStart="16dp"
+                        android:gravity="left"
+                        android:fontFamily="@font/cera_pro_bold"
+                        android:textColor="@color/white"
+                        android:text="August 31,2020"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="16dp"
+                android:background="#f5f5f5"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:background="@color/white"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/t1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tt1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="My Earnings"
+                        android:fontFamily="@font/cera_pro_medium"
+                        android:textSize="16dp"
+                        android:paddingBottom="15dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary"
+                        />
+                    <View
+                        android:id="@+id/v1"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="4dp"
+                        android:background="#eaeaea"/>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/t2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tt2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Settlements"
+                        android:fontFamily="@font/cera_pro_medium"
+                        android:textSize="16dp"
+                        android:paddingBottom="15dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary"
+                        />
+                    <View
+                        android:id="@+id/v2"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@color/colorPrimary"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#f5f5f5"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="All Settlements"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/cera_pro_medium"
+                android:textSize="14dp"
+                android:textColor="#999999"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="true"
+                android:scrollbars="none"
+                android:overScrollMode="never"/>
+
+
+            <Button
+                android:id="@+id/rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="39dp"
+                android:layout_marginTop="46dp"
+                android:layout_marginEnd="39dp"
+                android:layout_marginBottom="32dp"
+                android:background="#00b246"
+                android:visibility="gone"
+                android:fontFamily="@font/cera_pro_medium"
+                android:text="Download Settlements"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                />
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

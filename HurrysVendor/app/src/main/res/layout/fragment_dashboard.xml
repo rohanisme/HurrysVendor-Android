@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/l1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:fontFamily="@font/cera_pro_bold"
+        android:paddingStart="16dp"
+        android:text="My Orders"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/l1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/z1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/t1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Orders"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/colorDarkgrey"
+                        android:textSize="14dp"
+                        android:fontFamily="@font/cera_pro_medium"/>
+
+                    <View
+                        android:id="@+id/s1"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="4dp"
+                        android:background="#eaeaea"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/z2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/t2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Past Orders"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/colorDarkgrey"
+                        android:textSize="14dp"
+                        android:fontFamily="@font/cera_pro_medium"/>
+
+                    <View
+                        android:id="@+id/s2"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="4dp"
+                        android:background="#eaeaea"/>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"
+                android:overScrollMode="never"
+                android:nestedScrollingEnabled="true"/>
+
+            <LinearLayout
+                android:id="@+id/online"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="75dp"
+                        android:layout_marginTop="24dp"
+                        android:paddingStart="32dp"
+                        android:paddingEnd="32dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        android:background="@drawable/earn_bg"
+                        android:layout_alignParentBottom="true"
+                        >
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16dp"
+                                android:gravity="center"
+                                android:fontFamily="@font/cera_pro_medium"
+                                android:textColor="@color/white"
+                                android:text="Current Earnings"/>
+                            <TextView
+                                android:id="@+id/earnings1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:textSize="21dp"
+                                android:paddingStart="16dp"
+                                android:gravity="left"
+                                android:fontFamily="@font/cera_pro_bold"
+                                android:textColor="@color/white"
+                                android:text=""/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16dp"
+                                android:gravity="center"
+                                android:fontFamily="@font/cera_pro_medium"
+                                android:textColor="@color/white"
+                                android:text="Next Settlement Date"/>
+                            <TextView
+                                android:id="@+id/paymentdate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:textSize="16dp"
+                                android:paddingStart="16dp"
+                                android:gravity="left"
+                                android:fontFamily="@font/cera_pro_bold"
+                                android:textColor="@color/white"
+                                android:text="August 31,2020"/>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:layout_marginTop="128dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="You are Online!"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/cera_pro_bold"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Waiting for Orders"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/cera_pro_bold"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/onlinepast"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="75dp"
+                        android:layout_marginTop="24dp"
+                        android:paddingStart="32dp"
+                        android:paddingEnd="32dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        android:background="@drawable/earn_bg"
+                        android:layout_alignParentBottom="true"
+                        >
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16dp"
+                                android:gravity="center"
+                                android:fontFamily="@font/cera_pro_medium"
+                                android:textColor="@color/white"
+                                android:text="Current Earnings"/>
+                            <TextView
+                                android:id="@+id/earnings2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:textSize="21dp"
+                                android:paddingStart="16dp"
+                                android:gravity="left"
+                                android:fontFamily="@font/cera_pro_bold"
+                                android:textColor="@color/white"
+                                android:text=""/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16dp"
+                                android:gravity="center"
+                                android:fontFamily="@font/cera_pro_medium"
+                                android:textColor="@color/white"
+                                android:text="Next Settlement Date"/>
+                            <TextView
+                                android:id="@+id/paymentdate1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:textSize="16dp"
+                                android:paddingStart="16dp"
+                                android:gravity="left"
+                                android:fontFamily="@font/cera_pro_bold"
+                                android:textColor="@color/white"
+                                android:text="August 31,2020"/>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:layout_marginTop="128dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="You have not completed any orders"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/cera_pro_bold"
+                    />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/offline"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="24dp"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:background="@drawable/earn_bg"
+                android:layout_alignParentBottom="true"
+                >
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:gravity="center"
+                        android:fontFamily="@font/cera_pro_medium"
+                        android:textColor="@color/white"
+                        android:text="Current Earnings"/>
+                    <TextView
+                        android:id="@+id/earnings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="21dp"
+                        android:paddingStart="16dp"
+                        android:gravity="left"
+                        android:fontFamily="@font/cera_pro_bold"
+                        android:textColor="@color/white"
+                        android:text=""/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:gravity="center"
+                        android:fontFamily="@font/cera_pro_medium"
+                        android:textColor="@color/white"
+                        android:text="Next Settlement Date"/>
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="16dp"
+                        android:paddingStart="16dp"
+                        android:gravity="left"
+                        android:fontFamily="@font/cera_pro_bold"
+                        android:textColor="@color/white"
+                        android:text="August 31,2020"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_marginTop="128dp"
+            android:layout_gravity="center_vertical"
+            android:text="You are offfline!"
+            android:textSize="18dp"
+            android:fontFamily="@font/cera_pro_bold"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#999999"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_vertical"
+            android:text="Click below to start accepting orders"
+            android:textSize="14dp"
+            android:fontFamily="@font/cera_pro_bold"
+            />
+
+        <Button
+            android:id="@+id/go"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="32dp"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:background="@drawable/go"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

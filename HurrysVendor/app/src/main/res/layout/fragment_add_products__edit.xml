@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/touch"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/l1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="15dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/back" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/cera_pro_medium"
+                        android:paddingStart="16dp"
+                        android:text="Add Products"
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f5f5f5"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:text="Product Photos"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:fontFamily="@font/cera_pro_medium"
+                android:textColor="@color/colorslategrey"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:paddingBottom="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/doc1"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/addimage"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/doc2"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/addimage"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/doc3"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/addimage"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:layout_marginTop="16dp"
+            android:text="Product Info"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="#55565b"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="Item Name "
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:inputType="textCapWords"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="Product Category "
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="@color/black"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:paddingTop="15dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/border_line"
+            android:orientation="vertical"
+            >
+
+            <Spinner
+                android:id="@+id/subcategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/cera_pro_medium"
+                android:inputType="textCapSentences"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="Product SubCategory "
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="@color/black"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:paddingTop="15dp"
+            android:weightSum="2"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/border_line"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8">
+
+                <Spinner
+                    android:id="@+id/itemcategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:inputType="textCapSentences"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="0.2">
+
+                <ImageView
+                    android:id="@+id/add"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/plus_green"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="24dp"
+            android:background="#f5f5f5"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:layout_marginTop="16dp"
+            android:text="Product Quantity &amp; Price"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="#55565b"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/r1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+        <Button
+            android:id="@+id/plus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/landmark"
+            android:layout_margin="32dp"
+            android:text="Add Variations"
+            android:background="@drawable/addvariation"
+            android:fontFamily="@font/cera_pro_bold"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="24dp"
+            android:background="#f5f5f5"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:layout_marginTop="16dp"
+            android:text="Product Features &amp; Descriptions"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="#55565b"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="Product Description"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:paddingStart="10dp"
+            android:minLines="3"
+            android:maxLines="8"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="24dp"
+            android:background="#f5f5f5"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:layout_marginTop="16dp"
+            android:text="Additional Information"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="#55565b"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="Key Features "
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/key"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:inputType="textCapWords"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="Units "
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/units"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:inputType="textCapWords"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="Disclaimer "
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/disclaimer"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:inputType="textCapWords"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="Shell Life "
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/shell"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:inputType="textCapWords"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="Manufacturing Details "
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/manufacture"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:inputType="textCapWords"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="Seller "
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/seller"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:inputType="textCapWords"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/landmark"
+            android:layout_margin="32dp"
+            android:background="#00b246"
+            android:text="UPDATE"
+            android:fontFamily="@font/cera_pro_bold"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

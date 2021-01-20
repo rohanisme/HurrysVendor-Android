@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:scrollbars="none"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activities.Welcome">
+
+    <LinearLayout
+        android:id="@+id/stage2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="40dp"
+        android:layout_marginTop="24dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="32dp"
+            android:background="#ffffff"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="Bank Account Name"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/bankaccount"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:inputType="textCapSentences"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="Account Number"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/bnumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:inputType="numberPassword"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="Confirm Account Number"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/bcnumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:inputType="number"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="Bank Sort Code"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/bsortcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:inputType="number"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="Bank Name"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/bankname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:inputType="textCapCharacters"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="Business Name"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/businessname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:inputType="textCapCharacters"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="Business Category"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:paddingTop="15dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/border_line"
+            android:orientation="vertical"
+            >
+
+            <Spinner
+                android:id="@+id/category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/cera_pro_medium"
+                android:inputType="textCapSentences"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="Business Address"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/baddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:inputType="textCapCharacters"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="Business Description"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/bdescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:inputType="textCapCharacters"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="Opening Time"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/otime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:text="HH:MM"
+            android:paddingEnd="10dp"
+            android:drawableRight="@drawable/ic_cal"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="Closing Time"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/ctime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:text="HH:MM"
+            android:paddingEnd="10dp"
+            android:drawableRight="@drawable/ic_cal"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="Commision"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/commision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:inputType="numberDecimal"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="Deliery Time"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/deliverytime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/border_line"
+            android:fontFamily="@font/cera_pro_medium"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:inputType="numberDecimal"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            android:gravity="right">
+
+            <TextView
+                android:id="@+id/previous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="32dp"
+                android:textColor="#00b246"
+                android:fontFamily="@font/cera_pro_medium"
+                android:text="PREVIOUS"/>
+
+            <ImageView
+                android:id="@+id/next1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/next_circle"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</ScrollView>

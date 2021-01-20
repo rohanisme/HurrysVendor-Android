@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/card"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:elevation="20dp"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="5dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="15dp"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:weightSum="2">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:layout_gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/cera_pro_medium"/>
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="24th August"
+                    android:layout_marginTop="4dp"
+                    android:layout_gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="#999999"
+                    android:fontFamily="@font/cera_pro_medium"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="$450"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/cera_pro_medium"/>
+
+                <TextView
+                    android:id="@+id/payment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Online"
+                    android:layout_marginTop="4dp"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:textSize="14dp"
+                    android:textColor="#999999"
+                    android:fontFamily="@font/cera_pro_medium"/>
+
+                <TextView
+                    android:id="@+id/pushid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/cera_pro_medium"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="0dp"
+            android:background="#eaeaea"/>
+
+        <LinearLayout
+            android:id="@+id/addressrow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:weightSum="2">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Delivery Address"
+                    android:layout_gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="#999999"
+                    android:fontFamily="@font/cera_pro_medium"/>
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:layout_marginTop="4dp"
+                    android:layout_gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/cera_pro_medium"/>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/items"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="10 items"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/cera_pro_medium"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="View Details"
+                    android:layout_marginTop="4dp"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:textSize="14dp"
+                    android:textColor="#0e4d97"
+                    android:fontFamily="@font/cera_pro_medium"/>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="0dp"
+            android:background="#eaeaea"/>
+
+        <LinearLayout
+            android:id="@+id/deliveryrow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="10dp"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/pp"
+                    android:layout_width="39dp"
+                    android:layout_height="39dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:orientation="vertical"
+                android:layout_weight="1.3">
+
+
+                <TextView
+                    android:id="@+id/deliveryname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Delivery Partner"
+                    android:layout_gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/cera_pro_medium"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Delivery Executive"
+                    android:layout_gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="#55565b"
+                    android:fontFamily="@font/cera_pro_medium"/>
+
+                <TextView
+                    android:id="@+id/number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Delivery Executive"
+                    android:layout_gravity="center"
+                    android:textSize="14dp"
+                    android:visibility="gone"
+                    android:textColor="#55565b"
+                    android:fontFamily="@font/cera_pro_medium"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:layout_weight="0.3">
+
+                <ImageView
+                    android:id="@+id/call"
+                    android:layout_width="30dp"
+                    android:layout_gravity="center"
+                    android:layout_height="30dp"
+                    android:src="@drawable/call"/>
+
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="0dp"
+            android:background="#eaeaea"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:weightSum="2">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+
+                <TextView
+                    android:id="@+id/orderid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Order ID"
+                    android:layout_gravity="center"
+                    android:textSize="18dp"
+                    android:textColor="#0e4d97"
+                    android:fontFamily="@font/cera_pro_medium"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="COMPLETED"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:textSize="14dp"
+                    android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/cera_pro_medium"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
