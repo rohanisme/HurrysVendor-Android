@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:id="@+id/scrollView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.AddCategory">
@@ -27,17 +26,17 @@
             <ImageView
                 android:id="@+id/back"
                 android:layout_width="wrap_content"
-                android:layout_marginTop="6dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
                 android:src="@drawable/back" />
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="64dp"
                 android:fontFamily="@font/cera_pro_medium"
                 android:paddingStart="32dp"
-                android:layout_marginEnd="64dp"
                 android:text="Add Sub Category"
                 android:textColor="@color/black"
                 android:textSize="20dp" />
@@ -46,19 +45,15 @@
         </LinearLayout>
 
 
-
-
-
-
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:textColor="@color/black"
             android:fontFamily="@font/cera_pro_medium"
             android:text="Add Sub Category"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/l1" />
 
@@ -66,8 +61,8 @@
             android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
             android:orientation="horizontal"
+            android:weightSum="2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12">
 
@@ -82,10 +77,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="32dp"
-                    android:textColor="#666666"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:hint="Sub Category Name"
                     android:inputType="textCapCharacters"
-                    android:fontFamily="@font/cera_pro_medium"
+                    android:textColor="#666666"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView12" />
@@ -103,16 +98,13 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    />
+                    android:gravity="center" />
 
 
             </LinearLayout>
 
 
         </LinearLayout>
-
-
 
 
         <TableLayout
@@ -177,11 +169,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/table_layout" />
-
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

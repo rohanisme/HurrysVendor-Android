@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:scrollbars="none"
+    android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:layout_height="match_parent">
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    android:scrollbars="none">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:scrollbars="none"
-        android:fitsSystemWindows="true"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:background="@color/white"
+            android:orientation="vertical"
             tools:context=".Activities.Login">
 
             <LinearLayout
@@ -33,13 +32,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:layout_gravity="center"
-                android:padding="15dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:paddingBottom="16dp"
-                android:background="@drawable/login"
                 android:layout_marginEnd="8dp"
+                android:background="@drawable/login"
                 android:orientation="horizontal"
+                android:padding="15dp"
+                android:paddingBottom="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/home_carousel"
                 app:layout_constraintTop_toTopOf="parent">
@@ -47,19 +46,18 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1.5">
+                    android:layout_weight="1.5"
+                    android:orientation="vertical">
 
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/cera_pro_medium"
                         android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/cera_pro_medium"
                         android:text="Welcome back to"
                         android:textColor="#999999"
-                        android:textSize="21dp"
-                        />
+                        android:textSize="21dp" />
 
                     <ImageView
                         android:layout_width="125dp"
@@ -69,20 +67,19 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/cera_pro_medium"
                         android:layout_marginTop="32dp"
+                        android:fontFamily="@font/cera_pro_medium"
                         android:text="Sign in to get started"
                         android:textColor="@color/black"
-                        android:textSize="21dp"
-                        />
+                        android:textSize="21dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginTop="2dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_weight="0.5"
                     android:gravity="right">
 
@@ -92,9 +89,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/cera_pro_medium"
                         android:text="Skip"
-                        android:visibility="gone"
                         android:textColor="@color/black"
-                        android:textSize="16dp" />
+                        android:textSize="16dp"
+                        android:visibility="gone" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -103,11 +100,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/cera_pro_medium"
                 android:layout_marginStart="19dp"
-                android:textSize="18dp"
+                android:fontFamily="@font/cera_pro_medium"
                 android:text="Enter Mobile Number"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="18dp" />
 
             <LinearLayout
                 android:id="@+id/l1"
@@ -115,36 +112,35 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="19dp"
                 android:layout_marginEnd="32dp"
-                android:weightSum="2"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
                 android:background="@drawable/border_line"
-                android:padding="4dp">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="4dp"
+                android:weightSum="2">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_weight="1.5">
+                    android:layout_weight="1.5"
+                    android:orientation="horizontal">
 
                     <com.hbb20.CountryCodePicker
                         android:id="@+id/country"
                         android:layout_width="wrap_content"
-                        app:ccp_countryPreference="gb,in"
+                        android:layout_height="wrap_content"
                         app:ccp_autoDetectCountry="true"
+                        app:ccp_countryPreference="gb,in"
                         app:ccp_showFlag="false"
-                        app:ccp_showNameCode="false"
-                        android:layout_height="wrap_content" />
+                        app:ccp_showNameCode="false" />
 
                     <EditText
                         android:id="@+id/mobilenumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:background="@null"
                         android:inputType="phone"
-                        android:maxLength="10"
-                        android:layout_gravity="center"
-                        />
+                        android:maxLength="10" />
 
 
                 </LinearLayout>
@@ -153,31 +149,31 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_weight="0.5"
                     android:gravity="right"
-                    android:layout_weight="0.5">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/Tresend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12dp"
+                        android:fontFamily="@font/cera_pro_bold"
                         android:gravity="right"
-                        android:visibility="gone"
-                        android:textColor="@color/colorAccent"
                         android:text="RESEND OTP"
-                        android:fontFamily="@font/cera_pro_medium"/>
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12dp"
+                        android:visibility="visible" />
 
                     <TextView
                         android:id="@+id/verify"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12dp"
+                        android:fontFamily="@font/cera_pro_medium"
                         android:gravity="right"
-                        android:visibility="gone"
-                        android:textColor="@color/colorAccent"
                         android:text="VERIFY"
-                        android:fontFamily="@font/cera_pro_medium"/>
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12dp"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -190,16 +186,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/cera_pro_medium"
                 android:text="Enter Otp"
                 android:textColor="@color/black"
-                android:fontFamily="@font/cera_pro_medium"
                 android:textSize="18dp"
                 app:layout_constraintStart_toEndOf="@+id/back"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.mukesh.OtpView
                 android:id="@+id/Tverify"
-                android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="19dp"
@@ -207,24 +202,23 @@
                 android:itemBackground="@color/white"
                 android:textColor="@color/black"
                 android:textSize="16dp"
+                android:visibility="visible"
                 app:itemCount="6"
                 app:itemSpacing="5dp"
-                app:lineColor="@color/colorAccent"
-                app:viewType="line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"
-                />
-
+                app:lineColor="@color/colorAccent"
+                app:viewType="line" />
 
 
             <ImageView
                 android:id="@+id/next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="32dp"
                 android:layout_gravity="center"
-                android:src="@drawable/next_circle"/>
+                android:layout_margin="32dp"
+                android:src="@drawable/next_circle" />
 
 
         </LinearLayout>
@@ -241,7 +235,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
