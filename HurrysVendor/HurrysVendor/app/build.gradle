@@ -1,0 +1,158 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.0"
+
+    defaultConfig {
+        applicationId "hurrys.corp.vendor"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 7
+        versionName "1.0.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+
+        checkReleaseBuilds false
+
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //GLide
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+
+
+    implementation 'com.google.firebase:firebase-messaging:20.1.4'
+    implementation 'com.google.firebase:firebase-core:17.3.0'
+    implementation 'com.google.firebase:firebase-database:19.2.1'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.firebaseui:firebase-ui-database:1.1.1'
+    implementation 'com.google.firebase:firebase-auth:19.3.0'
+
+    // Recommended: Add the Firebase SDK for Google Analytics.
+    implementation 'com.google.firebase:firebase-analytics:17.3.0'
+    implementation 'com.google.firebase:firebase-dynamic-links:19.1.0'
+
+    // Add the Firebase SDK for Crashlytics.
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
+//    implementation 'com.google.firebase:firebase-perf:19.0.5'
+
+
+    implementation 'org.apache.httpcomponents:httpcore:4.4.1'
+
+
+    //SPinner
+    implementation 'com.jaredrummler:material-spinner:1.3.1'
+
+
+    //Circular Image
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+
+
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.7.0'
+
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+
+    //Material Spinner
+    implementation 'com.jaredrummler:material-spinner:1.3.1'
+
+    //Runtime Permission
+    implementation 'com.karumi:dexter:5.0.0'
+
+    //App Intro Pages
+    implementation 'com.github.AppIntro:AppIntro:5.1.0'
+
+    //App Showcase
+    implementation 'com.github.amlcurran.showcaseview:library:5.4.3'
+
+
+    //fancy Buttons
+    implementation 'com.github.medyo:fancybuttons:1.9.0'
+
+
+    implementation 'com.zcw:togglebutton-library:1.0.0'
+
+
+    //Google Places
+    implementation 'com.google.android.gms:play-services-places:17.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    //Places APi
+    implementation 'com.google.android.libraries.places:places:1.1.0'
+    implementation 'com.google.maps:google-maps-services:0.2.5'
+
+    implementation 'com.skyfishjy.ripplebackground:library:1.0.1'
+
+    //ToolTip
+    implementation 'com.github.vihtarb:tooltip:0.1.9'
+
+    //Shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
+    //Sweet Alert
+    implementation 'com.github.f0ris.sweetalert:library:1.6.2'
+
+    //Image Enlarger
+    implementation 'com.github.dmallcott:DismissibleImageView:1.0.1'
+
+    //Country Picker
+    implementation 'com.hbb20:ccp:2.3.5'
+
+    implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.0'
+
+    implementation 'com.brucetoo.pickview:library:1.2.3'
+
+    implementation 'com.github.ome450901:SimpleRatingBar:1.5.0'
+
+    implementation 'com.airbnb.android:lottie:3.4.0'
+
+    //Carousel Viewer
+    implementation 'com.synnapps:carouselview:0.1.5'
+    implementation 'com.github.jama5262:CarouselView:1.1.0'
+
+}

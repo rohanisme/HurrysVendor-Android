@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="30dp"
+    android:paddingTop="40dp"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp"
+    android:layout_marginBottom="16dp"
+    android:layout_height="wrap_content">
+
+    <RadioGroup
+        android:id="@+id/radio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/hurrys"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Delivery By Hurrys"/>
+
+        <RadioButton
+            android:id="@+id/own"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:textSize="16dp"
+            android:text="Delivery by Own Driver"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorPrimary"
+        android:text="Submit"
+        android:textSize="16dp"
+        android:textColor="@color/white"/>
+
+</LinearLayout>
