@@ -324,7 +324,6 @@
                     android:gravity="right"
                     android:text="COMPLETED"
                     android:padding="5dp"
-                    android:background="#e5f7ec"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14dp" />
 

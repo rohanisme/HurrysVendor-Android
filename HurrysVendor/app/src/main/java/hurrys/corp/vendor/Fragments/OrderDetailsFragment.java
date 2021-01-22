@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,11 +16,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -390,9 +391,29 @@ public class OrderDetailsFragment extends Fragment {
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu= new PopupMenu(getContext(),view);
-                //popupMenu.setOnMenuItemClickListener();
+                PopupMenu popupMenu = new PopupMenu(getContext(), view);
                 popupMenu.inflate(R.menu.option_menu_item);
+                popupMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.cancelmenu:
+                                return true;
+                            case R.id.supportMenu:
+                                if (getActivity() != null) {
+                                    Fragment fragment = new SupportFragment();
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    fragmentManager.beginTransaction()
+                                            .addToBackStack(null)
+                                            .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
+                                }
+                                return true;
+
+                        }
+
+                        return false;
+                    }
+                });
                 popupMenu.show();
 
             }
@@ -765,4 +786,25 @@ public class OrderDetailsFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
 
     }
+
+    /*@Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case R.id.cancelmenu:
+                return true;
+            case R.id.supportMenu:
+                if (getActivity() != null) {
+                    Fragment fragment = new SupportFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
+                }
+                return true;
+
+        }
+
+        return false;
+    }*/
 }

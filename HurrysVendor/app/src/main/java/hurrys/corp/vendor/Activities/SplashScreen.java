@@ -1,18 +1,14 @@
 package hurrys.corp.vendor.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.animation.Animator;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.MediaController;
-import android.widget.VideoView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,7 +23,7 @@ import hurrys.corp.vendor.R;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private static final String TAG ="LOGIN DATA" ;
+    private static final String TAG = "LOGIN DATA";
     protected boolean _active = true;
     protected int _splashTime = 3000;
     private Session session;
@@ -47,7 +43,7 @@ public class SplashScreen extends AppCompatActivity {
 
         session = new Session(SplashScreen.this);
 
-        LottieAnimationView animation_view=findViewById(R.id.animation_view);
+        LottieAnimationView animation_view = findViewById(R.id.animation_view);
 
         animation_view.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
@@ -58,8 +54,7 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animator animator) {
                 database = FirebaseDatabase.getInstance().getReference();
-                if(TextUtils.isEmpty(session.getisfirsttime()))
-                {
+                if (TextUtils.isEmpty(session.getisfirsttime())) {
                     FirebaseDynamicLinks.getInstance()
                             .getDynamicLink(getIntent())
                             .addOnSuccessListener(SplashScreen.this, new OnSuccessListener<PendingDynamicLinkData>() {
@@ -79,20 +74,16 @@ public class SplashScreen extends AppCompatActivity {
                                         startActivity(new Intent(SplashScreen.this,
                                                 Permissions.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                         finish();
-                                    }
-                                    else{
+                                    } else {
                                         startActivity(new Intent(SplashScreen.this,
                                                 Permissions.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                         finish();
                                     }
 
 
-
                                 }
                             });
-                }
-                else
-                {
+                } else {
                     if (session.getusername() != "") {
                         startActivity(new Intent(SplashScreen.this,
                                 MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -178,8 +169,6 @@ public class SplashScreen extends AppCompatActivity {
 //                }
 //            }
 //        });
-
-
 
 
     }
