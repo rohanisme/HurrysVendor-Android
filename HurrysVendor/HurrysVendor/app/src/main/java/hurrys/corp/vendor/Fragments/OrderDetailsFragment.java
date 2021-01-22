@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -389,6 +390,10 @@ public class OrderDetailsFragment extends Fragment {
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                PopupMenu popupMenu= new PopupMenu(getContext(),view);
+                //popupMenu.setOnMenuItemClickListener();
+                popupMenu.inflate(R.menu.option_menu_item);
+                popupMenu.show();
 
             }
         });
