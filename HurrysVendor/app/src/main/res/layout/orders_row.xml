@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    android:id="@+id/card"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
+    android:background="#eaeaea"
     android:elevation="20dp"
-    app:cardUseCompatPadding="true"
+    android:orientation="vertical"
     app:cardCornerRadius="5dp"
-    android:layout_height="wrap_content">
+    app:cardUseCompatPadding="true">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/linearLayout"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="15dp"
-        android:layout_height="wrap_content">
+        android:paddingRight="16dp">
 
 
         <LinearLayout
@@ -30,31 +30,31 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingStart="16dp"
+                android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_weight="1">
+                android:paddingStart="16dp">
 
 
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Name"
                     android:layout_gravity="center"
-                    android:textSize="14dp"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:text="Name"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/cera_pro_medium"/>
+                    android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="24th August"
-                    android:layout_marginTop="4dp"
                     android:layout_gravity="center"
-                    android:textSize="14dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:text="24th August"
                     android:textColor="#999999"
-                    android:fontFamily="@font/cera_pro_medium"/>
+                    android:textSize="14dp" />
 
             </LinearLayout>
 
@@ -63,44 +63,44 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="right"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="$450"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:gravity="right"
-                    android:textSize="16dp"
+                    android:text="$450"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/cera_pro_medium"/>
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/payment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Online"
-                    android:layout_marginTop="4dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:gravity="right"
-                    android:textSize="14dp"
+                    android:text="Online"
                     android:textColor="#999999"
-                    android:fontFamily="@font/cera_pro_medium"/>
+                    android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/pushid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:visibility="gone"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:gravity="right"
-                    android:textSize="16dp"
+                    android:text=""
                     android:textColor="@color/black"
-                    android:fontFamily="@font/cera_pro_medium"/>
+                    android:textSize="16dp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -109,45 +109,43 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="0dp"
-            android:background="#eaeaea"/>
+            android:background="#eaeaea" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:weightSum="2">
 
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingStart="16dp"
+                android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_weight="1">
+                android:paddingStart="16dp">
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Delivery Address"
                     android:layout_gravity="center"
-                    android:textSize="14dp"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:text="Delivery Address"
                     android:textColor="#999999"
-                    android:fontFamily="@font/cera_pro_medium"/>
+                    android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:layout_marginTop="4dp"
                     android:layout_gravity="center"
-                    android:textSize="14dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:text="Name"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/cera_pro_medium"/>
-
+                    android:textSize="14dp" />
 
 
             </LinearLayout>
@@ -157,32 +155,31 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="right"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/items"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="10 items"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:gravity="right"
-                    android:textSize="16dp"
+                    android:text="10 items"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/cera_pro_medium"/>
+                    android:textSize="16dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="View Details"
-                    android:layout_marginTop="4dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:gravity="right"
-                    android:textSize="14dp"
+                    android:text="View Details"
                     android:textColor="#0e4d97"
-                    android:fontFamily="@font/cera_pro_medium"/>
-
+                    android:textSize="14dp" />
 
 
             </LinearLayout>
@@ -191,9 +188,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="0dp"
-            android:background="#eaeaea"/>
+            android:layout_height="1dp"
+            android:background="#eaeaea" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -205,20 +201,20 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingStart="8dp"
+                android:layout_weight="1"
                 android:orientation="horizontal"
-                android:layout_weight="1">
+                android:paddingStart="8dp">
 
 
                 <TextView
                     android:id="@+id/orderid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Order ID"
                     android:layout_gravity="center"
-                    android:textSize="18dp"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:text="Order ID"
                     android:textColor="#0e4d97"
-                    android:fontFamily="@font/cera_pro_medium"/>
+                    android:textSize="18dp" />
 
             </LinearLayout>
 
@@ -227,23 +223,23 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
                 android:gravity="right"
-                android:orientation="horizontal"
-                android:layout_weight="1">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="COMPLETED"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:gravity="right"
-                    android:textSize="14dp"
+                    android:text="COMPLETED"
                     android:textColor="@color/colorPrimary"
-                    android:fontFamily="@font/cera_pro_medium"/>
+                    android:textSize="14dp" />
 
             </LinearLayout>
-
 
 
         </LinearLayout>

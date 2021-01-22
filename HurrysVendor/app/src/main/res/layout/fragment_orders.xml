@@ -22,8 +22,8 @@
 
         <ImageView
             android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="15dp"
+            android:layout_height="16dp"
             android:src="@drawable/back"/>
 
 
@@ -34,7 +34,7 @@
             android:text="Orders Dashboard"
             android:layout_marginStart="32dp"
             android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:textSize="16dp" />
 
     </LinearLayout>
 

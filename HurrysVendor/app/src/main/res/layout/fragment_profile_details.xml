@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.ProfileDetails">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -36,9 +36,9 @@
                 <ImageView
                     android:id="@+id/back"
                     android:layout_width="15dp"
-                    android:layout_marginStart="16dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center"
+                    android:layout_marginStart="16dp"
                     android:src="@drawable/back" />
 
                 <TextView
@@ -71,41 +71,41 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="200dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="200dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:weightSum="3"
-                android:layout_height="wrap_content">
+                android:weightSum="3">
 
                 <LinearLayout
                     android:id="@+id/z1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/t1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Personal Details"
                         android:layout_marginTop="4dp"
+                        android:fontFamily="@font/cera_pro_medium"
+                        android:text="Personal Details"
                         android:textColor="@color/colorDarkgrey"
-                        android:textSize="14dp"
-                        android:fontFamily="@font/cera_pro_medium"/>
+                        android:textSize="14dp" />
 
                     <View
                         android:id="@+id/s1"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_marginTop="4dp"
-                        android:background="#eaeaea"/>
+                        android:background="#eaeaea" />
 
                 </LinearLayout>
 
@@ -114,26 +114,26 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/t2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bank Details"
                         android:layout_marginTop="4dp"
+                        android:fontFamily="@font/cera_pro_medium"
+                        android:text="Bank Details"
                         android:textColor="@color/colorDarkgrey"
-                        android:textSize="14dp"
-                        android:fontFamily="@font/cera_pro_medium"/>
+                        android:textSize="14dp" />
 
                     <View
                         android:id="@+id/s2"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_marginTop="4dp"
-                        android:background="#eaeaea"/>
+                        android:background="#eaeaea" />
 
                 </LinearLayout>
 
@@ -142,31 +142,28 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/t3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Documents"
                         android:layout_marginTop="4dp"
+                        android:fontFamily="@font/cera_pro_medium"
+                        android:text="Documents"
                         android:textColor="@color/black"
-                        android:textSize="14dp"
-                        android:fontFamily="@font/cera_pro_medium"/>
+                        android:textSize="14dp" />
 
                     <View
                         android:id="@+id/s3"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_marginTop="4dp"
-                        android:background="@color/colorPrimary"/>
+                        android:background="@color/colorPrimary" />
 
                 </LinearLayout>
-
-
-
 
 
             </LinearLayout>
@@ -175,8 +172,8 @@
                 android:id="@+id/stage1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="24dp"
+                android:orientation="vertical"
                 android:visibility="visible">
 
                 <TextView
@@ -202,16 +199,16 @@
                     android:inputType="textCapSentences"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
-                    android:textSize="16dp"/>
+                    android:textSize="16dp" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Date of Birth"
                     android:textColor="@color/black" />
@@ -221,14 +218,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
-                    android:text="DD/MM/YYYY"
-                    android:paddingEnd="10dp"
+                    android:background="@drawable/border_line"
                     android:drawableRight="@drawable/ic_cal"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="10dp"
+                    android:text="DD/MM/YYYY"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -236,9 +233,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Gender"
                     android:textColor="@color/black" />
@@ -246,13 +243,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
-                    android:paddingTop="15dp"
-                    android:layout_gravity="center_vertical"
                     android:background="@drawable/border_line"
                     android:orientation="vertical"
-                    >
+                    android:paddingTop="15dp">
 
                     <TextView
                         android:id="@+id/gender"
@@ -267,14 +263,13 @@
                 </LinearLayout>
 
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Email ID"
                     android:textColor="@color/black" />
@@ -284,10 +279,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="textEmailAddress"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -297,9 +292,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Alternate Mobile Number"
                     android:textColor="@color/black" />
@@ -309,37 +304,36 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="32dp"
-                    android:weightSum="2"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
                     android:background="@drawable/border_line"
-                    android:padding="4dp">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:weightSum="2">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_weight="1.5">
+                        android:layout_weight="1.5"
+                        android:orientation="horizontal">
 
                         <com.hbb20.CountryCodePicker
                             android:id="@+id/country"
                             android:layout_width="wrap_content"
-                            app:ccp_countryPreference="gb,in"
+                            android:layout_height="wrap_content"
                             app:ccp_autoDetectCountry="true"
+                            app:ccp_countryPreference="gb,in"
                             app:ccp_showFlag="false"
-                            app:ccp_showNameCode="false"
-                            android:layout_height="wrap_content" />
+                            app:ccp_showNameCode="false" />
 
                         <TextView
                             android:id="@+id/anumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:background="@null"
                             android:fontFamily="@font/cera_pro_medium"
                             android:inputType="phone"
-                            android:maxLength="10"
-                            android:layout_gravity="center"
-                            />
+                            android:maxLength="10" />
 
 
                     </LinearLayout>
@@ -350,9 +344,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Address"
                     android:textColor="@color/black" />
@@ -362,10 +356,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="textPostalAddress"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -375,9 +369,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Pincode"
                     android:textColor="@color/black" />
@@ -387,10 +381,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -402,9 +396,9 @@
                 android:id="@+id/stage2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:orientation="vertical"
                 android:paddingBottom="40dp"
-                android:layout_marginTop="24dp"
                 android:visibility="gone">
 
 
@@ -412,46 +406,46 @@
                     android:id="@+id/b1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="10dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:elevation="10dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="10dp"
-                    app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/white">
+                    app:cardUseCompatPadding="true">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:orientation="horizontal"
                         android:padding="10dp"
-                        android:layout_gravity="center_vertical"
                         android:weightSum="2">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="1.5">
+                            android:layout_weight="1.5"
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
                                 android:text="Bank  Details"
-                                android:layout_marginTop="4dp"
                                 android:textColor="@color/black"
-                                android:textSize="16dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="16dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="5 Items"
                                 android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
+                                android:text="5 Items"
                                 android:textColor="#999999"
-                                android:textSize="14dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="14dp" />
 
 
                         </LinearLayout>
@@ -460,16 +454,16 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_weight="0.5"
                             android:gravity="right"
-                            android:orientation="vertical"
-                            android:layout_weight="0.5">
+                            android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/bi1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
-                                android:src="@drawable/ic_success"/>
+                                android:src="@drawable/ic_success" />
 
                         </LinearLayout>
 
@@ -482,46 +476,46 @@
                     android:id="@+id/b2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="10dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:elevation="10dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="10dp"
-                    app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/white">
+                    app:cardUseCompatPadding="true">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:orientation="horizontal"
                         android:padding="10dp"
-                        android:layout_gravity="center_vertical"
                         android:weightSum="2">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="1.5">
+                            android:layout_weight="1.5"
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
                                 android:text="Company  Details"
-                                android:layout_marginTop="4dp"
                                 android:textColor="@color/black"
-                                android:textSize="16dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="16dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="7 Items"
                                 android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
+                                android:text="7 Items"
                                 android:textColor="#999999"
-                                android:textSize="14dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="14dp" />
 
 
                         </LinearLayout>
@@ -530,16 +524,16 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_weight="0.5"
                             android:gravity="right"
-                            android:orientation="vertical"
-                            android:layout_weight="0.5">
+                            android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/bi2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
-                                android:src="@drawable/ic_success"/>
+                                android:src="@drawable/ic_success" />
 
                         </LinearLayout>
 
@@ -552,46 +546,46 @@
                     android:id="@+id/b3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="10dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:elevation="10dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="10dp"
-                    app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/white">
+                    app:cardUseCompatPadding="true">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:orientation="horizontal"
                         android:padding="10dp"
-                        android:layout_gravity="center_vertical"
                         android:weightSum="2">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="1.5">
+                            android:layout_weight="1.5"
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
                                 android:text="Shop  Details"
-                                android:layout_marginTop="4dp"
                                 android:textColor="@color/black"
-                                android:textSize="16dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="16dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="4 Items"
                                 android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
+                                android:text="4 Items"
                                 android:textColor="#999999"
-                                android:textSize="14dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="14dp" />
 
 
                         </LinearLayout>
@@ -600,16 +594,16 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_weight="0.5"
                             android:gravity="right"
-                            android:orientation="vertical"
-                            android:layout_weight="0.5">
+                            android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/bi3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
-                                android:src="@drawable/ic_success"/>
+                                android:src="@drawable/ic_success" />
 
 
                         </LinearLayout>
@@ -626,9 +620,9 @@
                 android:id="@+id/stage3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:layout_marginTop="24dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="visible">
 
 
                 <LinearLayout
@@ -641,26 +635,26 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="Personal Photo"/>
+                            android:gravity="center"
+                            android:text="Personal Photo"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <ImageView
                             android:id="@+id/doc1"
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
                             android:layout_height="90dp"
-                            android:src="@drawable/addimage"/>
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/addimage" />
 
 
                     </LinearLayout>
@@ -668,26 +662,26 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="ID Proof"/>
+                            android:gravity="center"
+                            android:text="ID Proof"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <ImageView
                             android:id="@+id/doc2"
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
                             android:layout_height="90dp"
-                            android:src="@drawable/addimage"/>
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/addimage" />
 
                     </LinearLayout>
 
@@ -705,26 +699,26 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="Address Proof"/>
+                            android:gravity="center"
+                            android:text="Address Proof"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <ImageView
                             android:id="@+id/doc3"
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
                             android:layout_height="90dp"
-                            android:src="@drawable/addimage"/>
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/addimage" />
 
 
                     </LinearLayout>
@@ -732,26 +726,26 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="Brand Logo"/>
+                            android:gravity="center"
+                            android:text="Brand Logo"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <ImageView
                             android:id="@+id/doc7"
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
                             android:layout_height="90dp"
-                            android:src="@drawable/addimage"/>
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/addimage" />
 
                     </LinearLayout>
 
@@ -769,26 +763,26 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="Bank Statement"/>
+                            android:gravity="center"
+                            android:text="Bank Statement"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <ImageView
                             android:id="@+id/doc4"
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
                             android:layout_height="90dp"
-                            android:src="@drawable/addimage"/>
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/addimage" />
 
 
                     </LinearLayout>
@@ -796,26 +790,26 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="VAT Code"/>
+                            android:gravity="center"
+                            android:text="VAT Code"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <ImageView
                             android:id="@+id/doc6"
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
                             android:layout_height="90dp"
-                            android:src="@drawable/addimage"/>
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/addimage" />
 
                     </LinearLayout>
 
@@ -832,58 +826,57 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="Food/Shop License"/>
+                            android:gravity="center"
+                            android:text="Food/Shop License"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <ImageView
                             android:id="@+id/doc5"
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
                             android:layout_height="90dp"
-                            android:src="@drawable/addimage"/>
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/addimage" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="Signature"/>
+                            android:gravity="center"
+                            android:text="Signature"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <ImageView
                             android:id="@+id/doc8"
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
                             android:layout_height="90dp"
-                            android:src="@drawable/addimage"/>
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/addimage" />
 
                     </LinearLayout>
 
 
                 </LinearLayout>
-
 
 
             </LinearLayout>
@@ -892,16 +885,16 @@
                 android:id="@+id/substage1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:orientation="vertical"
                 android:paddingBottom="40dp"
-                android:layout_marginTop="24dp"
                 android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
 
                     <LinearLayout
@@ -913,9 +906,9 @@
                             android:id="@+id/back1"
                             android:layout_width="12dp"
                             android:layout_height="12dp"
-                            android:layout_marginTop="3dp"
                             android:layout_marginStart="16dp"
-                            android:src="@drawable/back"/>
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/back" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -934,7 +927,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="4dp"
                         android:layout_marginTop="16dp"
-                        android:background="#eaeaea"/>
+                        android:background="#eaeaea" />
 
 
                 </LinearLayout>
@@ -962,17 +955,16 @@
                     android:inputType="textCapSentences"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
-                    android:textSize="16dp"/>
-
+                    android:textSize="16dp" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Account Number"
                     android:textColor="@color/black" />
@@ -982,24 +974,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="numberPassword"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Confirm Account Number"
                     android:textColor="@color/black" />
@@ -1009,10 +1000,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="number"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -1022,9 +1013,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Bank Sort Code"
                     android:textColor="@color/black" />
@@ -1034,10 +1025,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="number"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -1047,9 +1038,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Bank Name"
                     android:textColor="@color/black" />
@@ -1059,10 +1050,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -1074,16 +1065,16 @@
                 android:id="@+id/substage2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:orientation="vertical"
                 android:paddingBottom="40dp"
-                android:layout_marginTop="24dp"
                 android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
 
                     <LinearLayout
@@ -1095,9 +1086,9 @@
                             android:id="@+id/back2"
                             android:layout_width="12dp"
                             android:layout_height="12dp"
-                            android:layout_marginTop="3dp"
                             android:layout_marginStart="16dp"
-                            android:src="@drawable/back"/>
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/back" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -1116,7 +1107,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="4dp"
                         android:layout_marginTop="16dp"
-                        android:background="#eaeaea"/>
+                        android:background="#eaeaea" />
 
 
                 </LinearLayout>
@@ -1125,9 +1116,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Business Name"
                     android:textColor="@color/black" />
@@ -1137,10 +1128,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -1150,9 +1141,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Display Name"
                     android:textColor="@color/black" />
@@ -1162,10 +1153,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -1175,9 +1166,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Business Category"
                     android:textColor="@color/black" />
@@ -1185,13 +1176,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
-                    android:paddingTop="15dp"
-                    android:layout_gravity="center_vertical"
                     android:background="@drawable/border_line"
                     android:orientation="vertical"
-                    >
+                    android:paddingTop="15dp">
 
                     <TextView
                         android:id="@+id/category"
@@ -1209,9 +1199,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="VAT Code"
                     android:textColor="@color/black" />
@@ -1221,10 +1211,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -1235,9 +1225,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Business Address"
                     android:textColor="@color/black" />
@@ -1247,10 +1237,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -1260,9 +1250,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Pickup Address"
                     android:textColor="@color/black" />
@@ -1272,10 +1262,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -1285,9 +1275,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Business Description"
                     android:textColor="@color/black" />
@@ -1297,15 +1287,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
-
 
 
             </LinearLayout>
@@ -1314,16 +1303,16 @@
                 android:id="@+id/substage3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:orientation="vertical"
                 android:paddingBottom="40dp"
-                android:layout_marginTop="24dp"
                 android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
 
                     <LinearLayout
@@ -1335,9 +1324,9 @@
                             android:id="@+id/back3"
                             android:layout_width="12dp"
                             android:layout_height="12dp"
-                            android:layout_marginTop="3dp"
                             android:layout_marginStart="16dp"
-                            android:src="@drawable/back"/>
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/back" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -1356,7 +1345,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="4dp"
                         android:layout_marginTop="16dp"
-                        android:background="#eaeaea"/>
+                        android:background="#eaeaea" />
 
 
                 </LinearLayout>
@@ -1365,9 +1354,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Opening Time"
                     android:textColor="@color/black" />
@@ -1377,14 +1366,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
-                    android:text="HH:MM"
-                    android:paddingEnd="10dp"
+                    android:background="@drawable/border_line"
                     android:drawableRight="@drawable/ic_cal"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="10dp"
+                    android:text="HH:MM"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -1392,9 +1381,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Closing Time"
                     android:textColor="@color/black" />
@@ -1404,14 +1393,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
-                    android:text="HH:MM"
-                    android:paddingEnd="10dp"
+                    android:background="@drawable/border_line"
                     android:drawableRight="@drawable/ic_cal"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="10dp"
+                    android:text="HH:MM"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -1419,9 +1408,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Commision"
                     android:textColor="@color/black" />
@@ -1431,13 +1420,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
-                    android:text="Will be entered by admin"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="numberDecimal"
                     android:paddingStart="10dp"
+                    android:text="Will be entered by admin"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -1445,9 +1434,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Delivery Time"
                     android:textColor="@color/black" />
@@ -1457,15 +1446,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="numberDecimal"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
-
 
 
             </LinearLayout>

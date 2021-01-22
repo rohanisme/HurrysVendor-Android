@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:scrollbars="none"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:scrollbars="none"
     tools:context=".Activities.Welcome">
 
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:scrollbars="none"
-        android:overScrollMode="never"
         android:layout_height="match_parent"
         android:background="@color/white"
+        android:overScrollMode="never"
+        android:scrollbars="none"
         tools:context=".Activities.Welcome">
 
         <LinearLayout
@@ -28,43 +26,41 @@
             <ImageView
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:layout_marginStart="16dp"
-                android:src="@drawable/logo"/>
+                android:layout_marginTop="24dp"
+                android:src="@drawable/logo" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/cera_pro_medium"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/cera_pro_medium"
                 android:lineSpacingMultiplier="1.25"
                 android:text="Vendor Onboarding\nDetails"
                 android:textColor="#55565b"
-                android:textSize="21dp"
-                />
+                android:textSize="21dp" />
 
             <TextView
                 android:id="@+id/comments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/cera_pro_medium"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/cera_pro_medium"
                 android:text="Comments : Account Under Review"
                 android:textColor="@color/colorPrimary"
-                android:textSize="15dp"
-                />
+                android:textSize="15dp" />
 
             <LinearLayout
                 android:id="@+id/progress"
                 android:layout_width="match_parent"
-                android:padding="15dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:layout_height="wrap_content">
+                android:padding="15dp">
 
                 <LinearLayout
                     android:id="@+id/l1"
@@ -78,19 +74,18 @@
                         android:id="@+id/one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/one"/>
+                        android:src="@drawable/one" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Personal Details"
                         android:layout_marginTop="4dp"
+                        android:fontFamily="@font/cera_pro_medium"
+                        android:text="Personal Details"
                         android:textColor="@color/black"
-                        android:textSize="10dp"
-                        android:fontFamily="@font/cera_pro_medium"/>
+                        android:textSize="10dp" />
 
                 </LinearLayout>
-
 
 
                 <ImageView
@@ -98,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:src="@drawable/line"/>
+                    android:src="@drawable/line" />
 
                 <LinearLayout
                     android:id="@+id/l2"
@@ -113,16 +108,16 @@
                         android:id="@+id/two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/two"/>
+                        android:src="@drawable/two" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bank Details"
                         android:layout_marginTop="4dp"
+                        android:fontFamily="@font/cera_pro_medium"
+                        android:text="Bank Details"
                         android:textColor="@color/black"
-                        android:textSize="10dp"
-                        android:fontFamily="@font/cera_pro_medium"/>
+                        android:textSize="10dp" />
 
                 </LinearLayout>
 
@@ -131,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:src="@drawable/line"/>
+                    android:src="@drawable/line" />
 
                 <LinearLayout
                     android:id="@+id/l3"
@@ -145,16 +140,16 @@
                         android:id="@+id/three"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/three"/>
+                        android:src="@drawable/three" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Documents Upload"
                         android:layout_marginTop="4dp"
+                        android:fontFamily="@font/cera_pro_medium"
+                        android:text="Documents Upload"
                         android:textColor="@color/black"
-                        android:textSize="10dp"
-                        android:fontFamily="@font/cera_pro_medium"/>
+                        android:textSize="10dp" />
 
                 </LinearLayout>
 
@@ -164,8 +159,8 @@
                 android:id="@+id/stage1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="24dp"
+                android:orientation="vertical"
                 android:visibility="gone">
 
                 <TextView
@@ -177,7 +172,8 @@
                     android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Full Name"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/name"
@@ -191,33 +187,34 @@
                     android:inputType="textCapSentences"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
-                    android:textSize="16dp"/>
+                    android:textSize="16dp" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Date of Birth"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/dob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
-                    android:text="DD/MM/YYYY"
-                    android:paddingEnd="10dp"
+                    android:background="@drawable/border_line"
                     android:drawableRight="@drawable/ic_cal"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="10dp"
+                    android:text="DD/MM/YYYY"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -225,23 +222,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Gender"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
-                    android:paddingTop="15dp"
-                    android:layout_gravity="center_vertical"
                     android:background="@drawable/border_line"
                     android:orientation="vertical"
-                    >
+                    android:paddingTop="15dp">
 
                     <Spinner
                         android:id="@+id/gender"
@@ -256,27 +253,27 @@
                 </LinearLayout>
 
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Email ID"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="textEmailAddress"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -286,49 +283,49 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Alternate Mobile Number"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="32dp"
-                    android:weightSum="2"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
                     android:background="@drawable/border_line"
-                    android:padding="4dp">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:weightSum="2">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_weight="1.5">
+                        android:layout_weight="1.5"
+                        android:orientation="horizontal">
 
                         <com.hbb20.CountryCodePicker
                             android:id="@+id/country"
                             android:layout_width="wrap_content"
-                            app:ccp_countryPreference="gb,in"
+                            android:layout_height="wrap_content"
                             app:ccp_autoDetectCountry="true"
+                            app:ccp_countryPreference="gb,in"
                             app:ccp_showFlag="false"
-                            app:ccp_showNameCode="false"
-                            android:layout_height="wrap_content" />
+                            app:ccp_showNameCode="false" />
 
                         <EditText
                             android:id="@+id/anumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:background="@null"
                             android:fontFamily="@font/cera_pro_medium"
                             android:inputType="phone"
-                            android:maxLength="10"
-                            android:layout_gravity="center"
-                            />
+                            android:maxLength="10" />
 
 
                     </LinearLayout>
@@ -339,22 +336,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Address"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="textPostalAddress"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -364,22 +362,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Pincode"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/postcode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -389,34 +388,32 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="32dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="16dp"
-                    android:orientation="horizontal"
-                    android:gravity="right">
+                    android:layout_marginBottom="32dp"
+                    android:gravity="right"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/previous0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:visibility="invisible"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="32dp"
-                        android:textColor="#00b246"
                         android:fontFamily="@font/cera_pro_medium"
-                        android:text="PREVIOUS"/>
+                        android:text="PREVIOUS"
+                        android:textColor="#00b246"
+                        android:textSize="14dp"
+                        android:visibility="invisible" />
 
                     <ImageView
                         android:id="@+id/next"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/next_circle"
-                        />
+                        android:src="@drawable/next_circle" />
 
                 </LinearLayout>
-
 
 
             </LinearLayout>
@@ -425,9 +422,9 @@
                 android:id="@+id/stage2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:orientation="vertical"
                 android:paddingBottom="40dp"
-                android:layout_marginTop="24dp"
                 android:visibility="gone">
 
 
@@ -435,46 +432,46 @@
                     android:id="@+id/b1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="10dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:elevation="10dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="10dp"
-                    app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/white">
+                    app:cardUseCompatPadding="true">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:orientation="horizontal"
                         android:padding="10dp"
-                        android:layout_gravity="center_vertical"
                         android:weightSum="2">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="1.5">
+                            android:layout_weight="1.5"
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
                                 android:text="Bank  Details"
-                                android:layout_marginTop="4dp"
                                 android:textColor="@color/black"
-                                android:textSize="16dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="16dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="5 Items"
                                 android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
+                                android:text="5 Items"
                                 android:textColor="#999999"
-                                android:textSize="14dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="14dp" />
 
 
                         </LinearLayout>
@@ -483,26 +480,26 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_weight="0.5"
                             android:gravity="right"
-                            android:orientation="vertical"
-                            android:layout_weight="0.5">
+                            android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/bi1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
-                                android:src="@drawable/ic_success"/>
+                                android:src="@drawable/ic_success" />
 
                             <TextView
                                 android:id="@+id/bt1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Not Started"
                                 android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
+                                android:text="Not Started"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="14dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="14dp" />
 
                         </LinearLayout>
 
@@ -515,46 +512,46 @@
                     android:id="@+id/b2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="10dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:elevation="10dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="10dp"
-                    app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/white">
+                    app:cardUseCompatPadding="true">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:orientation="horizontal"
                         android:padding="10dp"
-                        android:layout_gravity="center_vertical"
                         android:weightSum="2">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="1.5">
+                            android:layout_weight="1.5"
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
                                 android:text="Company  Details"
-                                android:layout_marginTop="4dp"
                                 android:textColor="@color/black"
-                                android:textSize="16dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="16dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="7 Items"
                                 android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
+                                android:text="7 Items"
                                 android:textColor="#999999"
-                                android:textSize="14dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="14dp" />
 
 
                         </LinearLayout>
@@ -563,26 +560,26 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_weight="0.5"
                             android:gravity="right"
-                            android:orientation="vertical"
-                            android:layout_weight="0.5">
+                            android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/bi2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
-                                android:src="@drawable/ic_success"/>
+                                android:src="@drawable/ic_success" />
 
                             <TextView
                                 android:id="@+id/bt2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Not Started"
                                 android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
+                                android:text="Not Started"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="14dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="14dp" />
 
                         </LinearLayout>
 
@@ -595,46 +592,46 @@
                     android:id="@+id/b3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="10dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:elevation="10dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="10dp"
-                    app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/white">
+                    app:cardUseCompatPadding="true">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:orientation="horizontal"
                         android:padding="10dp"
-                        android:layout_gravity="center_vertical"
                         android:weightSum="2">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="1.5">
+                            android:layout_weight="1.5"
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
                                 android:text="Shop  Details"
-                                android:layout_marginTop="4dp"
                                 android:textColor="@color/black"
-                                android:textSize="16dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="16dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="4 Items"
                                 android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
+                                android:text="4 Items"
                                 android:textColor="#999999"
-                                android:textSize="14dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="14dp" />
 
 
                         </LinearLayout>
@@ -643,26 +640,26 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_weight="0.5"
                             android:gravity="right"
-                            android:orientation="vertical"
-                            android:layout_weight="0.5">
+                            android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/bi3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
-                                android:src="@drawable/ic_success"/>
+                                android:src="@drawable/ic_success" />
 
                             <TextView
                                 android:id="@+id/bt3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Not Started"
                                 android:layout_marginTop="4dp"
+                                android:fontFamily="@font/cera_pro_medium"
+                                android:text="Not Started"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="14dp"
-                                android:fontFamily="@font/cera_pro_medium"/>
+                                android:textSize="14dp" />
 
                         </LinearLayout>
 
@@ -674,30 +671,29 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="32dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="16dp"
-                    android:orientation="horizontal"
-                    android:gravity="right">
+                    android:layout_marginBottom="32dp"
+                    android:gravity="right"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/previous"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="32dp"
-                        android:textColor="#00b246"
                         android:fontFamily="@font/cera_pro_medium"
-                        android:text="PREVIOUS"/>
+                        android:text="PREVIOUS"
+                        android:textColor="#00b246"
+                        android:textSize="14dp" />
 
                     <ImageView
                         android:id="@+id/next1"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/next_circle"
-                        />
+                        android:src="@drawable/next_circle" />
 
                 </LinearLayout>
 
@@ -707,9 +703,9 @@
                 android:id="@+id/stage3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:layout_marginTop="24dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
 
                 <LinearLayout
@@ -722,40 +718,39 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="Personal Photo"/>
+                            android:gravity="center"
+                            android:text="Personal Photo"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <RelativeLayout
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_height="90dp">
+                            android:layout_height="90dp"
+                            android:layout_marginTop="8dp">
 
                             <ImageView
                                 android:id="@+id/doc1"
                                 android:layout_width="90dp"
                                 android:layout_height="90dp"
-                                android:src="@drawable/addimage"/>
+                                android:src="@drawable/addimage" />
 
                             <ImageView
                                 android:id="@+id/close1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:src="@drawable/close"/>
+                                android:src="@drawable/close" />
 
                         </RelativeLayout>
-
 
 
                     </LinearLayout>
@@ -763,37 +758,37 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="ID Proof"/>
+                            android:gravity="center"
+                            android:text="ID Proof"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <RelativeLayout
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_height="90dp">
+                            android:layout_height="90dp"
+                            android:layout_marginTop="8dp">
 
                             <ImageView
                                 android:id="@+id/doc2"
                                 android:layout_width="90dp"
                                 android:layout_height="90dp"
-                                android:src="@drawable/addimage"/>
+                                android:src="@drawable/addimage" />
 
                             <ImageView
                                 android:id="@+id/close2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:src="@drawable/close"/>
+                                android:src="@drawable/close" />
 
                         </RelativeLayout>
 
@@ -814,40 +809,39 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="Address Proof"/>
+                            android:gravity="center"
+                            android:text="Address Proof"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <RelativeLayout
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_height="90dp">
+                            android:layout_height="90dp"
+                            android:layout_marginTop="8dp">
 
                             <ImageView
                                 android:id="@+id/doc3"
                                 android:layout_width="90dp"
                                 android:layout_height="90dp"
-                                android:src="@drawable/addimage"/>
+                                android:src="@drawable/addimage" />
 
                             <ImageView
                                 android:id="@+id/close3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:src="@drawable/close"/>
+                                android:src="@drawable/close" />
 
                         </RelativeLayout>
-
 
 
                     </LinearLayout>
@@ -855,37 +849,37 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="Brand Logo"/>
+                            android:gravity="center"
+                            android:text="Brand Logo"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <RelativeLayout
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_height="90dp">
+                            android:layout_height="90dp"
+                            android:layout_marginTop="8dp">
 
                             <ImageView
                                 android:id="@+id/doc7"
                                 android:layout_width="90dp"
                                 android:layout_height="90dp"
-                                android:src="@drawable/addimage"/>
+                                android:src="@drawable/addimage" />
 
                             <ImageView
                                 android:id="@+id/close7"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:src="@drawable/close"/>
+                                android:src="@drawable/close" />
 
                         </RelativeLayout>
 
@@ -906,40 +900,39 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="Bank Statement"/>
+                            android:gravity="center"
+                            android:text="Bank Statement"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <RelativeLayout
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_height="90dp">
+                            android:layout_height="90dp"
+                            android:layout_marginTop="8dp">
 
                             <ImageView
                                 android:id="@+id/doc4"
                                 android:layout_width="90dp"
                                 android:layout_height="90dp"
-                                android:src="@drawable/addimage"/>
+                                android:src="@drawable/addimage" />
 
                             <ImageView
                                 android:id="@+id/close4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:src="@drawable/close"/>
+                                android:src="@drawable/close" />
 
                         </RelativeLayout>
-
 
 
                     </LinearLayout>
@@ -947,37 +940,37 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="VAT Code"/>
+                            android:gravity="center"
+                            android:text="VAT Code"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <RelativeLayout
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_height="90dp">
+                            android:layout_height="90dp"
+                            android:layout_marginTop="8dp">
 
                             <ImageView
                                 android:id="@+id/doc6"
                                 android:layout_width="90dp"
                                 android:layout_height="90dp"
-                                android:src="@drawable/addimage"/>
+                                android:src="@drawable/addimage" />
 
                             <ImageView
                                 android:id="@+id/close6"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:src="@drawable/close"/>
+                                android:src="@drawable/close" />
 
                         </RelativeLayout>
 
@@ -997,37 +990,37 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="Food/Shop License"/>
+                            android:gravity="center"
+                            android:text="Food/Shop License"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <RelativeLayout
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_height="90dp">
+                            android:layout_height="90dp"
+                            android:layout_marginTop="8dp">
 
                             <ImageView
                                 android:id="@+id/doc5"
                                 android:layout_width="90dp"
                                 android:layout_height="90dp"
-                                android:src="@drawable/addimage"/>
+                                android:src="@drawable/addimage" />
 
                             <ImageView
                                 android:id="@+id/close5"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:src="@drawable/close"/>
+                                android:src="@drawable/close" />
 
                         </RelativeLayout>
 
@@ -1037,37 +1030,37 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             android:fontFamily="@font/cera_pro_medium"
-                            android:text="Signature"/>
+                            android:gravity="center"
+                            android:text="Signature"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
 
                         <RelativeLayout
                             android:layout_width="90dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_height="90dp">
+                            android:layout_height="90dp"
+                            android:layout_marginTop="8dp">
 
                             <ImageView
                                 android:id="@+id/doc8"
                                 android:layout_width="90dp"
                                 android:layout_height="90dp"
-                                android:src="@drawable/addimage"/>
+                                android:src="@drawable/addimage" />
 
                             <ImageView
                                 android:id="@+id/close8"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:src="@drawable/close"/>
+                                android:src="@drawable/close" />
 
                         </RelativeLayout>
 
@@ -1080,30 +1073,29 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="32dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="16dp"
-                    android:orientation="horizontal"
-                    android:gravity="right">
+                    android:layout_marginBottom="32dp"
+                    android:gravity="right"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/previous1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="32dp"
-                        android:textColor="#00b246"
                         android:fontFamily="@font/cera_pro_medium"
-                        android:text="PREVIOUS"/>
+                        android:text="PREVIOUS"
+                        android:textColor="#00b246"
+                        android:textSize="14dp" />
 
                     <ImageView
                         android:id="@+id/register"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/next_circle"
-                        />
+                        android:src="@drawable/next_circle" />
 
                 </LinearLayout>
 
@@ -1113,16 +1105,16 @@
                 android:id="@+id/substage1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:orientation="vertical"
                 android:paddingBottom="40dp"
-                android:layout_marginTop="24dp"
                 android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
 
                     <LinearLayout
@@ -1134,9 +1126,9 @@
                             android:id="@+id/back1"
                             android:layout_width="12dp"
                             android:layout_height="12dp"
-                            android:layout_marginTop="3dp"
                             android:layout_marginStart="16dp"
-                            android:src="@drawable/back"/>
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/back" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -1155,7 +1147,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="4dp"
                         android:layout_marginTop="16dp"
-                        android:background="#eaeaea"/>
+                        android:background="#eaeaea" />
 
 
                 </LinearLayout>
@@ -1180,21 +1172,20 @@
                     android:layout_marginEnd="19dp"
                     android:background="@drawable/border_line"
                     android:fontFamily="@font/cera_pro_medium"
+                    android:hint="Account Name"
                     android:inputType="textCapSentences"
                     android:paddingStart="10dp"
-                    android:hint="Account Name"
                     android:textColor="@color/black"
-                    android:textSize="16dp"/>
-
+                    android:textSize="16dp" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Account Number"
                     android:textColor="@color/black" />
@@ -1204,10 +1195,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:hint="Account Number"
                     android:inputType="numberPassword"
                     android:paddingStart="10dp"
@@ -1215,14 +1206,13 @@
                     android:textSize="16dp" />
 
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Confirm Account Number"
                     android:textColor="@color/black" />
@@ -1232,12 +1222,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
-                    android:inputType="number"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:hint="CXXXXXXX Number"
+                    android:inputType="number"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
@@ -1246,9 +1236,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Bank Sort Code"
                     android:textColor="@color/black" />
@@ -1258,12 +1248,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
-                    android:inputType="number"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:hint="XXX-XXX"
+                    android:inputType="number"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
@@ -1272,9 +1262,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Bank Name"
                     android:textColor="@color/black" />
@@ -1284,13 +1274,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:hint="Bank Name"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
-                    android:hint="Bank Name"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -1299,8 +1289,8 @@
                     android:id="@+id/substagebtn1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
                     android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:background="@color/colorPrimary"
                     android:fontFamily="@font/cera_pro_bold"
@@ -1318,16 +1308,16 @@
                 android:id="@+id/substage2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:orientation="vertical"
                 android:paddingBottom="40dp"
-                android:layout_marginTop="24dp"
                 android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
 
                     <LinearLayout
@@ -1339,9 +1329,9 @@
                             android:id="@+id/back2"
                             android:layout_width="12dp"
                             android:layout_height="12dp"
-                            android:layout_marginTop="3dp"
                             android:layout_marginStart="16dp"
-                            android:src="@drawable/back"/>
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/back" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -1360,7 +1350,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="4dp"
                         android:layout_marginTop="16dp"
-                        android:background="#eaeaea"/>
+                        android:background="#eaeaea" />
 
 
                 </LinearLayout>
@@ -1369,9 +1359,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Business Name"
                     android:textColor="@color/black" />
@@ -1381,10 +1371,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:hint="ABC Store"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
@@ -1395,9 +1385,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Pickup Address"
                     android:textColor="@color/black" />
@@ -1407,14 +1397,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:paddingTop="15dp"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:hint="Select Pickup Address"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
+                    android:paddingTop="15dp"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -1422,9 +1412,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Business Address"
                     android:textColor="@color/black" />
@@ -1434,10 +1424,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:hint="Enter Registered Business Address"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
@@ -1445,14 +1435,13 @@
                     android:textSize="16dp" />
 
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Display Name"
                     android:textColor="@color/black" />
@@ -1462,10 +1451,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:hint="Store Diplay Name"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
@@ -1476,9 +1465,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Business Category"
                     android:textColor="@color/black" />
@@ -1486,13 +1475,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
-                    android:paddingTop="15dp"
-                    android:layout_gravity="center_vertical"
                     android:background="@drawable/border_line"
                     android:orientation="vertical"
-                    >
+                    android:paddingTop="15dp">
 
                     <Spinner
                         android:id="@+id/category"
@@ -1510,9 +1498,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="VAT Code"
                     android:textColor="@color/black" />
@@ -1522,10 +1510,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:hint="Enter VAT Code"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
@@ -1533,15 +1521,13 @@
                     android:textSize="16dp" />
 
 
-
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Business Description"
                     android:textColor="@color/black" />
@@ -1551,10 +1537,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:hint="Enter Businesss Description"
                     android:inputType="textCapCharacters"
                     android:paddingStart="10dp"
@@ -1566,8 +1552,8 @@
                     android:id="@+id/substagebtn2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
                     android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:background="@color/colorPrimary"
                     android:fontFamily="@font/cera_pro_bold"
@@ -1585,16 +1571,16 @@
                 android:id="@+id/substage3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:orientation="vertical"
                 android:paddingBottom="40dp"
-                android:layout_marginTop="24dp"
                 android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
 
                     <LinearLayout
@@ -1606,9 +1592,9 @@
                             android:id="@+id/back3"
                             android:layout_width="12dp"
                             android:layout_height="12dp"
-                            android:layout_marginTop="3dp"
                             android:layout_marginStart="16dp"
-                            android:src="@drawable/back"/>
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/back" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -1627,7 +1613,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="4dp"
                         android:layout_marginTop="16dp"
-                        android:background="#eaeaea"/>
+                        android:background="#eaeaea" />
 
 
                 </LinearLayout>
@@ -1636,9 +1622,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Opening Time"
                     android:textColor="@color/black" />
@@ -1648,14 +1634,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:drawableRight="@drawable/ic_cal"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:gravity="center_vertical"
                     android:hint="HH:MM"
                     android:paddingEnd="10dp"
-                    android:drawableRight="@drawable/ic_cal"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -1663,9 +1649,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Closing Time"
                     android:textColor="@color/black" />
@@ -1675,14 +1661,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:drawableRight="@drawable/ic_cal"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:gravity="center_vertical"
                     android:hint="HH:MM"
                     android:paddingEnd="10dp"
-                    android:drawableRight="@drawable/ic_cal"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -1690,9 +1676,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Commision"
                     android:textColor="@color/black" />
@@ -1702,14 +1688,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:paddingTop="10dp"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
-                    android:text="Will be entered by admin"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:inputType="numberDecimal"
                     android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:text="Will be entered by admin"
                     android:textColor="@color/colorDarkgrey"
                     android:textSize="16dp" />
 
@@ -1717,9 +1703,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="#ffffff"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="32dp"
+                    android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Delivery Time"
                     android:textColor="@color/black" />
@@ -1729,10 +1715,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_line"
-                    android:fontFamily="@font/cera_pro_medium"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:hint="40 Mins"
                     android:inputType="number"
                     android:paddingStart="10dp"
@@ -1743,8 +1729,8 @@
                     android:id="@+id/substagebtn3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
                     android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:background="@color/colorPrimary"
                     android:fontFamily="@font/cera_pro_bold"

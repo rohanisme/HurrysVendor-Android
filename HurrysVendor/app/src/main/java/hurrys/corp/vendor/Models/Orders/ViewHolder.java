@@ -1,8 +1,8 @@
 package hurrys.corp.vendor.Models.Orders;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.media.Image;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,20 +10,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.willy.ratingbar.RotationRatingBar;
 
 import java.text.DecimalFormat;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import hurrys.corp.vendor.Configurations.Session;
 import hurrys.corp.vendor.R;
 
 
-public  class ViewHolder extends RecyclerView.ViewHolder {
+public class ViewHolder extends RecyclerView.ViewHolder {
     View mView;
 
     private ClickListener mClickListener;
@@ -50,11 +47,11 @@ public  class ViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setDetails(Context ctx,String CName,String Address,String Subtotal,String Pushid,String OrderNo,String OrderDateTime,String Qty,String Payment,String Status,String DeliveryPartner,String DeliveryNumber,String DeliveryImage){
+    public void setDetails(Context ctx, String CName, String Address, String Subtotal, String Pushid, String OrderNo, String OrderDateTime, String Qty, String Payment, String Status, String DeliveryPartner, String DeliveryNumber, String DeliveryImage) {
 
         CardView cardView;
-        TextView name,date,amount,payment,pushid,address,items,orderid,status,number;
-        LinearLayout addressrow,deliveryrow;
+        TextView name, date, amount, payment, pushid, address, items, orderid, status, number;
+        LinearLayout addressrow, deliveryrow;
         CircleImageView pp;
         TextView deliveryname;
         ImageView call;
@@ -80,44 +77,45 @@ public  class ViewHolder extends RecyclerView.ViewHolder {
         double price = Double.parseDouble(Subtotal);
         double com = 25;
         double tot = price * (com / 100.0);
-        double gtot = price - tot ;
+        double gtot = price - tot;
 
-        DecimalFormat form=new DecimalFormat("0.00");
+        DecimalFormat form = new DecimalFormat("0.00");
 
         pushid.setText(Pushid);
-        orderid.setText("Order ID : "+OrderNo);
+        orderid.setText("Order ID : " + OrderNo);
         date.setText(OrderDateTime);
-        amount.setText("\u00a3 " + form.format(Math.round(gtot*100.0)/100.0));
-        items.setText(Qty+" items");
+        amount.setText("\u00a3 " + form.format(Math.round(gtot * 100.0) / 100.0));
+        items.setText(Qty + " items");
         payment.setText(Payment);
         address.setText(Address);
         name.setText(CName);
-        if(Status.equals("1")) {
+        if (Status.equals("1")) {
             status.setText("PENDING");
             status.setTextColor(Color.parseColor("#b38400"));
-        }
-        else if(Status.equals("2")) {
+            status.setBackgroundColor(Color.parseColor("#FFF0C5"));
+        } else if (Status.equals("2")) {
             status.setText("PREPARING");
             status.setTextColor(Color.parseColor("#00B246"));
-        }
-        else if(Status.equals("3")) {
+            status.setBackgroundColor(Color.parseColor("#00B246"));
+        } else if (Status.equals("3")) {
             status.setText("READY TO DELIVERY");
             status.setTextColor(Color.parseColor("#00B246"));
-        }
-        else if(Status.equals("4")) {
+            status.setBackgroundColor(Color.parseColor("#00B246"));
+        } else if (Status.equals("4")) {
             status.setText("AWAITING DELIVERY");
             status.setTextColor(Color.parseColor("#00B246"));
-        }
-        else if(Status.equals("5")) {
+            status.setBackgroundColor(Color.parseColor("#00B246"));
+        } else if (Status.equals("5")) {
             status.setText("DELIVERED");
             status.setTextColor(Color.parseColor("#00B246"));
-        }
-        else if(Status.equals("10")){
+            status.setBackgroundColor(Color.parseColor("#00B246"));
+        } else if (Status.equals("10")) {
             status.setText("CANCELLED");
             status.setTextColor(Color.parseColor("#FF0000"));
+            status.setBackgroundColor(Color.parseColor("#FF0000"));
         }
 
-        if(!TextUtils.isEmpty(DeliveryPartner)){
+        if (!TextUtils.isEmpty(DeliveryPartner)) {
             addressrow.setVisibility(View.GONE);
             deliveryrow.setVisibility(View.VISIBLE);
             deliveryname.setText(DeliveryPartner);
@@ -125,8 +123,7 @@ public  class ViewHolder extends RecyclerView.ViewHolder {
             Glide.with(ctx)
                     .load(DeliveryImage)
                     .into(pp);
-        }
-        else{
+        } else {
             deliveryrow.setVisibility(View.GONE);
             addressrow.setVisibility(View.VISIBLE);
         }
@@ -134,10 +131,10 @@ public  class ViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    public void setDetails1(Context ctx,String CName,String Address,String Subtotal,String Pushid,String OrderNo,String OrderDateTime,String Qty,String Payment,String Status){
+    public void setDetails1(Context ctx, String CName, String Address, String Subtotal, String Pushid, String OrderNo, String OrderDateTime, String Qty, String Payment, String Status) {
 
         CardView cardView;
-        TextView name,date,amount,payment,pushid,address,items,orderid,status;
+        TextView name, date, amount, payment, pushid, address, items, orderid, status;
 
 
         cardView = mView.findViewById(R.id.card);
@@ -152,40 +149,36 @@ public  class ViewHolder extends RecyclerView.ViewHolder {
         status = mView.findViewById(R.id.status);
 
 
-
         double price = Double.parseDouble(Subtotal);
         double com = 25;
         double tot = price * (com / 100.0);
-        double gtot = price - tot ;
+        double gtot = price - tot;
 
-        DecimalFormat form=new DecimalFormat("0.00");
+        DecimalFormat form = new DecimalFormat("0.00");
 
         pushid.setText(Pushid);
-        orderid.setText("OrderID #"+OrderNo);
+        orderid.setText("OrderID #" + OrderNo);
         date.setText(OrderDateTime);
-        amount.setText("\u00a3 " + form.format(Math.round(gtot*100.0)/100.0));
-        items.setText(Qty+" items");
+        amount.setText("\u00a3 " + form.format(Math.round(gtot * 100.0) / 100.0));
+        items.setText(Qty + " items");
         payment.setText(Payment);
         address.setText(Address);
         name.setText(CName);
-        if(Status.equals("5")) {
+        if (Status.equals("5")) {
             status.setText("DELIVERED");
             status.setTextColor(Color.parseColor("#00B246"));
-        }
-        else if(Status.equals("10")){
+        } else if (Status.equals("10")) {
             status.setText("CANCELLED");
             status.setTextColor(Color.parseColor("#FF0000"));
-        }
-        else{
-                cardView.setVisibility(View.GONE);
-                cardView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+        } else {
+            cardView.setVisibility(View.GONE);
+            cardView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
         }
 
     }
 
 
-
-    public void setDetails2(Context ctx,String OrderNo,String ItemDetails,String Pushid,String OrderDateTime,String ChefTotal,String Status,String ChefCommision,String Subtotal,String DeliveryCharges,String Chef,String OrderType,String VendorCustomer){
+    public void setDetails2(Context ctx, String OrderNo, String ItemDetails, String Pushid, String OrderDateTime, String ChefTotal, String Status, String ChefCommision, String Subtotal, String DeliveryCharges, String Chef, String OrderType, String VendorCustomer) {
 
 //        TextView orderid,items,pushid,date,total,status;
 //        ImageView statusimage;
@@ -239,14 +232,13 @@ public  class ViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-
-
     public void setOnClickListener(ClickListener clickListener) {
         mClickListener = clickListener;
     }
 
     public interface ClickListener {
         void onItemClick(View v, int position);
+
         void onItemLongClick(View v, int position);
     }
 }

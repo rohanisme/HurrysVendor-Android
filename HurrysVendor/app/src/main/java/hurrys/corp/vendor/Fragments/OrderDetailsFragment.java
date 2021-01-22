@@ -4,27 +4,28 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.text.Html;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -37,13 +38,10 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.Nullable;
-import com.tooltip.Tooltip;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -66,26 +64,27 @@ public class OrderDetailsFragment extends Fragment {
     private Session session;
     private RecyclerView mRecyclerView;
     private DatabaseReference mref;
-    private TextView orderid, date, daname, address,support;
+    private TextView orderid, date, daname, address, support;
     private LinearLayout deliveryrow;
 
-    private TextView subtotal,discount,commision,delivery,tax,grandtotal,status,number;
+    private TextView subtotal, discount, commision, delivery, tax, grandtotal, status, number;
 
-    private Button accpet,accpet1,ready,decline,delivered,dispatched;
-    private double gtot=0,dbalance=0;
+    private Button accpet, accpet1, ready, decline, delivered, dispatched;
+    private double gtot = 0, dbalance = 0;
     private BottomSheetDialog bottomSheetDialog;
 
-    String selection="";
+    String selection = "";
 
     DataSnapshot d;
 
     CircleImageView pp;
     TextView deliveryname;
-    ImageView call;
+    ImageView call, openMenu;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
     }
 
@@ -93,15 +92,15 @@ public class OrderDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v=inflater.inflate(R.layout.fragment_order_details, container, false);
+        View v = inflater.inflate(R.layout.fragment_order_details, container, false);
 
-        if(getActivity()!=null) {
+        if (getActivity() != null) {
             LinearLayout bottomnavigation = (getActivity()).findViewById(R.id.bottomnavigation);
             bottomnavigation.setVisibility(View.GONE);
         }
 
         orderid = v.findViewById(R.id.orderid);
-        date =v.findViewById(R.id.date);
+        date = v.findViewById(R.id.date);
 
         daname = v.findViewById(R.id.daname);
         address = v.findViewById(R.id.address);
@@ -110,31 +109,30 @@ public class OrderDetailsFragment extends Fragment {
         dispatched = v.findViewById(R.id.dispatched);
         delivered = v.findViewById(R.id.delivered);
 
-        subtotal=v.findViewById(R.id.subtotal);
-        delivery=v.findViewById(R.id.delivery);
-        commision=v.findViewById(R.id.commision);
-        discount=v.findViewById(R.id.discount);
-        tax=v.findViewById(R.id.tax);
-        grandtotal=v.findViewById(R.id.grandtotal);
-        accpet=v.findViewById(R.id.accept);
-        accpet1=v.findViewById(R.id.accept1);
-        ready=v.findViewById(R.id.ready);
-        decline=v.findViewById(R.id.decline);
-        deliveryrow=v.findViewById(R.id.deliveryrow);
-        pp=v.findViewById(R.id.pp);
-        deliveryname=v.findViewById(R.id.deliveryname);
-        call=v.findViewById(R.id.call);
-        number=v.findViewById(R.id.number);
+        subtotal = v.findViewById(R.id.subtotal);
+        delivery = v.findViewById(R.id.delivery);
+        commision = v.findViewById(R.id.commision);
+        discount = v.findViewById(R.id.discount);
+        tax = v.findViewById(R.id.tax);
+        grandtotal = v.findViewById(R.id.grandtotal);
+        accpet = v.findViewById(R.id.accept);
+        accpet1 = v.findViewById(R.id.accept1);
+        ready = v.findViewById(R.id.ready);
+        decline = v.findViewById(R.id.decline);
+        deliveryrow = v.findViewById(R.id.deliveryrow);
+        pp = v.findViewById(R.id.pp);
+        deliveryname = v.findViewById(R.id.deliveryname);
+        call = v.findViewById(R.id.call);
+        openMenu = v.findViewById(R.id.openMenu);
+        number = v.findViewById(R.id.number);
 
 
-
-
-        ImageView back=v.findViewById(R.id.back);
+        ImageView back = v.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(getActivity()!=null)
-                getActivity().onBackPressed();
+                if (getActivity() != null)
+                    getActivity().onBackPressed();
             }
         });
 
@@ -148,7 +146,7 @@ public class OrderDetailsFragment extends Fragment {
         support.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(getActivity()!=null) {
+                if (getActivity() != null) {
                     Fragment fragment = new SupportFragment();
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     fragmentManager.beginTransaction()
@@ -166,20 +164,20 @@ public class OrderDetailsFragment extends Fragment {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            orderid.setText("Order ID : #"+dataSnapshot.child("OrderNo").getValue().toString().substring(5));
-                            DecimalFormat form=new DecimalFormat("0.00");
-                            d=dataSnapshot;
+                        if (dataSnapshot.exists()) {
+                            orderid.setText("Order ID : #" + dataSnapshot.child("OrderNo").getValue().toString().substring(5));
+                            DecimalFormat form = new DecimalFormat("0.00");
+                            d = dataSnapshot;
 
                             date.setText(dataSnapshot.child("OrderDateTime").getValue().toString());
-                            subtotal.setText("\u00a3"+form.format(Double.parseDouble(dataSnapshot.child("Subtotal").getValue().toString())));
-                            discount.setText("\u00a3"+form.format(Double.parseDouble(dataSnapshot.child("Discount").getValue().toString())));
-                            delivery.setText("\u00a3"+form.format(Double.parseDouble(dataSnapshot.child("DeliveryCharges").getValue().toString())));
-                            tax.setText("\u00a3"+form.format(Double.parseDouble(dataSnapshot.child("Taxes").getValue().toString())));
+                            subtotal.setText("\u00a3" + form.format(Double.parseDouble(dataSnapshot.child("Subtotal").getValue().toString())));
+                            discount.setText("\u00a3" + form.format(Double.parseDouble(dataSnapshot.child("Discount").getValue().toString())));
+                            delivery.setText("\u00a3" + form.format(Double.parseDouble(dataSnapshot.child("DeliveryCharges").getValue().toString())));
+                            tax.setText("\u00a3" + form.format(Double.parseDouble(dataSnapshot.child("Taxes").getValue().toString())));
 
                             orderid.setText(dataSnapshot.child("OrderNo").getValue().toString());
 
-                            if(dataSnapshot.child("DeliverySelection").exists()){
+                            if (dataSnapshot.child("DeliverySelection").exists()) {
                                 selection = dataSnapshot.child("DeliverySelection").getValue().toString();
                             }
 
@@ -190,38 +188,36 @@ public class OrderDetailsFragment extends Fragment {
                             double disc = Double.parseDouble(discount.getText().toString().substring(1));
                             double com = 25;
 
-                            double tot = price * (com/100.0);
+                            double tot = price * (com / 100.0);
 
 
                             double gtot = (price - tot);
 
-                            commision.setText("\u00a3"+form.format(Math.round(tot*100.0)/100.0));
-                            grandtotal.setText("\u00a3"+form.format(Math.round(gtot*100.0)/100.0));
-                            gtot=Double.parseDouble(grandtotal.getText().toString().substring(1));
+                            commision.setText("\u00a3" + form.format(Math.round(tot * 100.0) / 100.0));
+                            grandtotal.setText("\u00a3" + form.format(Math.round(gtot * 100.0) / 100.0));
+                            gtot = Double.parseDouble(grandtotal.getText().toString().substring(1));
 
 
                             address.setText(dataSnapshot.child("Address").getValue().toString());
                             daname.setText(dataSnapshot.child("CName").getValue().toString());
 
-                            if(dataSnapshot.child("Status").getValue().toString().equals("1")){
+                            if (dataSnapshot.child("Status").getValue().toString().equals("1")) {
                                 accpet.setVisibility(View.VISIBLE);
                                 accpet1.setVisibility(View.VISIBLE);
                                 decline.setVisibility(View.VISIBLE);
                                 ready.setVisibility(View.GONE);
                                 dispatched.setVisibility(View.GONE);
                                 delivered.setVisibility(View.GONE);
-                            }
-                            else if(dataSnapshot.child("Status").getValue().toString().equals("2")){
+                            } else if (dataSnapshot.child("Status").getValue().toString().equals("2")) {
                                 ready.setVisibility(View.VISIBLE);
                                 decline.setVisibility(View.GONE);
                                 accpet.setVisibility(View.GONE);
                                 accpet1.setVisibility(View.GONE);
                                 dispatched.setVisibility(View.GONE);
                                 delivered.setVisibility(View.GONE);
-                            }
-                            else if(dataSnapshot.child("Status").getValue().toString().equals("3")){
-                                if(!TextUtils.isEmpty(selection)) {
-                                    if(selection.equals("Self")) {
+                            } else if (dataSnapshot.child("Status").getValue().toString().equals("3")) {
+                                if (!TextUtils.isEmpty(selection)) {
+                                    if (selection.equals("Self")) {
                                         ready.setVisibility(View.GONE);
                                         decline.setVisibility(View.GONE);
                                         accpet.setVisibility(View.GONE);
@@ -230,9 +226,8 @@ public class OrderDetailsFragment extends Fragment {
                                         delivered.setVisibility(View.GONE);
                                     }
                                 }
-                            }
-                            else if(dataSnapshot.child("Status").getValue().toString().equals("4")){
-                                if(!TextUtils.isEmpty(selection)) {
+                            } else if (dataSnapshot.child("Status").getValue().toString().equals("4")) {
+                                if (!TextUtils.isEmpty(selection)) {
                                     if (selection.equals("Self")) {
                                         ready.setVisibility(View.GONE);
                                         decline.setVisibility(View.GONE);
@@ -242,8 +237,7 @@ public class OrderDetailsFragment extends Fragment {
                                         delivered.setVisibility(View.VISIBLE);
                                     }
                                 }
-                            }
-                            else{
+                            } else {
                                 ready.setVisibility(View.GONE);
                                 accpet.setVisibility(View.GONE);
                                 accpet1.setVisibility(View.GONE);
@@ -252,47 +246,41 @@ public class OrderDetailsFragment extends Fragment {
                                 delivered.setVisibility(View.GONE);
                             }
 
-                            if(dataSnapshot.child("DeliveryPartner").exists()){
+                            if (dataSnapshot.child("DeliveryPartner").exists()) {
                                 deliveryrow.setVisibility(View.VISIBLE);
                                 deliveryname.setText(dataSnapshot.child("DeliveryPartner").getValue().toString());
                                 number.setText(dataSnapshot.child("DeliveryNumber").getValue().toString());
-                                if(dataSnapshot.child("DeliveryImage").exists())
-                                    if(getContext()!=null)
+                                if (dataSnapshot.child("DeliveryImage").exists())
+                                    if (getContext() != null)
                                         Glide.with(getContext())
                                                 .load(dataSnapshot.child("DeliveryImage").getValue().toString())
                                                 .into(pp);
-                            }
-                            else
+                            } else
                                 deliveryrow.setVisibility(View.GONE);
 
 
-                            if(dataSnapshot.child("Status").getValue().toString().equals("1")) {
+                            if (dataSnapshot.child("Status").getValue().toString().equals("1")) {
                                 status.setText("PENDING");
                                 status.setTextColor(Color.parseColor("#b38400"));
-                            }
-                            else if(dataSnapshot.child("Status").getValue().toString().equals("2")){
+                            } else if (dataSnapshot.child("Status").getValue().toString().equals("2")) {
                                 status.setText("PREPARING");
                                 status.setTextColor(Color.parseColor("#00B246"));
-                            }
-                            else if(dataSnapshot.child("Status").getValue().toString().equals("3")){
+                            } else if (dataSnapshot.child("Status").getValue().toString().equals("3")) {
                                 status.setText("READY TO DELIVER");
                                 status.setTextColor(Color.parseColor("#00B246"));
-                            }
-                            else if(dataSnapshot.child("Status").getValue().toString().equals("4")){
+                            } else if (dataSnapshot.child("Status").getValue().toString().equals("4")) {
                                 status.setText("AWAITING DELIVERY");
                                 status.setTextColor(Color.parseColor("#00B246"));
-                            }
-                            else if(dataSnapshot.child("Status").getValue().toString().equals("5")){
+                            } else if (dataSnapshot.child("Status").getValue().toString().equals("5")) {
                                 status.setText("DELIVERED");
                                 status.setTextColor(Color.parseColor("#00B246"));
-                            }
-                            else if(dataSnapshot.child("Status").getValue().toString().equals("10")){
+                            } else if (dataSnapshot.child("Status").getValue().toString().equals("10")) {
                                 status.setText("CANCELLED");
                                 status.setTextColor(Color.parseColor("#FF0000"));
                             }
 
 
-                            if(dataSnapshot.child("OrderType").getValue().toString().equals("Others")){
+                            if (dataSnapshot.child("OrderType").getValue().toString().equals("Others")) {
                                 mref = FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Cart");
 
                                 FirebaseRecyclerAdapter<OrderDetails, ViewHolder> firebaseRecyclerAdapter =
@@ -304,14 +292,14 @@ public class OrderDetailsFragment extends Fragment {
                                         ) {
                                             @Override
                                             protected void populateViewHolder(ViewHolder viewHolder, OrderDetails orderDetails, int position) {
-                                                viewHolder.setDetails(getContext(),orderDetails.Image,orderDetails.Name,orderDetails.Price,orderDetails.Qty,orderDetails.Total,orderDetails.Units);
+                                                viewHolder.setDetails(getContext(), orderDetails.Image, orderDetails.Name, orderDetails.Price, orderDetails.Qty, orderDetails.Total, orderDetails.Units);
 
                                             }
 
                                             @Override
                                             public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-                                                final  ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
+                                                final ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
                                                 viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
                                                     @Override
                                                     public void onItemClick(View v, final int position) {
@@ -335,8 +323,7 @@ public class OrderDetailsFragment extends Fragment {
                                         };
 
                                 mRecyclerView.setAdapter(firebaseRecyclerAdapter);
-                            }
-                            else{
+                            } else {
 
                                 mref = FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Cart");
                                 FirebaseRecyclerAdapter<OrderDetails1, ViewHolder> firebaseRecyclerAdapter =
@@ -348,13 +335,13 @@ public class OrderDetailsFragment extends Fragment {
                                         ) {
                                             @Override
                                             protected void populateViewHolder(ViewHolder viewHolder, OrderDetails1 orderDetails, int position) {
-                                                viewHolder.setDetails2(getContext(),orderDetails.Name,orderDetails.Price,orderDetails.Type,orderDetails.Qty,orderDetails.Image);
+                                                viewHolder.setDetails2(getContext(), orderDetails.Name, orderDetails.Price, orderDetails.Type, orderDetails.Qty, orderDetails.Image);
                                             }
 
                                             @Override
                                             public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-                                                final  ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
+                                                final ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
                                                 viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
                                                     @Override
                                                     public void onItemClick(View v, final int position) {
@@ -395,11 +382,21 @@ public class OrderDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:"+number.getText().toString()));
+                intent.setData(Uri.parse("tel:" + number.getText().toString()));
                 startActivity(intent);
             }
         });
 
+        openMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu= new PopupMenu(getContext(),view);
+                //popupMenu.setOnMenuItemClickListener();
+                popupMenu.inflate(R.menu.option_menu_item);
+                popupMenu.show();
+
+            }
+        });
 
         final Date currentDate = new Date(System.currentTimeMillis());
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -408,8 +405,8 @@ public class OrderDetailsFragment extends Fragment {
         SimpleDateFormat df1 = new SimpleDateFormat("dd, MMM yyyy  HH:MM");
         final String date2 = df1.format(currentDate);
 
-        bottomSheetDialog=new BottomSheetDialog(getContext());
-        final View bottomSheetDialogView=getLayoutInflater().inflate(R.layout.bottom_deliveryselection,null);
+        bottomSheetDialog = new BottomSheetDialog(getContext());
+        final View bottomSheetDialogView = getLayoutInflater().inflate(R.layout.bottom_deliveryselection, null);
         bottomSheetDialog.setContentView(bottomSheetDialogView);
 
         RadioGroup radioGroup = bottomSheetDialogView.findViewById(R.id.radio);
@@ -423,12 +420,12 @@ public class OrderDetailsFragment extends Fragment {
 
                 bottomSheetDialog.dismiss();
 
-                if(selectedId == -1){
-                    Toast.makeText(getContext(),"Please select a required option",Toast.LENGTH_LONG).show();
+                if (selectedId == -1) {
+                    Toast.makeText(getContext(), "Please select a required option", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                RadioButton radioButton = (RadioButton)bottomSheetDialogView.findViewById(selectedId);
+                RadioButton radioButton = (RadioButton) bottomSheetDialogView.findViewById(selectedId);
                 FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("3");
                 FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue(radioButton.getText().toString());
                 FirebaseDatabase.getInstance().getReference().child("PendingOrders").child(pushid).setValue(d.getValue());
@@ -444,7 +441,7 @@ public class OrderDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(getContext()!=null) {
+                if (getContext() != null) {
                     SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("Are you sure you want to accept the order!")
                             .setConfirmText("Yes")
@@ -458,7 +455,7 @@ public class OrderDetailsFragment extends Fragment {
                                     FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
                                     FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
                                     FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
-                                    if(getActivity()!=null)
+                                    if (getActivity() != null)
                                         getActivity().onBackPressed();
 
                                 }
@@ -466,14 +463,13 @@ public class OrderDetailsFragment extends Fragment {
                             .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                        sweetAlertDialog.dismiss();
+                                    sweetAlertDialog.dismiss();
                                 }
                             });
 
                     sDialog.setCancelable(false);
                     sDialog.show();
                 }
-
 
 
             }
@@ -483,7 +479,7 @@ public class OrderDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(getContext()!=null) {
+                if (getContext() != null) {
                     SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("Are you sure you want to accept the order and self delivery!")
                             .setConfirmText("Yes")
@@ -497,7 +493,7 @@ public class OrderDetailsFragment extends Fragment {
                                     FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
                                     FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
                                     FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
-                                    if(getActivity()!=null)
+                                    if (getActivity() != null)
                                         getActivity().onBackPressed();
 
                                 }
@@ -512,7 +508,6 @@ public class OrderDetailsFragment extends Fragment {
                     sDialog.setCancelable(false);
                     sDialog.show();
                 }
-
 
 
             }
@@ -570,7 +565,7 @@ public class OrderDetailsFragment extends Fragment {
         ready.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(getContext()!=null) {
+                if (getContext() != null) {
                     SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("Is the order ready!")
                             .setConfirmText("Yes")
@@ -599,14 +594,15 @@ public class OrderDetailsFragment extends Fragment {
                                             currentData.setValue(value);
                                             return Transaction.success(currentData);
                                         }
+
                                         @Override
                                         public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
                                             DatabaseReference rref1 = FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Transactions").push();
                                             Earnings earnings = new Earnings(rref1.getKey(), session.getusername(), Double.toString(dbalance), date1, Double.toString(gtot), "Online",
-                                                    "Cr", "Order Total", orderid.getText().toString().substring(12), "Pending",pushid);
+                                                    "Cr", "Order Total", orderid.getText().toString().substring(12), "Pending", pushid);
                                             rref1.setValue(earnings);
-                                            if(getContext()!=null) {
-                                                if(selection.equals("Self")) {
+                                            if (getContext() != null) {
+                                                if (selection.equals("Self")) {
                                                     SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
                                                             .setTitleText("Good job!")
                                                             .setContentText("You Accepted  to self deliver the order!")
@@ -620,8 +616,7 @@ public class OrderDetailsFragment extends Fragment {
                                                             });
                                                     sDialog.setCancelable(false);
                                                     sDialog.show();
-                                                }
-                                                else{
+                                                } else {
                                                     SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
                                                             .setTitleText("Good job!")
                                                             .setContentText("You order will be picked shortly!")
@@ -658,7 +653,7 @@ public class OrderDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(getContext()!=null) {
+                if (getContext() != null) {
                     SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("Are you sure you want to dispatch the order!")
                             .setConfirmText("Yes")
@@ -668,7 +663,7 @@ public class OrderDetailsFragment extends Fragment {
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
                                     FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("4");
-                                    if(getActivity()!=null)
+                                    if (getActivity() != null)
                                         getActivity().onBackPressed();
 
                                 }
@@ -683,7 +678,6 @@ public class OrderDetailsFragment extends Fragment {
                     sDialog.setCancelable(false);
                     sDialog.show();
                 }
-
 
 
             }
@@ -694,7 +688,7 @@ public class OrderDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(getContext()!=null) {
+                if (getContext() != null) {
                     SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("Are you sure you want to mark the order delivered!")
                             .setConfirmText("Yes")
@@ -705,7 +699,7 @@ public class OrderDetailsFragment extends Fragment {
                                     sweetAlertDialog.dismiss();
                                     FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("5");
                                     FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerStatus").removeValue();
-                                    if(getActivity()!=null)
+                                    if (getActivity() != null)
                                         getActivity().onBackPressed();
 
                                 }
@@ -722,11 +716,8 @@ public class OrderDetailsFragment extends Fragment {
                 }
 
 
-
             }
         });
-
-
 
 
 //        handover.setOnClickListener(new View.OnClickListener() {
@@ -768,4 +759,10 @@ public class OrderDetailsFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.option_menu_item, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
 }
