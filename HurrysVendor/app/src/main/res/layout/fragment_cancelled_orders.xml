@@ -4,155 +4,373 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Dashboard">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".Fragments.Dashboard">
 
-        <LinearLayout
-            android:id="@+id/l1"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/help"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F4F8F8"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp"
-            android:gravity="center_vertical"
-            android:paddingEnd="20dp">
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:text="HELP"
+            android:textSize="18sp"
+            android:paddingEnd="22dp"
+            android:layout_marginTop="22dp"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/cera_pro_bold"/>
 
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="15dp"
-                android:layout_height="16dp"
-                android:src="@drawable/back"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/cancel_icon"/>
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/cera_pro_bold"
-                android:text="Cancelled Orders"
-                android:layout_marginStart="32dp"
-                android:textColor="@color/black"
-                android:textSize="16dp" />
-
-        </LinearLayout>
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorGrey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/l1" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/l1">
+            android:textSize="21sp"
+            android:fontFamily="@font/cera_pro_medium"
+            android:textColor="#999999"
+            android:text="Sorry! Your order got cancelled.
+We are just as sad as you"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="40dp"/>
 
-            <LinearLayout
-                android:layout_width="0sp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10sp"
-                    android:paddingTop="5sp"
-                    android:layout_marginStart="16sp"
-                    android:paddingEnd="10sp"
-                    android:text="Start Date"
-                    android:textSize="10sp"
-                    android:textColor="@color/colorDarkgrey" />
-
-
-                <TextView
-                    android:id="@+id/sdate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10sp"
-                    android:layout_marginStart="16sp"
-                    android:paddingEnd="10sp"
-                    android:paddingBottom="5sp"
-                    android:text="DD-MM-YYY  "
-                    android:textSize="15sp"
-                    android:textColor="@color/colorPrimaryDark" />
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="0sp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10sp"
-                    android:paddingTop="5sp"
-                    android:layout_marginStart="16sp"
-                    android:paddingEnd="10sp"
-                    android:text="End Date"
-                    android:textSize="10sp"
-                    android:textColor="@color/colorDarkgrey" />
-
-
-                <TextView
-                    android:id="@+id/edate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10sp"
-                    android:layout_marginStart="16sp"
-                    android:paddingEnd="10sp"
-                    android:paddingBottom="5sp"
-                    android:text="DD-MM-YYY"
-                    android:textSize="15sp"
-                    android:textColor="@color/colorPrimaryDark" />
-
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
 
         <View
-            android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="16sp"
-            android:layout_marginEnd="16sp"
-            android:layout_marginTop="8sp"
-            android:background="@color/editext"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
+            android:layout_height="3dp"
+            android:layout_marginTop="16dp"
+            android:background="#f5f5f5"/>
 
+        <TextView
+            android:id="@+id/orderid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="Order ID"
+            android:layout_marginTop="23dp"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:gravity="right"
+            android:textColor="#0e4d97"
+            android:textSize="16dp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="16dp"
+            android:background="#f5f5f5"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cera_pro_medium"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:text="Items"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycylerView"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            android:nestedScrollingEnabled="true"
+            android:overScrollMode="never"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:background="#f5f5f5"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_weight="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:text="Item Total"
+                    android:fontFamily="@font/cera_pro_bold"
+                    android:textColor="#888e9e"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/subtotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:gravity="right"
+                    android:text=" £ 0.00"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_weight="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:text="Total Discount     "
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:drawableRight="@drawable/info"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:textColor="#888e9e"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/discount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:gravity="right"
+                    android:text=" £ 0.00"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_weight="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:text="Delivery Charges"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:textColor="#888e9e"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/delivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:gravity="right"
+                    android:text=" £ 0.00"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_weight="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:text="Commision"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:textColor="#888e9e"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/commision"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:gravity="right"
+                    android:text=" £ 0.00"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_weight="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:text="Service Charges"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:textColor="#888e9e"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:gravity="right"
+                    android:text=" £ 0.00"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="16dp"
+            android:background="#eaeaea"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:textColor="@color/black"
+                    android:paddingStart="16dp"
+                    android:text="Total Paid"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingEnd="24dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/grandtotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:gravity="right"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:textColor="@color/black"
+                    android:paddingStart="16dp"
+                    android:text=" £ 0.00"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

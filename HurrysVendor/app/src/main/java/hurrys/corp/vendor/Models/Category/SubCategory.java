@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import hurrys.corp.vendor.Activities.MainActivity;
 import hurrys.corp.vendor.Configurations.Session;
 import hurrys.corp.vendor.R;
@@ -66,11 +67,96 @@ public class SubCategory extends RecyclerView.Adapter<SubCategory.ViewHolder> {
             Glide.with(holder.view.getContext())
                     .load(sub.Image)
                     .into(holder.image);
+            holder.close.setVisibility(View.VISIBLE);
         }
         else{
             holder.name.setText("New");
             holder.name.setVisibility(View.INVISIBLE);
+            holder.close.setVisibility(View.INVISIBLE);
         }
+
+
+        holder.close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("SubCategory")
+                        .child(holder.pushid.getText().toString())
+                        .child("ItemCategory")
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.exists()){
+                                    if(TextUtils.isEmpty(dataSnapshot.getValue().toString())){
+                                        SweetAlertDialog sDialog = new SweetAlertDialog(holder.view.getContext(), SweetAlertDialog.WARNING_TYPE)
+                                                .setTitleText("Are you sure you want to delete the category!")
+                                                .setConfirmText("Yes")
+                                                .setCancelText("No")
+                                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                    @Override
+                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                        sweetAlertDialog.dismiss();
+                                                        FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("SubCategory")
+                                                                .child(holder.pushid.getText().toString()).removeValue();
+                                                    }
+                                                })
+                                                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                    @Override
+                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                        sweetAlertDialog.dismiss();
+                                                    }
+                                                });
+
+                                        sDialog.setCancelable(false);
+                                        sDialog.show();
+                                    }
+                                    else{
+                                        SweetAlertDialog sDialog = new SweetAlertDialog(holder.view.getContext(), SweetAlertDialog.WARNING_TYPE)
+                                                .setTitleText("Please Delete all SubCategory and Items to delete Category!")
+                                                .setConfirmText("Ok")
+                                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                    @Override
+                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                        sweetAlertDialog.dismiss();
+                                                    }
+                                                });
+
+                                        sDialog.setCancelable(false);
+                                        sDialog.show();
+                                    }
+                                }
+                                else{
+                                    SweetAlertDialog sDialog = new SweetAlertDialog(holder.view.getContext(), SweetAlertDialog.WARNING_TYPE)
+                                            .setTitleText("Are you sure you want to delete the category!")
+                                            .setConfirmText("Yes")
+                                            .setCancelText("No")
+                                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                @Override
+                                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                    sweetAlertDialog.dismiss();
+                                                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("SubCategory")
+                                                            .child(holder.pushid.getText().toString()).removeValue();
+                                                }
+                                            })
+                                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                @Override
+                                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                    sweetAlertDialog.dismiss();
+                                                }
+                                            });
+
+                                    sDialog.setCancelable(false);
+                                    sDialog.show();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+            }
+        });
+
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,15 +221,22 @@ public class SubCategory extends RecyclerView.Adapter<SubCategory.ViewHolder> {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     if(dataSnapshot.exists()){
-                                        String temp=dataSnapshot.getValue().toString();
-                                        a=temp;
-
-                                        ArrayList<String> category1 = new ArrayList<String>(Arrays.asList(temp.split(",")));
-
-                                        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(holder.view.getContext());
-                                        recyclerView.setLayoutManager(mLayoutManager);
-                                        category1000 = new Category(category1);
-                                        recyclerView.setAdapter(category1000);
+                                        if(!TextUtils.isEmpty(dataSnapshot.getValue().toString())) {
+                                            String temp = dataSnapshot.getValue().toString();
+                                            a = temp;
+                                            ArrayList<String> category1 = new ArrayList<String>(Arrays.asList(temp.split(",")));
+                                            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(holder.view.getContext());
+                                            recyclerView.setLayoutManager(mLayoutManager);
+                                            category1000 = new Category(category1);
+                                            recyclerView.setAdapter(category1000);
+                                        }
+                                        else{
+                                            ArrayList<String> category1 = new ArrayList<String>();
+                                            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(holder.view.getContext());
+                                            recyclerView.setLayoutManager(mLayoutManager);
+                                            category1000 = new Category(category1);
+                                            recyclerView.setAdapter(category1000);
+                                        }
 
                                     }
                                 }
@@ -229,7 +322,7 @@ public class SubCategory extends RecyclerView.Adapter<SubCategory.ViewHolder> {
         public final View view;
 
         TextView name,pushid;
-        ImageView image;
+        ImageView image,close;
         LinearLayout linearLayout;
         public ViewHolder(View mView) {
             super(mView);
@@ -237,6 +330,7 @@ public class SubCategory extends RecyclerView.Adapter<SubCategory.ViewHolder> {
             name=mView.findViewById(R.id.name);
             pushid=mView.findViewById(R.id.pushid);
             image=mView.findViewById(R.id.image);
+            close=mView.findViewById(R.id.close);
             linearLayout=mView.findViewById(R.id.linearLayout);
         }
 

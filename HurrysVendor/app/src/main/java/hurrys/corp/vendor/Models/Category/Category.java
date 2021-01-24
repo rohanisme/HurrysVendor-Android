@@ -74,13 +74,14 @@ public class Category extends RecyclerView.Adapter<Category.ViewHolder> {
                 for(int i=0;i<category.size();i++){
                     a+=category.get(i)+",";
                 }
-                FirebaseDatabase.getInstance().getReference()
-                        .child("Vendor")
-                        .child(session.getusername())
-                        .child("SubCategory")
-                        .child(session.gettemp())
-                        .child("ItemCategory")
-                        .setValue(a);
+
+                    FirebaseDatabase.getInstance().getReference()
+                            .child("Vendor")
+                            .child(session.getusername())
+                            .child("SubCategory")
+                            .child(session.gettemp())
+                            .child("ItemCategory")
+                            .setValue(a);
 
                 notifyDataSetChanged();
             }

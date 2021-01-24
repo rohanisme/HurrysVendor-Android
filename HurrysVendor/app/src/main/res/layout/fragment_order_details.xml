@@ -100,6 +100,8 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/cera_pro_medium"
                             android:text=" ongoing"
+                            android:paddingStart="4dp"
+                            android:paddingEnd="4dp"
                             android:textColor="@color/black"
                             android:textSize="16dp" />
 

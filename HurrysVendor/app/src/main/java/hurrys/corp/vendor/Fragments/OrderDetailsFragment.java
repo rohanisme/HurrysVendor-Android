@@ -176,7 +176,7 @@ public class OrderDetailsFragment extends Fragment {
                             delivery.setText("\u00a3" + form.format(Double.parseDouble(dataSnapshot.child("DeliveryCharges").getValue().toString())));
                             tax.setText("\u00a3" + form.format(Double.parseDouble(dataSnapshot.child("Taxes").getValue().toString())));
 
-                            orderid.setText(dataSnapshot.child("OrderNo").getValue().toString());
+//                            orderid.setText(dataSnapshot.child("OrderNo").getValue().toString());
 
                             if (dataSnapshot.child("DeliverySelection").exists()) {
                                 selection = dataSnapshot.child("DeliverySelection").getValue().toString();
@@ -263,21 +263,27 @@ public class OrderDetailsFragment extends Fragment {
                             if (dataSnapshot.child("Status").getValue().toString().equals("1")) {
                                 status.setText("PENDING");
                                 status.setTextColor(Color.parseColor("#b38400"));
+                                status.setBackgroundColor(Color.parseColor("#FFF0C5"));
                             } else if (dataSnapshot.child("Status").getValue().toString().equals("2")) {
                                 status.setText("PREPARING");
                                 status.setTextColor(Color.parseColor("#00B246"));
+                                status.setBackgroundColor(Color.parseColor("#e5f7ec"));
                             } else if (dataSnapshot.child("Status").getValue().toString().equals("3")) {
-                                status.setText("READY TO DELIVER");
+                                status.setText("READY TO DELIVERY");
                                 status.setTextColor(Color.parseColor("#00B246"));
+                                status.setBackgroundColor(Color.parseColor("#e5f7ec"));
                             } else if (dataSnapshot.child("Status").getValue().toString().equals("4")) {
                                 status.setText("AWAITING DELIVERY");
                                 status.setTextColor(Color.parseColor("#00B246"));
+                                status.setBackgroundColor(Color.parseColor("#e5f7ec"));
                             } else if (dataSnapshot.child("Status").getValue().toString().equals("5")) {
                                 status.setText("DELIVERED");
                                 status.setTextColor(Color.parseColor("#00B246"));
+                                status.setBackgroundColor(Color.parseColor("#e5f7ec"));
                             } else if (dataSnapshot.child("Status").getValue().toString().equals("10")) {
                                 status.setText("CANCELLED");
                                 status.setTextColor(Color.parseColor("#FF0000"));
+                                status.setBackgroundColor(Color.parseColor("#F1B2B2"));
                             }
 
 
@@ -397,8 +403,6 @@ public class OrderDetailsFragment extends Fragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
-                            case R.id.cancelmenu:
-                                return true;
                             case R.id.supportMenu:
                                 if (getActivity() != null) {
                                     Fragment fragment = new SupportFragment();

@@ -3,9 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/cancelmenu"
-        android:title="CANCEL ORDER"/>
 
     <item
         android:id="@+id/supportMenu"

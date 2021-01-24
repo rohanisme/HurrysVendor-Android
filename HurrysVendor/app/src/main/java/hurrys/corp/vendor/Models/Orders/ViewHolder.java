@@ -96,23 +96,23 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         } else if (Status.equals("2")) {
             status.setText("PREPARING");
             status.setTextColor(Color.parseColor("#00B246"));
-           // status.setBackgroundColor(Color.parseColor("#e5f7ec"));
+            status.setBackgroundColor(Color.parseColor("#e5f7ec"));
         } else if (Status.equals("3")) {
             status.setText("READY TO DELIVERY");
             status.setTextColor(Color.parseColor("#00B246"));
-            // status.setBackgroundColor(Color.parseColor("#e5f7ec"));
+             status.setBackgroundColor(Color.parseColor("#e5f7ec"));
         } else if (Status.equals("4")) {
             status.setText("AWAITING DELIVERY");
             status.setTextColor(Color.parseColor("#00B246"));
-            // status.setBackgroundColor(Color.parseColor("#e5f7ec"));
+             status.setBackgroundColor(Color.parseColor("#e5f7ec"));
         } else if (Status.equals("5")) {
             status.setText("DELIVERED");
             status.setTextColor(Color.parseColor("#00B246"));
-            // status.setBackgroundColor(Color.parseColor("#e5f7ec"));
+             status.setBackgroundColor(Color.parseColor("#e5f7ec"));
         } else if (Status.equals("10")) {
             status.setText("CANCELLED");
             status.setTextColor(Color.parseColor("#FF0000"));
-            //status.setBackgroundColor(Color.parseColor("#FF0000"));
+            status.setBackgroundColor(Color.parseColor("#F1B2B2"));
         }
 
         if (!TextUtils.isEmpty(DeliveryPartner)) {
@@ -167,9 +167,11 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         if (Status.equals("5")) {
             status.setText("DELIVERED");
             status.setTextColor(Color.parseColor("#00B246"));
+            status.setBackgroundColor(Color.parseColor("#e5f7ec"));
         } else if (Status.equals("10")) {
             status.setText("CANCELLED");
             status.setTextColor(Color.parseColor("#FF0000"));
+            status.setBackgroundColor(Color.parseColor("#F1B2B2"));
         } else {
             cardView.setVisibility(View.GONE);
             cardView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));

@@ -516,15 +516,31 @@ public class Dashboard extends Fragment {
 
 
                                 TextView pushid = v.findViewById(R.id.pushid);
-                                Bundle bundle = new Bundle();
-                                Fragment fragment = new CompleteOrderDetails();
-                                bundle.putString("pushid", pushid.getText().toString());
-                                fragment.setArguments(bundle);
-                                if(getActivity()!=null) {
-                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                    fragmentManager.beginTransaction()
-                                            .addToBackStack(null)
-                                            .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
+                                TextView status = v.findViewById(R.id.status);
+
+                                if(status.getText().toString().equals("DELIVERED")) {
+                                    Bundle bundle = new Bundle();
+                                    Fragment fragment = new CompleteOrderDetails();
+                                    bundle.putString("pushid", pushid.getText().toString());
+                                    fragment.setArguments(bundle);
+                                    if (getActivity() != null) {
+                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                        fragmentManager.beginTransaction()
+                                                .addToBackStack(null)
+                                                .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
+                                    }
+                                }
+                                else{
+                                    Bundle bundle = new Bundle();
+                                    Fragment fragment = new CancelledOrders();
+                                    bundle.putString("pushid", pushid.getText().toString());
+                                    fragment.setArguments(bundle);
+                                    if (getActivity() != null) {
+                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                        fragmentManager.beginTransaction()
+                                                .addToBackStack(null)
+                                                .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
+                                    }
                                 }
 
                             }
