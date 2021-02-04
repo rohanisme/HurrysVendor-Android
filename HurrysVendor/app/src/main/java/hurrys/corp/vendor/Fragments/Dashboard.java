@@ -424,7 +424,7 @@ public class Dashboard extends Fragment {
                 ) {
                     @Override
                     protected void populateViewHolder(ViewHolder viewHolder, hurrys.corp.vendor.Models.Orders.Orders order, int position) {
-                        viewHolder.setDetails(getContext(),order.CName,order.Address,order.Subtotal,order.Pushid,order.OrderNo,order.OrderDateTime,order.Qty,order.Payment,order.Status,order.DeliveryPartner,order.DeliveryNumber,order.DeliveryImage);
+                        viewHolder.setDetails(getContext(),order.CName,order.Address,order.Subtotal,order.Pushid,order.OrderNo,order.OrderDateTime,order.Qty,order.Payment,order.Status,order.DeliveryPartner,order.DeliveryNumber,order.DeliveryImage,order.Taxes,order.DeliveryCharges,order.DeliverySelection);
                     }
 
                     @Override
@@ -504,7 +504,7 @@ public class Dashboard extends Fragment {
                 ) {
                     @Override
                     protected void populateViewHolder(ViewHolder viewHolder, hurrys.corp.vendor.Models.Orders.Orders order, int position) {
-                        viewHolder.setDetails1(getContext(),order.CName,order.Address,order.Subtotal,order.Pushid,order.OrderNo,order.OrderDateTime,order.Qty,order.Payment,order.Status);
+                        viewHolder.setDetails1(getContext(),order.CName,order.Address,order.Subtotal,order.Pushid,order.OrderNo,order.OrderDateTime,order.Qty,order.Payment,order.Status,order.Taxes,order.DeliveryCharges,order.DeliverySelection);
                     }
 
                     @Override

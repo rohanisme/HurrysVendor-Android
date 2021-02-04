@@ -6,9 +6,9 @@ public class Users {
     public String UserId,Name,Age,Gender,Email,MobileNumber,AlternateNumber,Address,PostCode,BusinessName,VATCode,BusinessAddress,ShopAddress;
     public String BankName,AccountName,AccountNumber,SortCode,BranchName,BranchAddress,FranchiseCode,StoreName,StoreDescription,Category,StoreOpenTime,StoreCloseTime,DeliveryTime;
     public String Doc1,Doc2,Doc3,Doc4,Doc5,Doc6,Doc7,Doc8,Status,ApprovalStatus,Created,Commission,Comments;
-    public int Ratings,PendingAmount,Wallet,Orders;
+    public int Ratings,PendingAmount,Wallet,Orders,Featured;
 
-    public Users(String UserId, String Name, String Age, String Gender, String Email, String MobileNumber, String AlternateNumber, String Address, String PostCode, String BusinessName, String VATCode, String BusinessAddress, String ShopAddress,String BankName,String AccountName, String AccountNumber, String SortCode, String BranchName, String BranchAddress, String FranchiseCode, String StoreName, String StoreDescription, String Category, String StoreOpenTime, String StoreCloseTime, String Doc1, String Doc2, String Doc3, String Doc4, String Doc5, String Doc6, String Doc7, String Doc8, String Status, String ApprovalStatus, String Created, int Ratings, int PendingAmount, int Wallet,String Commission,String DeliveryTime,int Orders) {
+    public Users(String UserId, String Name, String Age, String Gender, String Email, String MobileNumber, String AlternateNumber, String Address, String PostCode, String BusinessName, String VATCode, String BusinessAddress, String ShopAddress,String BankName,String AccountName, String AccountNumber, String SortCode, String BranchName, String BranchAddress, String FranchiseCode, String StoreName, String StoreDescription, String Category, String StoreOpenTime, String StoreCloseTime, String Doc1, String Doc2, String Doc3, String Doc4, String Doc5, String Doc6, String Doc7, String Doc8, String Status, String ApprovalStatus, String Created, int Ratings, int PendingAmount, int Wallet,String Commission,String DeliveryTime,int Orders,int Featured) {
         this.UserId = UserId;
         this.Name = Name;
         this.Age = Age;
@@ -51,6 +51,7 @@ public class Users {
         this.Commission=Commission;
         this.DeliveryTime=DeliveryTime;
         this.Orders=Orders;
+        this.Featured = Featured;
     }
 
     public Users(){}

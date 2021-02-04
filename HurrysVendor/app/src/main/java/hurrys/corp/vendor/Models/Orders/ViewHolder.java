@@ -47,7 +47,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setDetails(Context ctx, String CName, String Address, String Subtotal, String Pushid, String OrderNo, String OrderDateTime, String Qty, String Payment, String Status, String DeliveryPartner, String DeliveryNumber, String DeliveryImage) {
+    public void setDetails(Context ctx, String CName, String Address, String Subtotal, String Pushid, String OrderNo, String OrderDateTime, String Qty, String Payment, String Status, String DeliveryPartner, String DeliveryNumber, String DeliveryImage,String Taxes,String DeliveryPrice,String DeliverySelection) {
 
         CardView cardView;
         TextView name, date, amount, payment, pushid, address, items, orderid, status, number;
@@ -75,9 +75,16 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
 
         double price = Double.parseDouble(Subtotal);
+        double del = Double.parseDouble(DeliveryPrice);
+        double taxes = Double.parseDouble(Taxes);
         double com = 25;
         double tot = price * (com / 100.0);
-        double gtot = price - tot;
+        double gtot = price - tot ;
+
+        if(DeliverySelection.equals("Self")){
+            gtot = gtot + del;
+        }
+
 
         DecimalFormat form = new DecimalFormat("0.00");
 
@@ -131,7 +138,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    public void setDetails1(Context ctx, String CName, String Address, String Subtotal, String Pushid, String OrderNo, String OrderDateTime, String Qty, String Payment, String Status) {
+    public void setDetails1(Context ctx, String CName, String Address, String Subtotal, String Pushid, String OrderNo, String OrderDateTime, String Qty, String Payment, String Status,String Taxes,String DeliveryPrice,String DeliverySelection) {
 
         CardView cardView;
         TextView name, date, amount, payment, pushid, address, items, orderid, status;
@@ -150,9 +157,15 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
 
         double price = Double.parseDouble(Subtotal);
+        double del = Double.parseDouble(DeliveryPrice);
+        double taxes = Double.parseDouble(Taxes);
         double com = 25;
         double tot = price * (com / 100.0);
-        double gtot = price - tot;
+        double gtot = price - tot ;
+
+        if(DeliverySelection.equals("Self")){
+            gtot = gtot + del;
+        }
 
         DecimalFormat form = new DecimalFormat("0.00");
 

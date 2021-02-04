@@ -66,11 +66,11 @@ public class OrderDetailsFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private DatabaseReference mref;
     private TextView orderid, date, daname, address, support;
-    private LinearLayout deliveryrow;
+    private LinearLayout deliveryrow,deliveryamountrow;
 
-    private TextView subtotal, discount, commision, delivery, tax, grandtotal, status, number;
+    private TextView subtotal, discount, commision, delivery, grandtotal, status, number;
 
-    private Button accpet, accpet1, ready, decline, delivered, dispatched;
+    private Button accpet, accpet1,accept2, ready, decline, delivered, dispatched;
     private double gtot = 0, dbalance = 0;
     private BottomSheetDialog bottomSheetDialog;
 
@@ -114,13 +114,15 @@ public class OrderDetailsFragment extends Fragment {
         delivery = v.findViewById(R.id.delivery);
         commision = v.findViewById(R.id.commision);
         discount = v.findViewById(R.id.discount);
-        tax = v.findViewById(R.id.tax);
+//        tax = v.findViewById(R.id.tax);
         grandtotal = v.findViewById(R.id.grandtotal);
         accpet = v.findViewById(R.id.accept);
         accpet1 = v.findViewById(R.id.accept1);
+        accept2 = v.findViewById(R.id.accept2);
         ready = v.findViewById(R.id.ready);
         decline = v.findViewById(R.id.decline);
         deliveryrow = v.findViewById(R.id.deliveryrow);
+        deliveryamountrow = v.findViewById(R.id.deliveryamountrow);
         pp = v.findViewById(R.id.pp);
         deliveryname = v.findViewById(R.id.deliveryname);
         call = v.findViewById(R.id.call);
@@ -174,7 +176,7 @@ public class OrderDetailsFragment extends Fragment {
                             subtotal.setText("\u00a3" + form.format(Double.parseDouble(dataSnapshot.child("Subtotal").getValue().toString())));
                             discount.setText("\u00a3" + form.format(Double.parseDouble(dataSnapshot.child("Discount").getValue().toString())));
                             delivery.setText("\u00a3" + form.format(Double.parseDouble(dataSnapshot.child("DeliveryCharges").getValue().toString())));
-                            tax.setText("\u00a3" + form.format(Double.parseDouble(dataSnapshot.child("Taxes").getValue().toString())));
+//                            tax.setText("\u00a3" + form.format(Double.parseDouble(dataSnapshot.child("Taxes").getValue().toString())));
 
 //                            orderid.setText(dataSnapshot.child("OrderNo").getValue().toString());
 
@@ -185,67 +187,84 @@ public class OrderDetailsFragment extends Fragment {
 
                             double price = Double.parseDouble(subtotal.getText().toString().substring(1));
                             double del = Double.parseDouble(delivery.getText().toString().substring(1));
-                            double taxes = Double.parseDouble(tax.getText().toString().substring(1));
+//                            double taxes = Double.parseDouble(tax.getText().toString().substring(1));
                             double disc = Double.parseDouble(discount.getText().toString().substring(1));
                             double com = 25;
 
                             double tot = price * (com / 100.0);
 
 
-                            double gtot = (price - tot);
+                            deliveryamountrow.setVisibility(View.GONE);
+                            double gtot = (price - tot );
+
+                            if(selection.equals("Self")){
+                                gtot = gtot + del;
+                                deliveryamountrow.setVisibility(View.VISIBLE);
+                            }
 
                             commision.setText("\u00a3" + form.format(Math.round(tot * 100.0) / 100.0));
                             grandtotal.setText("\u00a3" + form.format(Math.round(gtot * 100.0) / 100.0));
                             gtot = Double.parseDouble(grandtotal.getText().toString().substring(1));
 
-
                             address.setText(dataSnapshot.child("Address").getValue().toString());
                             daname.setText(dataSnapshot.child("CName").getValue().toString());
 
-                            if (dataSnapshot.child("Status").getValue().toString().equals("1")) {
-                                accpet.setVisibility(View.VISIBLE);
-                                accpet1.setVisibility(View.VISIBLE);
-                                decline.setVisibility(View.VISIBLE);
-                                ready.setVisibility(View.GONE);
-                                dispatched.setVisibility(View.GONE);
-                                delivered.setVisibility(View.GONE);
-                            } else if (dataSnapshot.child("Status").getValue().toString().equals("2")) {
-                                ready.setVisibility(View.VISIBLE);
-                                decline.setVisibility(View.GONE);
-                                accpet.setVisibility(View.GONE);
-                                accpet1.setVisibility(View.GONE);
-                                dispatched.setVisibility(View.GONE);
-                                delivered.setVisibility(View.GONE);
-                            } else if (dataSnapshot.child("Status").getValue().toString().equals("3")) {
-                                if (!TextUtils.isEmpty(selection)) {
-                                    if (selection.equals("Self")) {
-                                        ready.setVisibility(View.GONE);
-                                        decline.setVisibility(View.GONE);
-                                        accpet.setVisibility(View.GONE);
-                                        accpet1.setVisibility(View.GONE);
-                                        dispatched.setVisibility(View.VISIBLE);
-                                        delivered.setVisibility(View.GONE);
+                                if (dataSnapshot.child("Status").getValue().toString().equals("1")) {
+                                   if(!selection.equals("Self PickUp")){
+                                        accpet.setVisibility(View.VISIBLE);
+                                        accpet1.setVisibility(View.VISIBLE);
+                                        accept2.setVisibility(View.GONE);
                                     }
-                                }
-                            } else if (dataSnapshot.child("Status").getValue().toString().equals("4")) {
-                                if (!TextUtils.isEmpty(selection)) {
-                                    if (selection.equals("Self")) {
-                                        ready.setVisibility(View.GONE);
-                                        decline.setVisibility(View.GONE);
-                                        accpet.setVisibility(View.GONE);
-                                        accpet1.setVisibility(View.GONE);
-                                        dispatched.setVisibility(View.GONE);
-                                        delivered.setVisibility(View.VISIBLE);
+                                   else{
+                                       accpet.setVisibility(View.GONE);
+                                       accpet1.setVisibility(View.GONE);
+                                       accept2.setVisibility(View.VISIBLE);
+                                   }
+                                    decline.setVisibility(View.VISIBLE);
+                                    ready.setVisibility(View.GONE);
+                                    dispatched.setVisibility(View.GONE);
+                                    delivered.setVisibility(View.GONE);
+                                } else if (dataSnapshot.child("Status").getValue().toString().equals("2")) {
+                                    ready.setVisibility(View.VISIBLE);
+                                    decline.setVisibility(View.GONE);
+                                    accpet.setVisibility(View.GONE);
+                                    accept2.setVisibility(View.GONE);
+                                    accpet1.setVisibility(View.GONE);
+                                    dispatched.setVisibility(View.GONE);
+                                    delivered.setVisibility(View.GONE);
+                                } else if (dataSnapshot.child("Status").getValue().toString().equals("3")) {
+                                    if (!TextUtils.isEmpty(selection)) {
+                                        if (selection.equals("Self")) {
+                                            ready.setVisibility(View.GONE);
+                                            decline.setVisibility(View.GONE);
+                                            accpet.setVisibility(View.GONE);
+                                            accept2.setVisibility(View.GONE);
+                                            accpet1.setVisibility(View.GONE);
+                                            dispatched.setVisibility(View.VISIBLE);
+                                            delivered.setVisibility(View.GONE);
+                                        }
                                     }
+                                } else if (dataSnapshot.child("Status").getValue().toString().equals("4")) {
+                                    if (!TextUtils.isEmpty(selection)) {
+                                        if (selection.equals("Self")||selection.equals("Self PickUp")) {
+                                            ready.setVisibility(View.GONE);
+                                            decline.setVisibility(View.GONE);
+                                            accept2.setVisibility(View.GONE);
+                                            accpet.setVisibility(View.GONE);
+                                            accpet1.setVisibility(View.GONE);
+                                            dispatched.setVisibility(View.GONE);
+                                            delivered.setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                } else {
+                                    ready.setVisibility(View.GONE);
+                                    accpet.setVisibility(View.GONE);
+                                    accept2.setVisibility(View.GONE);
+                                    accpet1.setVisibility(View.GONE);
+                                    decline.setVisibility(View.GONE);
+                                    dispatched.setVisibility(View.GONE);
+                                    delivered.setVisibility(View.GONE);
                                 }
-                            } else {
-                                ready.setVisibility(View.GONE);
-                                accpet.setVisibility(View.GONE);
-                                accpet1.setVisibility(View.GONE);
-                                decline.setVisibility(View.GONE);
-                                dispatched.setVisibility(View.GONE);
-                                delivered.setVisibility(View.GONE);
-                            }
 
                             if (dataSnapshot.child("DeliveryPartner").exists()) {
                                 deliveryrow.setVisibility(View.VISIBLE);
@@ -330,7 +349,8 @@ public class OrderDetailsFragment extends Fragment {
                                         };
 
                                 mRecyclerView.setAdapter(firebaseRecyclerAdapter);
-                            } else {
+                            }
+                            else {
 
                                 mref = FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Cart");
                                 FirebaseRecyclerAdapter<OrderDetails1, ViewHolder> firebaseRecyclerAdapter =
@@ -538,6 +558,44 @@ public class OrderDetailsFragment extends Fragment {
             }
         });
 
+        accept2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (getContext() != null) {
+                    SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Are you sure you want to accept the order!")
+                            .setConfirmText("Yes")
+                            .setCancelText("No")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
+                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Self PickUp");
+                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
+                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
+                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
+                                    if (getActivity() != null)
+                                        getActivity().onBackPressed();
+
+                                }
+                            })
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                }
+                            });
+
+                    sDialog.setCancelable(false);
+                    sDialog.show();
+                }
+
+
+            }
+        });
+
         decline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -599,8 +657,14 @@ public class OrderDetailsFragment extends Fragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("3");
+                                    if (selection.equals("Self PickUp")) {
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("4");
+                                    }
+                                    else{
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("3");
+                                    }
                                     DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("PendingAmount");
+
                                     dref.runTransaction(new Transaction.Handler() {
                                         @NonNull
                                         @Override
@@ -641,7 +705,23 @@ public class OrderDetailsFragment extends Fragment {
                                                             });
                                                     sDialog.setCancelable(false);
                                                     sDialog.show();
-                                                } else {
+                                                }
+                                                else if (selection.equals("Self PickUp")) {
+                                                    SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
+                                                            .setTitleText("Good job!")
+                                                            .setContentText("Your order will be self picked by customer shortly!")
+                                                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                                @Override
+                                                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                                    sweetAlertDialog.dismiss();
+                                                                    if (getActivity() != null)
+                                                                        getActivity().onBackPressed();
+                                                                }
+                                                            });
+                                                    sDialog.setCancelable(false);
+                                                    sDialog.show();
+                                                }
+                                                else {
                                                     SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
                                                             .setTitleText("Good job!")
                                                             .setContentText("You order will be picked shortly!")
@@ -708,7 +788,6 @@ public class OrderDetailsFragment extends Fragment {
             }
         });
 
-
         delivered.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -743,8 +822,6 @@ public class OrderDetailsFragment extends Fragment {
 
             }
         });
-
-
 //        handover.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

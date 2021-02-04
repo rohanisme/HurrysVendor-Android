@@ -363,7 +363,8 @@ public class InventoryFragment extends Fragment {
                                                 v.child("Status").getValue().toString(),
                                                 foodtype,
                                                 v.child("ApprovalStatus").getValue().toString(),
-                                                v.child("SellingPrice").getValue().toString()
+                                                v.child("SellingPrice").getValue().toString(),
+                                                ""
                                         ));
                                     }
                                 }
@@ -402,16 +403,20 @@ public class InventoryFragment extends Fragment {
                                 plus.setVisibility(View.VISIBLE);
                                 for (DataSnapshot v : dataSnapshot.getChildren()) {
                                     if (v.exists()) {
-                                        String foodtype = "";
+                                        String foodtype = "",featured="";
                                         if (v.child("ItemImage1").exists())
                                             foodtype = v.child("ItemImage1").getValue().toString();
+                                        if (v.child("Featured").exists())
+                                            featured = v.child("Featured").getValue().toString();
+
                                         inventories.add(new Inventory(
                                                 v.child("ItemName").getValue().toString(),
                                                 v.child("PushId").getValue().toString(),
                                                 v.child("Status").getValue().toString(),
                                                 foodtype,
                                                 v.child("ApprovalStatus").getValue().toString(),
-                                                ""
+                                                "",
+                                                featured
                                         ));
                                     }
                                 }

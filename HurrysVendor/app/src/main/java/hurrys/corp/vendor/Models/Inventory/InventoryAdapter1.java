@@ -20,7 +20,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
+import com.google.firebase.database.annotations.Nullable;
 import com.zcw.togglebutton.ToggleButton;
 
 import java.util.ArrayList;
@@ -92,6 +98,13 @@ public class InventoryAdapter1  extends RecyclerView.Adapter<InventoryAdapter1.V
             holder.status.setTextColor(Color.parseColor("#FF0000"));
         }
 
+        if(inventory.Featured.equals("Yes")){
+            holder.feature.setToggleOn(true);
+        }
+        else{
+            holder.feature.setToggleOff(true);
+        }
+
 
         holder.toggle.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
             @Override
@@ -117,6 +130,58 @@ public class InventoryAdapter1  extends RecyclerView.Adapter<InventoryAdapter1.V
                 Toast.makeText(holder.view.getContext(),"Waiting for approval",Toast.LENGTH_LONG).show();
             }
 
+            }
+        });
+
+        holder.feature.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
+            @Override
+            public void onToggle(boolean on) {
+                if(on){
+                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername())
+                            .child("Products").child(holder.pushid.getText().toString()).child("Featured").setValue("Yes");
+
+                    DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Featured");
+
+                    dref.runTransaction(new Transaction.Handler() {
+                        @NonNull
+                        @Override
+                        public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                            double value = 0;
+                            if (currentData.getValue() != null) {
+                                value = Long.parseLong(currentData.getValue().toString()) + 1;
+                            }
+                            currentData.setValue(value);
+                            return Transaction.success(currentData);
+                        }
+
+                        @Override
+                        public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+                        }
+                    });
+                }
+                else{
+                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername())
+                            .child("Products").child(holder.pushid.getText().toString()).child("Featured").setValue("No");
+
+                    DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Featured");
+
+                    dref.runTransaction(new Transaction.Handler() {
+                        @NonNull
+                        @Override
+                        public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                            double value = 0;
+                            if (currentData.getValue() != null) {
+                                value = Long.parseLong(currentData.getValue().toString()) - 1;
+                            }
+                            currentData.setValue(value);
+                            return Transaction.success(currentData);
+                        }
+
+                        @Override
+                        public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+                        }
+                    });
+                }
             }
         });
 
@@ -202,7 +267,7 @@ public class InventoryAdapter1  extends RecyclerView.Adapter<InventoryAdapter1.V
 
         TextView name,pushid,price,status,edit;
         ImageView indicator;
-        ToggleButton toggle;
+        ToggleButton toggle,feature;
         LinearLayout linear;
 
         public ViewHolder(View view) {
@@ -213,6 +278,7 @@ public class InventoryAdapter1  extends RecyclerView.Adapter<InventoryAdapter1.V
             price=view.findViewById(R.id.price);
             indicator=view.findViewById(R.id.indicator);
             toggle=view.findViewById(R.id.toggle);
+            feature=view.findViewById(R.id.feature);
             status=view.findViewById(R.id.status);
             linear=view.findViewById(R.id.linear);
             edit=view.findViewById(R.id.edit);

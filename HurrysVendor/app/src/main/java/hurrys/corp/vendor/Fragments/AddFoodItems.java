@@ -563,8 +563,6 @@ public class AddFoodItems extends Fragment {
                     return;
                 }
 
-
-
 //                if (TextUtils.isEmpty(price.getText().toString())){
 //                    price.setError("Enter Offer Price");
 //                    price.requestFocus();
@@ -573,12 +571,12 @@ public class AddFoodItems extends Fragment {
 
 
                 if(stime.getText().toString().equals("HH:MM")){
-                    Toast.makeText(getContext(),"Select Start Time of Item Availablity",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Select Start Time of Item Availability",Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 if(etime.getText().toString().equals("HH:MM")){
-                    Toast.makeText(getContext(),"Select End Time of Item Availablity",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Select End Time of Item Availability",Toast.LENGTH_LONG).show();
                     return;
                 }
 

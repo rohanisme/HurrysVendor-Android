@@ -21,10 +21,11 @@ public class Orders {
     public String DeliveryPartner;
     public String DeliveryNumber;
     public String DeliveryImage;
+    public String DeliverySelection;
 
     public  Orders(){}
 
-    public Orders(String OrderNo,String ItemDetails,String Pushid,String OrderDateTime,String Status,String SellerCommission,String Subtotal,String DeliveryCharges,String Seller,String OrderType,String VendorCustomer,String CName,String Address,String Qty,String Payment,String DeliveryPartner,String DeliveryNumber,String DeliveryImage,String Taxes){
+    public Orders(String OrderNo,String ItemDetails,String Pushid,String OrderDateTime,String Status,String SellerCommission,String Subtotal,String DeliveryCharges,String Seller,String OrderType,String VendorCustomer,String CName,String Address,String Qty,String Payment,String DeliveryPartner,String DeliveryNumber,String DeliveryImage,String Taxes,String DeliverySelection){
         this.OrderDateTime=OrderDateTime;
         this.ItemsDetails=ItemDetails;
         this.Pushid=Pushid;
@@ -44,5 +45,6 @@ public class Orders {
         this.DeliveryNumber=DeliveryNumber;
         this.DeliveryImage=DeliveryImage;
         this.Taxes=Taxes;
+        this.DeliverySelection = DeliverySelection;
     }
 }

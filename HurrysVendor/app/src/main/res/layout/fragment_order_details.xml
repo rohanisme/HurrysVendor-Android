@@ -8,7 +8,6 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/l1"
         android:layout_width="match_parent"
@@ -270,6 +269,49 @@
 
             </LinearLayout>
 
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:layout_weight="2">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textSize="14dp"-->
+<!--                        android:text="Service Charges"-->
+<!--                        android:fontFamily="@font/cera_pro_medium"-->
+<!--                        android:textColor="#888e9e"/>-->
+
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tax"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textSize="14dp"-->
+<!--                        android:gravity="right"-->
+<!--                        android:text=" £ 0.00"-->
+<!--                        android:fontFamily="@font/cera_pro_medium"-->
+<!--                        android:textColor="@color/black"/>-->
+
+<!--                </LinearLayout>-->
+
+<!--            </LinearLayout>-->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -317,6 +359,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/deliveryamountrow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -334,7 +377,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="14dp"
-                        android:text="Delivery Charges"
+                        android:text="Self Delivered Charges"
                         android:fontFamily="@font/cera_pro_medium"
                         android:textColor="#888e9e"/>
 
@@ -402,48 +445,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_weight="2">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:text="Service Charges"
-                        android:fontFamily="@font/cera_pro_medium"
-                        android:textColor="#888e9e"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/tax"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:gravity="right"
-                        android:text=" £ 0.00"
-                        android:fontFamily="@font/cera_pro_medium"
-                        android:textColor="@color/black"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -619,6 +620,22 @@
                 android:visibility="gone"
                 android:fontFamily="@font/cera_pro_medium"
                 android:text=" ACCEPT BY SELF DELIVERY "
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                />
+
+            <Button
+                android:id="@+id/accept2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/rounded_corners"
+                android:backgroundTint="#00b246"
+                android:visibility="gone"
+                android:fontFamily="@font/cera_pro_medium"
+                android:text=" ACCEPT FOR SELF PICKUP "
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 />

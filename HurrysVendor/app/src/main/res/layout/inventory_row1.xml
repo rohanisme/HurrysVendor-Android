@@ -69,6 +69,52 @@
         </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:text="Featured"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.zcw.togglebutton.ToggleButton
+                    android:id="@+id/feature"
+                    android:layout_width="50dp"
+                    android:clickable="false"
+                    android:focusableInTouchMode="false"
+                    android:focusable="false"
+                    android:layout_gravity="center"
+                    android:layout_height="25dp"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
 
         <TextView
             android:id="@+id/pushid"
@@ -138,6 +184,8 @@
             android:focusable="false"
             android:layout_gravity="right"
             android:layout_height="25dp"/>
+
+
 
 
 

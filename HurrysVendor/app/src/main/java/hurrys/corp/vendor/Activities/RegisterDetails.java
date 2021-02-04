@@ -297,7 +297,8 @@ public class RegisterDetails extends AppCompatActivity {
                                 0,
                                 "",
                                 "",
-                                1000);
+                                1000,
+                                0);
 
                         mref.setValue(users);
 
