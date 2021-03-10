@@ -58,15 +58,10 @@ public class RegisterDetails extends AppCompatActivity {
     double dbalance=0;
     Spinner category;
     Session session;
-
     CountryCodePicker country;
-
 //    LinearLayout l1,l2,linearLayout2,stage1,stage2,blocks;
 //    ImageView e1,e2,next,previous,previous1,next1;
-
-
     ArrayList<String> category1=new ArrayList<String>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +87,9 @@ public class RegisterDetails extends AppCompatActivity {
 
         progressbar.setVisibility(View.GONE);
 
+
+        int year = Calendar.getInstance().get(Calendar.YEAR) - 18;
+
         DatePickerPopWin pickerPopWin = new DatePickerPopWin.Builder(RegisterDetails.this, new DatePickerPopWin.OnDatePickedListener() {
             @Override
             public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
@@ -105,7 +103,7 @@ public class RegisterDetails extends AppCompatActivity {
                 .colorCancel(Color.parseColor("#999999")) //color of cancel button
                 .colorConfirm(Color.parseColor("#009900"))//color of confirm button
                 .minYear(1920) //min year in loop
-                .maxYear(2100) // max year in loop
+                .maxYear(year) // max year in loop
                 .showDayMonthYear(true) // shows like dd mm yyyy (default is false)
                 .dateChose("2000-01-01") // date chose when init popwindow
                 .build();
@@ -121,9 +119,6 @@ public class RegisterDetails extends AppCompatActivity {
                 pickerPopWin.showPopWin(RegisterDetails.this);
             }
         });
-
-
-
 
         String pattern = "yyyy-MM-dd";
         final String dateInString = new SimpleDateFormat(pattern).format(new Date());
@@ -192,7 +187,6 @@ public class RegisterDetails extends AppCompatActivity {
 //                    return;
 //                }
 
-
                 if(dob.getText().toString().equals("DD/MM/YYYY")){
                     Toast.makeText(getApplicationContext(),"Select Date of Birth",Toast.LENGTH_SHORT).show();
                     next.setEnabled(true);
@@ -210,8 +204,6 @@ public class RegisterDetails extends AppCompatActivity {
                     next.setEnabled(true);
                     return;
                 }
-
-
 
                 if(category.getSelectedItem().toString().equals("Select")){
                     Toast.makeText(getApplicationContext(),"Select Category",Toast.LENGTH_SHORT).show();
@@ -298,14 +290,13 @@ public class RegisterDetails extends AppCompatActivity {
                                 "",
                                 "",
                                 1000,
-                                0);
+                                0,
+                                "");
 
                         mref.setValue(users);
 
                         progressbar.setVisibility(View.GONE);
-
                         session.setsubmitted("no");
-
                         Intent intent = new Intent(RegisterDetails.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         session = new Session(RegisterDetails.this);
                         session.setusername(users.UserId);

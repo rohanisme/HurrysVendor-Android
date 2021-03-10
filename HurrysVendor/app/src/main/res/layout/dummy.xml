@@ -1,391 +1,486 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    android:id="@+id/print_me_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:scrollbars="none"
-    tools:context=".Activities.Welcome">
-
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    >
     <LinearLayout
-        android:id="@+id/stage2"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:orientation="vertical"
-        android:paddingBottom="40dp"
-        android:visibility="visible">
+        android:background="#ffffff"
+        >
 
-        <TextView
+        <ImageView
+            android:layout_margin="16dp"
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="32dp"
-            android:background="#ffffff"
-            android:fontFamily="@font/cera_pro_medium"
-            android:text="Bank Account Name"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/bankaccount"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/border_line"
-            android:fontFamily="@font/cera_pro_medium"
-            android:inputType="textCapSentences"
-            android:paddingStart="10dp"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="32dp"
-            android:background="#ffffff"
-            android:fontFamily="@font/cera_pro_medium"
-            android:text="Account Number"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/bnumber"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/border_line"
-            android:fontFamily="@font/cera_pro_medium"
-            android:inputType="numberPassword"
-            android:paddingStart="10dp"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
-
+            android:src="@drawable/logo"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="32dp"
-            android:background="#ffffff"
-            android:fontFamily="@font/cera_pro_medium"
-            android:text="Confirm Account Number"
-            android:textColor="@color/black" />
+            android:text="Wingstop Shop"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/cera_pro_bold"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            />
 
-        <EditText
-            android:id="@+id/bcnumber"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/border_line"
+            android:text="Delivery"
+            android:gravity="center"
+            android:textSize="20sp"
             android:fontFamily="@font/cera_pro_medium"
-            android:inputType="number"
-            android:paddingStart="10dp"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
+            android:background="#000000"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:textColor="#ffffff"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#5500"
+            android:textSize="30sp"
+            android:fontFamily="@font/cera_pro_bold"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delivery in 40Mins"
+            android:textSize="17sp"
+            android:fontFamily="@font/cera_pro_bold"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-------------------------------------------------------------------------------"
+            android:textSize="18sp"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="32dp"
-            android:background="#ffffff"
-            android:fontFamily="@font/cera_pro_medium"
-            android:text="Bank Sort Code"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/bsortcode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/border_line"
-            android:fontFamily="@font/cera_pro_medium"
-            android:inputType="number"
-            android:paddingStart="10dp"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
+            android:layout_marginTop="4dp"
+            android:text="Order Paid"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="32dp"
-            android:background="#ffffff"
-            android:fontFamily="@font/cera_pro_medium"
-            android:text="Bank Name"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/bankname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:text="-------------------------------------------------------------------------------"
+            android:textSize="18sp"
+            android:layout_margin="4dp"
             android:layout_gravity="center"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/border_line"
-            android:fontFamily="@font/cera_pro_medium"
-            android:inputType="textCapCharacters"
-            android:paddingStart="10dp"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
-
+            android:textColor="#000000"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="32dp"
-            android:background="#ffffff"
-            android:fontFamily="@font/cera_pro_medium"
-            android:text="Business Name"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/businessname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/border_line"
-            android:fontFamily="@font/cera_pro_medium"
-            android:inputType="textCapCharacters"
-            android:paddingStart="10dp"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
+            android:layout_marginTop="4dp"
+            android:text="Delivery Notes"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="32dp"
-            android:background="#ffffff"
-            android:fontFamily="@font/cera_pro_medium"
-            android:text="Business Category"
-            android:textColor="@color/black" />
+            android:layout_marginTop="4dp"
+            android:text="This is a contact - free delivery. call when here. I'm in front of office"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-------------------------------------------------------------------------------"
+            android:textSize="18sp"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="New Customer"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-------------------------------------------------------------------------------"
+            android:textSize="18sp"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Order Notes"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Add Cutlery"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-------------------------------------------------------------------------------"
+            android:textSize="18sp"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Burgers"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="1x After Burger Meal"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Burgers"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="1x After Burger Meal"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Burgers"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="1x After Burger Meal"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Burgers"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="1x After Burger Meal"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Burgers"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="1x After Burger Meal"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-------------------------------------------------------------------------------"
+            android:textSize="18sp"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/border_line"
-            android:orientation="vertical"
-            android:paddingTop="15dp">
+            android:layout_marginEnd="16dp"
+            android:layout_weight="2">
 
-            <Spinner
-                android:id="@+id/category"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:fontFamily="@font/cera_pro_medium"
-                android:inputType="textCapSentences"
-                android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:layout_gravity="left"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:text="No of Items"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:text="4"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="32dp"
-            android:background="#ffffff"
-            android:fontFamily="@font/cera_pro_medium"
-            android:text="Business Address"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/baddress"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/border_line"
-            android:fontFamily="@font/cera_pro_medium"
-            android:inputType="textCapCharacters"
-            android:paddingStart="10dp"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
+            android:layout_marginEnd="16dp"
+            android:layout_weight="2">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="32dp"
-            android:background="#ffffff"
-            android:fontFamily="@font/cera_pro_medium"
-            android:text="Business Description"
-            android:textColor="@color/black" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1">
 
-        <EditText
-            android:id="@+id/bdescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/border_line"
-            android:fontFamily="@font/cera_pro_medium"
-            android:inputType="textCapCharacters"
-            android:paddingStart="10dp"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:text="Subtotal"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="32dp"
-            android:background="#ffffff"
-            android:fontFamily="@font/cera_pro_medium"
-            android:text="Opening Time"
-            android:textColor="@color/black" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/otime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/border_line"
-            android:drawableRight="@drawable/ic_cal"
-            android:fontFamily="@font/cera_pro_medium"
-            android:gravity="center_vertical"
-            android:paddingEnd="10dp"
-            android:text="HH:MM"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="32dp"
-            android:background="#ffffff"
-            android:fontFamily="@font/cera_pro_medium"
-            android:text="Closing Time"
-            android:textColor="@color/black" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:text="\u00a3 5.25"/>
 
-        <TextView
-            android:id="@+id/ctime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/border_line"
-            android:drawableRight="@drawable/ic_cal"
-            android:fontFamily="@font/cera_pro_medium"
-            android:gravity="center_vertical"
-            android:paddingEnd="10dp"
-            android:text="HH:MM"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="32dp"
-            android:background="#ffffff"
-            android:fontFamily="@font/cera_pro_medium"
-            android:text="Commision"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/commision"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/border_line"
-            android:fontFamily="@font/cera_pro_medium"
-            android:inputType="numberDecimal"
-            android:paddingStart="10dp"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="32dp"
-            android:background="#ffffff"
-            android:fontFamily="@font/cera_pro_medium"
-            android:text="Delivery Time"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/deliverytime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/border_line"
-            android:fontFamily="@font/cera_pro_medium"
-            android:inputType="numberDecimal"
-            android:paddingStart="10dp"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="32dp"
-            android:gravity="right"
-            android:orientation="horizontal">
+            android:layout_weight="2">
 
-            <TextView
-                android:id="@+id/previous"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="32dp"
-                android:fontFamily="@font/cera_pro_medium"
-                android:text="PREVIOUS"
-                android:textColor="#00b246"
-                android:textSize="14dp" />
+                android:layout_gravity="left"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1">
 
-            <ImageView
-                android:id="@+id/next1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/next_circle" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:text="Delivery Fee"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:text="\u00a32.49"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:text="Total Paid"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:text="\u00a3 18.74"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
 
 </ScrollView>

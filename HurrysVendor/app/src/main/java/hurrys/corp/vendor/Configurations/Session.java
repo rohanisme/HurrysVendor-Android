@@ -34,6 +34,16 @@ public class Session {
         return usename;
     }
 
+    public void setdeliverytime(String usename)
+    {
+        prefs.edit().putString("deliverytime", usename).commit();
+    }
+
+    public String getdeliverytime() {
+        String usename = prefs.getString("deliverytime","");
+        return usename;
+    }
+
 
     public void setname(String usename)
     {
@@ -66,6 +76,35 @@ public class Session {
         return usename;
     }
 
+    public void setselection(String usename)
+    {
+        prefs.edit().putString("setselection", usename).commit();
+    }
+
+    public String getselection() {
+        String usename = prefs.getString("setselection","");
+        return usename;
+    }
+
+    public void setstartime(String usename)
+    {
+        prefs.edit().putString("setstarttime", usename).commit();
+    }
+
+    public String getstarttime() {
+        String usename = prefs.getString("setstarttime","");
+        return usename;
+    }
+
+    public void setendtime(String usename)
+    {
+        prefs.edit().putString("setendtime", usename).commit();
+    }
+
+    public String getendtime() {
+        String usename = prefs.getString("setendtime","");
+        return usename;
+    }
 
     public void setlocation(String usename)
     {

@@ -235,7 +235,7 @@ public class CompleteOrderDetails extends Fragment {
                                         ) {
                                             @Override
                                             protected void populateViewHolder(ViewHolder viewHolder, OrderDetails1 orderDetails, int position) {
-                                                viewHolder.setDetails2(getContext(),orderDetails.Name,orderDetails.Price,orderDetails.Type,orderDetails.Qty,orderDetails.Image);
+                                                viewHolder.setDetails2(getContext(),orderDetails.Name,orderDetails.Price,orderDetails.Type,orderDetails.Qty,orderDetails.Image,orderDetails.Customised,orderDetails.CustomisedQty);
                                             }
 
                                             @Override
@@ -280,11 +280,13 @@ public class CompleteOrderDetails extends Fragment {
         neworder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new Dashboard();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.frame_container, fragment).commit();
+                if(getActivity()!=null) {
+                    Fragment fragment = new Dashboard();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.frame_container, fragment).commit();
+                }
             }
         });
 

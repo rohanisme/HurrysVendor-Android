@@ -8,15 +8,21 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.ahmedelsayed.sunmiprinterutill.PrintMe;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,16 +34,28 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.sunmi.peripheral.printer.ICallback;
+import com.sunmi.peripheral.printer.ILcdCallback;
+import com.sunmi.peripheral.printer.ITax;
+import com.sunmi.peripheral.printer.InnerPrinterCallback;
+import com.sunmi.peripheral.printer.InnerPrinterException;
+import com.sunmi.peripheral.printer.InnerPrinterManager;
+import com.sunmi.peripheral.printer.InnerResultCallbcak;
+import com.sunmi.peripheral.printer.SunmiPrinterService;
+import com.sunmi.peripheral.printer.TransBean;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import hurrys.corp.vendor.Configurations.Session;
+import hurrys.corp.vendor.Fragments.AddMenuFragment;
 import hurrys.corp.vendor.Fragments.ApprovalWelcome;
+import hurrys.corp.vendor.Fragments.CreateMeal;
 import hurrys.corp.vendor.Fragments.Dashboard;
 import hurrys.corp.vendor.Fragments.InventoryFragment;
 import hurrys.corp.vendor.Fragments.PaymentFragment;
 import hurrys.corp.vendor.Fragments.Profile;
 import hurrys.corp.vendor.Fragments.Welcome;
 import hurrys.corp.vendor.R;
+import woyou.aidlservice.jiuiv5.IWoyouService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
     Session session;
     ProgressBar progressBar;
     private static final String TAG = "MyFirebaseMsgService";
+    MediaPlayer player = null;
 
+    private PrintMe printMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         i2=findViewById(R.id.i2);
         i3=findViewById(R.id.i3);
         progressBar=findViewById(R.id.progressbar);
-
+        printMe =  new PrintMe(this);
 
         session = new Session(MainActivity.this);
         session.setisfirsttime("no");
@@ -96,33 +116,33 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        if(user==null){
-            session.setusername("");
-            session.settoken("");
-            session.setname("");
-            session.setpp("");
-            session.setpassword("");
-            session.setextras("");
-            session.setnumber("");
-            session.setpincode("");
-            session.setsub("");
-            session.setrange("");
-            session.settoken("");
-            session.setcart("");
-            session.setdaaddress("");
-            session.setdadist("");
-            session.setdaf("");
-            session.setdal("");
-            session.setdaloc("");
-            session.setdaname("");
-            session.setstatus("");
-
-
-            startActivity(new Intent(this,
-                    Login.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-            finish();
-        }
+//        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+//        if(user==null){
+//            session.setusername("");
+//            session.settoken("");
+//            session.setname("");
+//            session.setpp("");
+//            session.setpassword("");
+//            session.setextras("");
+//            session.setnumber("");
+//            session.setpincode("");
+//            session.setsub("");
+//            session.setrange("");
+//            session.settoken("");
+//            session.setcart("");
+//            session.setdaaddress("");
+//            session.setdadist("");
+//            session.setdaf("");
+//            session.setdal("");
+//            session.setdaloc("");
+//            session.setdaname("");
+//            session.setstatus("");
+//
+//
+//            startActivity(new Intent(this,
+//                    Login.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+//            finish();
+//        }
 
 
 
@@ -159,11 +179,20 @@ public class MainActivity extends AppCompatActivity {
                 i3.setImageResource(R.drawable.b3);
 
 
-                Fragment fragment = new InventoryFragment();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.frame_container, fragment).commit();
+                if(session.getcategory().equals("Food Delivery")||session.getcategory().equals("Home Food")) {
+                    Fragment fragment = new AddMenuFragment();
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.frame_container, fragment).commit();
+                }
+                else{
+                    Fragment fragment = new InventoryFragment();
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.frame_container, fragment).commit();
+                }
 
             }
         });
@@ -188,8 +217,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
         FirebaseDatabase.getInstance().getReference().child("Vendor")
                 .child(session.getusername())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -202,6 +229,22 @@ public class MainActivity extends AppCompatActivity {
                                 session.setsubmitted("yes");
                             else
                                 session.setsubmitted("no");
+
+                            if(dataSnapshot.child("Category").exists()){
+                                session.setcategory(dataSnapshot.child("Category").getValue().toString());
+                            }
+
+                            if(dataSnapshot.child("StoreOpenTime").exists()){
+                                session.setstartime(dataSnapshot.child("StoreOpenTime").getValue().toString());
+                            }
+
+                            if(dataSnapshot.child("DeliveryTime").exists()){
+                                session.setdeliverytime(dataSnapshot.child("DeliveryTime").getValue().toString());
+                            }
+
+                            if(dataSnapshot.child("StoreCloseTime").exists()){
+                                session.setendtime(dataSnapshot.child("StoreCloseTime").getValue().toString());
+                            }
 
                             if(dataSnapshot.child("Commision").exists())
                                 session.setcommision(dataSnapshot.child("Commision").getValue().toString());
@@ -252,19 +295,64 @@ public class MainActivity extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
                             }
                         }
+                        else{
+                            startActivity(new Intent(MainActivity.this,
+                                    Login.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                            finish();
+                        }
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
+
                 });
 
+
+        player = MediaPlayer.create(getApplicationContext(), R.raw.sound);
+        FirebaseDatabase.getInstance().getReference().child("Orders")
+                .orderByChild("SellerStatus").equalTo(session.getusername())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            for(DataSnapshot v: dataSnapshot.getChildren()) {
+                                if (v.child("Status").exists()) {
+                                    if (v.child("Status").getValue().toString().equals("1")) {
+                                        if(!player.isPlaying()) {
+                                            player.start();
+                                        }
+                                    } else {
+                                        stopPlaying();
+                                    }
+                                } else {
+                                    stopPlaying();
+                                }
+                            }
+                        }
+                        else{
+                            stopPlaying();
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
+
+}
+
+    private void stopPlaying() {
+        if (player != null) {
+            if(player.isPlaying()) {
+                player.pause();
+            }
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
 
         final SweetAlertDialog sDialog = new SweetAlertDialog(this, SweetAlertDialog.BUTTON_CONFIRM);
         sDialog.setTitleText("App Update!");
@@ -282,8 +370,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
 
         PackageManager manager = this.getPackageManager();
         PackageInfo info = null;

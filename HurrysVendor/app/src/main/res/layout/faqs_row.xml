@@ -41,6 +41,8 @@
             android:layout_height="wrap_content"
             android:text="Answe1 with a big senetense tht will eventually go to the second line. Answe1 with a big senetense tht will eventually go to the second line…"
             android:textColor="#55565b"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:layout_marginTop="8dp"
             android:textSize="12dp"
             android:fontFamily="@font/cera_pro_medium"/>

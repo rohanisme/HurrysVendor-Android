@@ -391,7 +391,7 @@ public class Login extends AppCompatActivity {
             // [END verify_with_code]
             signInWithPhoneAuthCredential(credential);
         } catch (Exception e) {
-            Toast toast = Toast.makeText(this, "Verification Code is wrong", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
             progressBar.setVisibility(View.GONE);

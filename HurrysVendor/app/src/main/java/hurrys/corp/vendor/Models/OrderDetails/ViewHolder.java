@@ -65,7 +65,11 @@ public  class ViewHolder extends RecyclerView.ViewHolder {
         }
 
         name.setText(Name);
-        units.setText(Units);
+        if(!TextUtils.isEmpty(Units)) {
+            if(!Units.equals("null"))
+                units.setText(Units);
+        }
+
         total.setText("\u00a3"+Total);
         qty.setText("x "+Qty);
         total.setVisibility(View.GONE);
@@ -96,7 +100,7 @@ public  class ViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    public void setDetails2(Context ctx,String Name,String RPrice,String Type,String Qty,String Image){
+    public void setDetails2(Context ctx,String Name,String RPrice,String Type,String Qty,String Image,String Customised,String CustomisedQty){
         TextView name,units,total,qty;
         ImageView image;
         image=mView.findViewById(R.id.image);
@@ -116,14 +120,26 @@ public  class ViewHolder extends RecyclerView.ViewHolder {
                         .into(image);
         }
 
+
+
         name = mView.findViewById(R.id.name);
         qty = mView.findViewById(R.id.qty);
         total = mView.findViewById(R.id.total);
-        name.setText(Name);
-        qty.setText("x "+Qty +" ("+Type+")");
-        total.setText("\u00a3"+RPrice);
+
         units.setVisibility(View.GONE);
         total.setVisibility(View.GONE);
+        total.setText("\u00a3"+RPrice);
+
+        name.setText(Name);
+        if(TextUtils.isEmpty(Customised))
+            qty.setText("x "+Qty +" ("+Type+")");
+        else{
+            qty.setText("x "+Qty);
+            if(!TextUtils.isEmpty(CustomisedQty))
+                units.setText("("+CustomisedQty+")");
+            units.setVisibility(View.VISIBLE);
+        }
+
 
     }
 

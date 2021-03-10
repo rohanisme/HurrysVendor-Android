@@ -188,8 +188,6 @@ public class SubCategory extends RecyclerView.Adapter<SubCategory.ViewHolder> {
                                     recyclerView.setLayoutManager(mLayoutManager);
                                     subCategoryAdapter = new SubCategoryMaster(subcategory);
                                     recyclerView.setAdapter(subCategoryAdapter);
-
-
                                 }
 
                                 @Override

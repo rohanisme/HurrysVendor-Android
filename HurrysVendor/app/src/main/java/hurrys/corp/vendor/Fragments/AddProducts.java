@@ -25,6 +25,7 @@ import android.provider.MediaStore;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,22 +84,18 @@ public class AddProducts extends Fragment {
     private Spinner itemcategory,subcategory;
     private RecyclerView r1;
     private Button submit,plus;
-
     private ProductsAdapter productsAdapter;
     ArrayList<Product> products=new ArrayList<Product>();
     private ArrayList<String> sname1= new ArrayList<String>();
     private ArrayList<String> spushid= new ArrayList<String>();
     private ArrayList<String> category1 =new ArrayList<String>();
-
     private BottomSheetDialog bottomSheetDialog;
-
-
     private ArrayList<String> subcategoryname= new ArrayList<String>();
     private ArrayList<String> subcategorypushid= new ArrayList<String>();
 
-    private String a;
+    private String a="";
     private int selection=0;
-
+    private  int temp=0;
     private Session session;
     private Uri imageUri;
     private Uri imageHoldUri = null;
@@ -288,11 +285,72 @@ public class AddProducts extends Fragment {
             }
         });
 
+        v.setFocusableInTouchMode(true);
+        v.requestFocus();
+        v.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    if(temp==0) {
+                        temp++;
+                        if(getContext()!=null) {
+                            SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                                    .setTitleText("Are you sure you want to exit! Your data will not be saved")
+                                    .setConfirmText("Yes")
+                                    .setCancelText("No")
+                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            sweetAlertDialog.dismiss();
+                                            if (getActivity() != null)
+                                                getActivity().onBackPressed();
+                                        }
+                                    })
+                                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            sweetAlertDialog.dismiss();
+                                            temp = 0;
+                                        }
+                                    });
+
+                            sDialog.setCancelable(false);
+                            sDialog.show();
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+
         ImageView back = v.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().onBackPressed();
+                if(getContext()!=null) {
+                    SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Are you sure you want to exit! Your data will not be saved")
+                            .setConfirmText("Yes")
+                            .setCancelText("No")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                    if (getActivity() != null)
+                                        getActivity().onBackPressed();
+                                }
+                            })
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                }
+                            });
+
+                    sDialog.setCancelable(false);
+                    sDialog.show();
+                }
+
             }
         });
 
@@ -305,8 +363,10 @@ public class AddProducts extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if(dataSnapshot.exists()){
                                 for(DataSnapshot v:dataSnapshot.getChildren()){
-                                    subcategoryname.add(v.child("Name").getValue().toString());
-                                    subcategorypushid.add(v.child("PushId").getValue().toString());
+                                    if(v.child("Name").exists()&&v.child("PushId").exists()) {
+                                        subcategoryname.add(v.child("Name").getValue().toString());
+                                        subcategorypushid.add(v.child("PushId").getValue().toString());
+                                    }
                                 }
                             }
                             if(getContext()!=null) {
@@ -383,6 +443,7 @@ public class AddProducts extends Fragment {
                 ImageView submit=bottomSheetDialogView.findViewById(R.id.submit);;
                 EditText categoryname=bottomSheetDialogView.findViewById(R.id.category);
 
+
                 if(subcategory.getSelectedItem().toString().equals("Select")){
                     Toast.makeText(getContext(),"Select Product Category",Toast.LENGTH_LONG).show();
                     return;
@@ -393,6 +454,8 @@ public class AddProducts extends Fragment {
                     return;
                 }
 
+                session.settemp(""+(subcategorypushid.get(subcategoryname.indexOf(subcategory.getSelectedItem().toString()))));
+
                 FirebaseDatabase.getInstance().getReference().child("Vendor")
                         .child(session.getusername())
                         .child("SubCategory")
@@ -402,16 +465,31 @@ public class AddProducts extends Fragment {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if(dataSnapshot.exists()){
-                                    String temp=dataSnapshot.getValue().toString();
-                                    a=temp;
-
-                                    ArrayList<String> category1 = new ArrayList<String>(Arrays.asList(temp.split(",")));
-
+                                    if(!TextUtils.isEmpty(dataSnapshot.getValue().toString())) {
+                                        String temp = dataSnapshot.getValue().toString();
+                                        a = temp;
+                                        ArrayList<String> category1 = new ArrayList<String>(Arrays.asList(temp.split(",")));
+                                        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                                        recyclerView.setLayoutManager(mLayoutManager);
+                                        category1000 = new Category(category1);
+                                        recyclerView.setAdapter(category1000);
+                                    }
+                                    else{
+                                        a="";
+                                        ArrayList<String> category1 = new ArrayList<String>();
+                                        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                                        recyclerView.setLayoutManager(mLayoutManager);
+                                        category1000 = new Category(category1);
+                                        recyclerView.setAdapter(category1000);
+                                    }
+                                }
+                                else{
+                                    a="";
+                                    ArrayList<String> category1 = new ArrayList<String>();
                                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
                                     recyclerView.setLayoutManager(mLayoutManager);
                                     category1000 = new Category(category1);
                                     recyclerView.setAdapter(category1000);
-
                                 }
                             }
 
@@ -455,9 +533,7 @@ public class AddProducts extends Fragment {
                                         if(dataSnapshot.exists()){
                                             String temp=dataSnapshot.getValue().toString();
                                             a=temp;
-
                                             ArrayList<String> category1 = new ArrayList<String>(Arrays.asList(temp.split(",")));
-
                                             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
                                             recyclerView.setLayoutManager(mLayoutManager);
                                             category1000 = new Category(category1);
@@ -627,10 +703,7 @@ public class AddProducts extends Fragment {
                     return;
                 }
 
-
-
-
-                if(sname1.indexOf(name.getText().toString())>-1){
+                if(sname1.contains(name.getText().toString())){
                     name.setError("The Item already exists");
                     name.requestFocus();
                     return;
@@ -640,7 +713,6 @@ public class AddProducts extends Fragment {
                     Toast.makeText(getContext(),"Add Quantity and prices",Toast.LENGTH_SHORT).show();
                     return;
                 }
-
 
                 DatabaseReference mref=FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Products").push();
                 mref.child("PushId").setValue(mref.getKey());
@@ -660,7 +732,6 @@ public class AddProducts extends Fragment {
                 mref.child("ShellLife").setValue(shell.getText().toString());
                 mref.child("Manufacture").setValue(shell.getText().toString());
 
-
                 for (int i = 0; i < productsAdapter.getItemCount(); i++) {
                     Product product = products.get(i);
                     DatabaseReference mref1=mref.child("Weights").push();
@@ -669,19 +740,19 @@ public class AddProducts extends Fragment {
                     mref1.child("Price").setValue(product.Name.substring(1));
                 }
 
-
-                SweetAlertDialog sDialog  = new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
-                        .setTitleText("Congrats!")
-                        .setContentText("Item Added Successfully!")
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                sweetAlertDialog.dismiss();
-                            }
-                        });
-                sDialog.setCancelable(false);
-                sDialog.show();
-
+                if(getContext()!=null) {
+                    SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
+                            .setTitleText("Congrats!")
+                            .setContentText("Item Added Successfully!")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                }
+                            });
+                    sDialog.setCancelable(false);
+                    sDialog.show();
+                }
 
                 path="No";
                 path3="No";
@@ -703,15 +774,12 @@ public class AddProducts extends Fragment {
                 shell.setText("");
                 manufacture.setText("");
 
-
                 products.clear();
                 productsAdapter = new ProductsAdapter(products);
                 r1.setAdapter(productsAdapter);
-
                 if(getActivity()!=null){
                     getActivity().onBackPressed();
                 }
-
 
             }
         });

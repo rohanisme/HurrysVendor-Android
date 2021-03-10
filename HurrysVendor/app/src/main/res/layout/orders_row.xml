@@ -16,8 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="15dp"
-        android:paddingRight="16dp">
+        android:paddingTop="15dp">
 
 
         <LinearLayout
@@ -54,7 +53,7 @@
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="24th August"
                     android:textColor="#999999"
-                    android:textSize="14dp" />
+                    android:textSize="12dp" />
 
             </LinearLayout>
 
@@ -65,6 +64,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="right"
+                android:paddingEnd="16dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -88,7 +88,7 @@
                     android:gravity="right"
                     android:text="Online"
                     android:textColor="#999999"
-                    android:textSize="14dp" />
+                    android:textSize="12dp" />
 
                 <TextView
                     android:id="@+id/pushid"
@@ -134,7 +134,7 @@
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Delivery Address"
                     android:textColor="#999999"
-                    android:textSize="14dp" />
+                    android:textSize="12dp" />
 
                 <TextView
                     android:id="@+id/address"
@@ -157,6 +157,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="right"
+                android:paddingEnd="16dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -179,7 +180,7 @@
                     android:gravity="right"
                     android:text="View Details"
                     android:textColor="#0e4d97"
-                    android:textSize="14dp" />
+                    android:textSize="12dp" />
 
 
             </LinearLayout>
@@ -206,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:paddingStart="8dp">
+                android:paddingStart="16dp">
 
 
                 <TextView
@@ -217,7 +218,7 @@
                     android:fontFamily="@font/cera_pro_medium"
                     android:text="Order ID"
                     android:textColor="#0e4d97"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
@@ -227,6 +228,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:paddingEnd="16dp"
                 android:gravity="right"
                 android:orientation="horizontal">
 
@@ -237,7 +239,6 @@
                     android:layout_gravity="right"
                     android:fontFamily="@font/cera_pro_medium"
                     android:gravity="right"
-                    android:padding="5dp"
                     android:text="COMPLETED"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14dp" />

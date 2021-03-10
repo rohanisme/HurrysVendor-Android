@@ -62,7 +62,7 @@ public class CompletedOrders extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v=inflater.inflate(R.layout.fragment_past_orders, container, false);
+        View v=inflater.inflate(R.layout.fragment_past_orders2, container, false);
 
         LinearLayout bottomnavigation=(getActivity()).findViewById(R.id.bottomnavigation);
         bottomnavigation.setVisibility(View.GONE);
@@ -210,7 +210,7 @@ public class CompletedOrders extends Fragment {
                 ) {
                     @Override
                     protected void populateViewHolder(ViewHolder viewHolder, Orders order, int position) {
-                        viewHolder.setDetails2(getContext(),order.OrderNo,order.ItemsDetails,order.Pushid,order.OrderDateTime,order.Subtotal,order.Status,order.SellerCommission,order.Subtotal,order.DeliveryCharges,order.Seller,order.OrderType,order.VendorCustomer);
+                        viewHolder.setDetails1(getContext(),order.OrderNo,order.ItemsDetails,order.Pushid,order.OrderDateTime,order.Subtotal,order.Status,order.SellerCommission,order.Subtotal,order.DeliveryCharges,order.Seller,order.OrderType,order.VendorCustomer);
 
                     }
 
@@ -280,7 +280,7 @@ public class CompletedOrders extends Fragment {
                 ) {
                     @Override
                     protected void populateViewHolder(ViewHolder viewHolder, Orders order, int position) {
-                        viewHolder.setDetails2(getContext(),order.OrderNo,order.ItemsDetails,order.Pushid,order.OrderDateTime,order.Subtotal,order.Status,order.SellerCommission,order.Subtotal,order.DeliveryCharges,order.Seller,sessions.getusername(),order.VendorCustomer);
+                        viewHolder.setDetails1(getContext(),order.OrderNo,order.ItemsDetails,order.Pushid,order.OrderDateTime,order.Subtotal,order.Status,order.SellerCommission,order.Subtotal,order.DeliveryCharges,order.Seller,sessions.getusername(),order.VendorCustomer);
 
                     }
 

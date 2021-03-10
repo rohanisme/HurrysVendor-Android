@@ -65,6 +65,8 @@ public class SubCategoryMaster extends RecyclerView.Adapter<SubCategoryMaster.Vi
                 ref.child("Name").setValue(holder.name.getText().toString());
                 ref.child("PushId").setValue(holder.pushid.getText().toString());
                 ref.child("SubCategoryImage").setValue(sub.Image);
+
+
             }
         });
 

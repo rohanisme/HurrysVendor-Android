@@ -8,7 +8,6 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/l1"
         android:layout_width="match_parent"
@@ -186,8 +185,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="16dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_weight="2">
 
                 <LinearLayout
@@ -229,8 +228,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="16dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_weight="2">
 
                 <LinearLayout
@@ -275,8 +274,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="16dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_weight="2">
 
                 <LinearLayout
@@ -318,8 +317,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="16dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_weight="2">
 
                 <LinearLayout
@@ -361,8 +360,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="16dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="gone"
                 android:layout_weight="2">
 
                 <LinearLayout
@@ -411,6 +411,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:weightSum="2">
 
                 <LinearLayout
@@ -424,7 +426,6 @@
                         android:textSize="16dp"
                         android:fontFamily="@font/cera_pro_medium"
                         android:textColor="@color/black"
-                        android:paddingStart="16dp"
                         android:text="Total Paid"/>
 
 
@@ -433,7 +434,6 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingEnd="24dp"
                     android:layout_weight="1">
 
                     <TextView
@@ -444,7 +444,6 @@
                         android:gravity="right"
                         android:fontFamily="@font/cera_pro_medium"
                         android:textColor="@color/black"
-                        android:paddingStart="16dp"
                         android:text="£ 0.00"/>
 
                 </LinearLayout>
@@ -459,8 +458,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:padding="10dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -487,7 +488,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_gravity="center"
-                    android:gravity="center"
+                    android:gravity="right"
                     android:layout_weight="1">
 
                     <TextView
@@ -527,9 +528,9 @@
                 android:id="@+id/neworder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="46dp"
-                android:layout_marginEnd="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/rounded_corners"
                 android:backgroundTint="#00b246"

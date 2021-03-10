@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -79,12 +80,12 @@ public class SplashScreen extends AppCompatActivity {
                                                 Permissions.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                         finish();
                                     }
-
-
                                 }
                             });
                 } else {
                     if (session.getusername() != "") {
+//                        session.setselection("New");
+                        session.settemp("");
                         startActivity(new Intent(SplashScreen.this,
                                 MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         finish();

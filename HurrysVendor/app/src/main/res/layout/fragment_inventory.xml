@@ -132,17 +132,66 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_layout">
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/l10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/plus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/landmark"
+                        android:layout_margin="32dp"
+                        android:background="#00b246"
+                        android:layout_centerInParent="true"
+                        android:text="Add Product"
+                        android:fontFamily="@font/cera_pro_bold"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/menu"
+                        android:layout_margin="32dp"
+                        android:background="#00b246"
+                        android:text="Create Category"
+                        android:fontFamily="@font/cera_pro_bold"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
@@ -158,7 +207,7 @@
                         android:id="@+id/t1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Categories"
+                        android:text="Approved"
                         android:layout_marginTop="4dp"
                         android:textColor="@color/colorDarkgrey"
                         android:textSize="14dp"
@@ -186,7 +235,7 @@
                         android:id="@+id/t2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Products"
+                        android:text="Awaiting Approval"
                         android:layout_marginTop="4dp"
                         android:textColor="@color/colorDarkgrey"
                         android:textSize="14dp"
@@ -194,6 +243,34 @@
 
                     <View
                         android:id="@+id/s2"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="4dp"
+                        android:background="#eaeaea"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/z3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/t3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rejected"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/colorDarkgrey"
+                        android:textSize="14dp"
+                        android:fontFamily="@font/cera_pro_medium"/>
+
+                    <View
+                        android:id="@+id/s3"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_marginTop="4dp"
@@ -307,17 +384,6 @@
     </androidx.core.widget.NestedScrollView>
 
 
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/plus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:src="@drawable/plus"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

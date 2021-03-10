@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -85,6 +86,12 @@ public class FaqsFragment extends Fragment {
                         viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
                             @Override
                             public void onItemClick(View v, int position) {
+
+
+                                TextView answer = v.findViewById(R.id.answer);
+
+                                answer.setMaxLines(100);
+
                             }
                             @Override
                             public void onItemLongClick(View v, int position) {

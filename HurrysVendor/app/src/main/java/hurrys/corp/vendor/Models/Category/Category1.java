@@ -51,8 +51,6 @@ public class Category1 extends RecyclerView.Adapter<Category1.ViewHolder> {
             holder.linearLayout.setBackgroundColor(Color.parseColor("#F0F0F0"));
         }
 
-
-
         holder.cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

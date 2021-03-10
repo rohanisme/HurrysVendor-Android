@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/promotionsrows"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#F2F2F2"
+    android:layout_margin="10dp"
+    android:padding="5dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.5">
+
+            <TextView
+                android:id="@+id/requesttype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Request Type"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:fontFamily="@font/cera_pro_medium"/>
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apply"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="15dp"
+                android:fontFamily="@font/cera_pro_bold"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/cera_pro_medium"
+        android:text="Get Flat 10% Discount"/>
+
+    <TextView
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:paddingLeft="10dp"
+        android:visibility="gone"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/cera_pro_bold"
+        android:text="Get Flat 10% Discount"/>
+
+
+
+
+
+
+</LinearLayout>

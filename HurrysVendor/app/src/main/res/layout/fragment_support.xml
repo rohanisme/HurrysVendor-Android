@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:autoSizeTextType="uniform"
-                android:text="Chat with us"
+                android:text="Chat with Us"
                 android:fontFamily="@font/cera_pro_medium"
                 android:textColor="#000000"
                 android:textSize="16dp"/>

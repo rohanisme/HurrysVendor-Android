@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:scrollbars="none"
+    android:layout_height="match_parent">
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -24,8 +31,6 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/dummypp"/>
-
-
 
         </LinearLayout>
 
@@ -169,8 +174,29 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cera_pro_medium"
                 android:paddingStart="8dp"
+                android:layout_marginTop="45dp"
+                android:text="Online Delivery "
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cera_pro_medium"
+                android:paddingStart="8dp"
                 android:layout_marginTop="32dp"
                 android:text="Last Delivery through Hurrys "
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cera_pro_medium"
+                android:paddingStart="8dp"
+                android:layout_marginTop="32dp"
+                android:text="Minimum Order Value "
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -193,6 +219,12 @@
                 android:layout_width="50dp"
                 android:layout_height="30dp"/>
 
+            <com.zcw.togglebutton.ToggleButton
+                android:id="@+id/online"
+                android:layout_marginTop="32dp"
+                android:layout_width="50dp"
+                android:layout_height="30dp"/>
+
             <TextView
                 android:id="@+id/lastorder"
                 android:layout_width="match_parent"
@@ -207,14 +239,92 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/cera_pro_bold"/>
 
+            <TextView
+                android:id="@+id/minimum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginTop="16dp"
+                android:textSize="16dp"
+                android:drawablePadding="5dp"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:textColor="@color/black"
+                android:fontFamily="@font/cera_pro_bold"/>
+
         </LinearLayout>
 
     </LinearLayout>
+
+
 
     <View
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:background="#f5f5f5"/>
+
+    <LinearLayout
+        android:id="@+id/l20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:paddingEnd="10dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/p1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cera_pro_medium"
+                android:paddingStart="8dp"
+                android:text="Add Menu "
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:layout_weight="0.8">
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:src="@drawable/right_arrow"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/l2"
@@ -223,9 +333,11 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingRight="10dp"
+        android:paddingEnd="10dp"
         android:weightSum="2">
 
         <LinearLayout
@@ -283,9 +395,11 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingRight="10dp"
+        android:paddingEnd="10dp"
         android:weightSum="2">
 
         <LinearLayout
@@ -337,15 +451,79 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/l300"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:paddingEnd="10dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/p2"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cera_pro_medium"
+                android:paddingStart="8dp"
+                android:text="Past Orders"
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:layout_weight="0.8">
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:src="@drawable/right_arrow"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/l4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingRight="10dp"
+        android:paddingEnd="10dp"
         android:weightSum="2">
 
         <LinearLayout
@@ -397,6 +575,133 @@
 
     </LinearLayout>
 
+
+    <LinearLayout
+        android:id="@+id/l40"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:paddingEnd="10dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/p3"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cera_pro_medium"
+                android:paddingStart="8dp"
+                android:text="Raise Request "
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:layout_weight="0.8">
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:src="@drawable/right_arrow"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/l41"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:paddingEnd="10dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/p3"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cera_pro_medium"
+                android:paddingStart="8dp"
+                android:text="Pending Requests"
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:layout_weight="0.8">
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:src="@drawable/right_arrow"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/l5"
         android:layout_width="match_parent"
@@ -404,9 +709,11 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingRight="10dp"
+        android:paddingEnd="10dp"
         android:weightSum="2">
 
         <LinearLayout
@@ -464,9 +771,11 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingRight="10dp"
+        android:paddingEnd="10dp"
         android:weightSum="2">
 
         <LinearLayout
@@ -518,3 +827,5 @@
     </LinearLayout>
 
 </LinearLayout>
+
+</ScrollView>

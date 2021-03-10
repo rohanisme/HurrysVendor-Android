@@ -25,6 +25,7 @@ import android.provider.MediaStore;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,9 +81,9 @@ public class AddFoodItems extends Fragment {
 
     private EditText name,details,addons,payment,mrp,price;
     private TextView stime,etime;
-    private Button plus;
+    private Button plus,plus1;
     private Spinner itemcategory,category;
-    private RecyclerView r1;
+    private RecyclerView r1,r2;
     private Button submit;
     private ImageView image,add;
 
@@ -93,8 +94,11 @@ public class AddFoodItems extends Fragment {
     private ArrayList<String> sname1= new ArrayList<String>();
     private ArrayList<String> spushid= new ArrayList<String>();
 
-    String a;
+    private ProductsAdapter portions;
+    private ArrayList<Product> portions1=new ArrayList<Product>();
 
+    String a="";
+    private  int temp=0;
     private BottomSheetDialog bottomSheetDialog;
 
     private Session session;
@@ -146,9 +150,11 @@ public class AddFoodItems extends Fragment {
         stime=v.findViewById(R.id.stime);
         etime=v.findViewById(R.id.etime);
         plus=v.findViewById(R.id.plus);
+        plus1=v.findViewById(R.id.plus1);
         itemcategory=v.findViewById(R.id.itemcategory);
         category=v.findViewById(R.id.category);
         r1=v.findViewById(R.id.r1);
+        r2=v.findViewById(R.id.r2);
         submit=v.findViewById(R.id.submit);
         add=v.findViewById(R.id.add);
         session=new Session(getActivity());
@@ -207,12 +213,73 @@ public class AddFoodItems extends Fragment {
             }
         });
 
+
+        v.setFocusableInTouchMode(true);
+        v.requestFocus();
+        v.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    if(temp==0) {
+                        temp++;
+                        if(getContext()!=null) {
+                            SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                                    .setTitleText("Are you sure you want to exit! Your data will not be saved")
+                                    .setConfirmText("Yes")
+                                    .setCancelText("No")
+                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            sweetAlertDialog.dismiss();
+                                            if (getActivity() != null)
+                                                getActivity().onBackPressed();
+                                        }
+                                    })
+                                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            sweetAlertDialog.dismiss();
+                                            temp = 0;
+                                        }
+                                    });
+
+                            sDialog.setCancelable(false);
+                            sDialog.show();
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+
         ImageView back = v.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(getActivity()!=null)
-                    getActivity().onBackPressed();
+                if(getContext()!=null) {
+                    SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Are you sure you want to exit! Your data will not be saved")
+                            .setConfirmText("Yes")
+                            .setCancelText("No")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                    if (getActivity() != null)
+                                        getActivity().onBackPressed();
+                                }
+                            })
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                }
+                            });
+
+                    sDialog.setCancelable(false);
+                    sDialog.show();
+                }
+
             }
         });
 
@@ -222,6 +289,8 @@ public class AddFoodItems extends Fragment {
         }
 
 
+        stime.setText(session.getstarttime());
+        etime.setText(session.getendtime());
 
 
 
@@ -237,7 +306,6 @@ public class AddFoodItems extends Fragment {
                 // Launch Time Picker Dialog
                 TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
                         new TimePickerDialog.OnTimeSetListener() {
-
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
@@ -253,19 +321,15 @@ public class AddFoodItems extends Fragment {
                                     m = "0" +minute;
                                 else
                                     m =""+ minute;
-
-
                                 stime.setText(h + ":" + m);
-
-
                             }
                         }, mHour, mMinute, true);
 
-
+                String a[]=session.getstarttime().split(":");
+                timePickerDialog.updateTime(Integer.parseInt(a[0]), Integer.parseInt(a[1]));
                 timePickerDialog.show();
             }
         });
-
 
         etime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -302,7 +366,8 @@ public class AddFoodItems extends Fragment {
                             }
                         }, mHour, mMinute, true);
 
-
+                String a[]=session.getendtime().split(":");
+                timePickerDialog.updateTime(Integer.parseInt(a[0]), Integer.parseInt(a[1]));
                 timePickerDialog.show();
             }
         });
@@ -449,97 +514,180 @@ public class AddFoodItems extends Fragment {
             }
         });
 
+        portions1.clear();
+        products.clear();
+
         productsAdapter = new ProductsAdapter(products);
-
-        bottomSheetDialog=new BottomSheetDialog(getContext());
-        final View bottomSheetDialogView=getLayoutInflater().inflate(R.layout.bottom_variationsothers,null);
-        bottomSheetDialog.setContentView(bottomSheetDialogView);
-
-        EditText addons=bottomSheetDialogView.findViewById(R.id.addons);
-        EditText payment=bottomSheetDialogView.findViewById(R.id.payment);
-        TextView cancel=bottomSheetDialogView.findViewById(R.id.cancel);
-        Button add=bottomSheetDialogView.findViewById(R.id.add);
+        portions = new ProductsAdapter(portions1);
 
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                bottomSheetDialog=new BottomSheetDialog(getContext());
+                final View bottomSheetDialogView=getLayoutInflater().inflate(R.layout.bottom_variationsothers,null);
+                bottomSheetDialog.setContentView(bottomSheetDialogView);
+
+                EditText addons=bottomSheetDialogView.findViewById(R.id.addons);
+                EditText payment=bottomSheetDialogView.findViewById(R.id.payment);
+                TextView cancel=bottomSheetDialogView.findViewById(R.id.cancel);
+                Button add=bottomSheetDialogView.findViewById(R.id.add);
+
+                payment.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(10,2)});
+
+                add.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(TextUtils.isEmpty(addons.getText().toString())){
+                            addons.setError("Enter Quantity");
+                            addons.requestFocus();
+                            return;
+                        }
+
+                        if(TextUtils.isEmpty(payment.getText().toString())){
+                            payment.setError("Enter Price");
+                            payment.requestFocus();
+                            return;
+                        }
+
+                        int temp=0,position=0;
+                        for(int i=0;i<productsAdapter.getItemCount();i++){
+                            Product product = products.get(i);
+                            if(product.Name.equals(addons.getText().toString())) {
+                                temp++;
+                                position = i;
+                            }
+                        }
+
+                        if(temp==0)
+                            products.add(new Product(addons.getText().toString(),"\u00a3"+payment.getText().toString()));
+                        else
+                            products.set(position,new Product(addons.getText().toString(),"\u00a3"+payment.getText().toString()));
+
+
+                        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                        r1.setLayoutManager(mLayoutManager);
+
+                        productsAdapter = new ProductsAdapter(products);
+
+                        r1.setAdapter(productsAdapter);
+
+                        addons.setText("");
+                        payment.setText("");
+
+                        if(getActivity()!=null) {
+                            View v = getActivity().getCurrentFocus();
+                            if (v != null) {
+                                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                assert imm != null;
+                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                            }
+                        }
+
+                        bottomSheetDialog.dismiss();
+                    }
+                });
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        addons.setText("");
+                        payment.setText("");
+                        bottomSheetDialog.dismiss();
+                    }
+                });
+
                 bottomSheetDialog.show();
+
+
             }
         });
 
-        payment.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(10,2)});
-
-        productsAdapter = new ProductsAdapter(products);
-
-        add.setOnClickListener(new View.OnClickListener() {
+        plus1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(TextUtils.isEmpty(addons.getText().toString())){
-                    addons.setError("Enter Quantity");
-                    addons.requestFocus();
-                    return;
-                }
 
-                if(TextUtils.isEmpty(payment.getText().toString())){
-                    payment.setError("Enter Price");
-                    payment.requestFocus();
-                    return;
-                }
+                bottomSheetDialog=new BottomSheetDialog(getContext());
+                final View bottomSheetDialogView=getLayoutInflater().inflate(R.layout.bottom_variationsothers,null);
+                bottomSheetDialog.setContentView(bottomSheetDialogView);
 
-                int temp=0,position=0;
-                for(int i=0;i<productsAdapter.getItemCount();i++){
-                    Product product = products.get(i);
-                    if(product.Name.equals(addons.getText().toString())) {
-                        temp++;
-                        position = i;
+                EditText addons=bottomSheetDialogView.findViewById(R.id.addons);
+                EditText payment=bottomSheetDialogView.findViewById(R.id.payment);
+                TextView cancel=bottomSheetDialogView.findViewById(R.id.cancel);
+                Button add=bottomSheetDialogView.findViewById(R.id.add);
+
+                payment.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(10,2)});
+
+                add.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(TextUtils.isEmpty(addons.getText().toString())){
+                            addons.setError("Enter Quantity");
+                            addons.requestFocus();
+                            return;
+                        }
+
+                        if(TextUtils.isEmpty(payment.getText().toString())){
+                            payment.setError("Enter Price");
+                            payment.requestFocus();
+                            return;
+                        }
+
+                        int temp=0,position=0;
+                        for(int i=0;i<portions.getItemCount();i++){
+                            Product product = portions1.get(i);
+                            if(product.Name.equals(addons.getText().toString())) {
+                                temp++;
+                                position = i;
+                            }
+                        }
+
+                        if(temp==0)
+                            portions1.add(new Product(addons.getText().toString(),"\u00a3"+payment.getText().toString()));
+                        else
+                            portions1.set(position,new Product(addons.getText().toString(),"\u00a3"+payment.getText().toString()));
+
+
+                        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                        r2.setLayoutManager(mLayoutManager);
+
+                        portions = new ProductsAdapter(portions1);
+
+                        r2.setAdapter(portions);
+
+                        addons.setText("");
+                        payment.setText("");
+
+                        if(getActivity()!=null) {
+                            View v = getActivity().getCurrentFocus();
+                            if (v != null) {
+                                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                assert imm != null;
+                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                            }
+                        }
+
+                        bottomSheetDialog.dismiss();
                     }
-                }
+                });
 
-                if(temp==0)
-                    products.add(new Product(addons.getText().toString(),"\u00a3"+payment.getText().toString()));
-                else
-                    products.set(position,new Product(addons.getText().toString(),"\u00a3"+payment.getText().toString()));
-
-
-                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-                r1.setLayoutManager(mLayoutManager);
-
-                productsAdapter = new ProductsAdapter(products);
-
-                r1.setAdapter(productsAdapter);
-
-                addons.setText("");
-                payment.setText("");
-
-                if(getActivity()!=null) {
-                    View v = getActivity().getCurrentFocus();
-                    if (v != null) {
-                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                        assert imm != null;
-                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        addons.setText("");
+                        payment.setText("");
+                        bottomSheetDialog.dismiss();
                     }
-                }
+                });
 
-                bottomSheetDialog.dismiss();
+                bottomSheetDialog.show();
+
+
             }
         });
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addons.setText("");
-                payment.setText("");
-                bottomSheetDialog.dismiss();
-            }
-        });
-
-        payment.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(10,2)});
         price.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(10,2)});
         mrp.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(10,2)});
-
-
-
-
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -581,7 +729,7 @@ public class AddFoodItems extends Fragment {
                 }
 
 
-                if(sname1.indexOf(name.getText().toString())>-1){
+                if(sname1.contains(name.getText().toString())){
                     name.setError("The Item already exists");
                     name.requestFocus();
                     return;
@@ -609,6 +757,16 @@ public class AddFoodItems extends Fragment {
                     mref1.child("Name").setValue(product.PushId);
                     mref1.child("PushId").setValue(mref1.getKey());
                     mref1.child("Price").setValue(product.Name.substring(1));
+                    mref1.child("Status").setValue("Active");
+                }
+
+                for (int i = 0; i < portions.getItemCount(); i++) {
+                    Product product = portions1.get(i);
+                    DatabaseReference mref1=mref.child("Portions").push();
+                    mref1.child("Name").setValue(product.PushId);
+                    mref1.child("PushId").setValue(mref1.getKey());
+                    mref1.child("Price").setValue(product.Name.substring(1));
+                    mref1.child("Status").setValue("Active");
                 }
 
 
@@ -639,12 +797,14 @@ public class AddFoodItems extends Fragment {
                 stime.setText("HH:MM");
                 etime.setText("HH:MM");
                 submit.setVisibility(View.VISIBLE);
-                addons.setText("");
-                payment.setText("");
 
                 products.clear();
                 productsAdapter = new ProductsAdapter(products);
                 r1.setAdapter(productsAdapter);
+
+                portions1.clear();
+                portions = new ProductsAdapter(portions1);
+                r2.setAdapter(portions);
 
 
                 session.settemp("");

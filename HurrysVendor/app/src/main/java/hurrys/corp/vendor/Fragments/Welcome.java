@@ -82,7 +82,7 @@ public class Welcome extends Fragment {
         if(!TextUtils.isEmpty(session.getsubmitted())){
             if(session.getsubmitted().equals("yes")) {
                 start.setVisibility(View.GONE);
-                if(comments.getText().toString().equals("Please proceed to fill the form"))
+                if(comments.getText().toString().equals("Please proceed to fill the form "))
                     comments.setText("This process usually takes 24-48 Hrs");
             }
             else

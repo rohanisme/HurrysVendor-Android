@@ -76,6 +76,7 @@ public class InventoryAdapter1  extends RecyclerView.Adapter<InventoryAdapter1.V
                         .into(holder.indicator);
         }
 
+        holder.featured.setVisibility(View.INVISIBLE);
 
         if(inventory.AStatus.equals("Approved")){
             holder.linear.setAlpha(1.0f);
@@ -100,9 +101,11 @@ public class InventoryAdapter1  extends RecyclerView.Adapter<InventoryAdapter1.V
 
         if(inventory.Featured.equals("Yes")){
             holder.feature.setToggleOn(true);
+            holder.featured.setVisibility(View.VISIBLE);
         }
         else{
             holder.feature.setToggleOff(true);
+            holder.featured.setVisibility(View.INVISIBLE);
         }
 
 
@@ -124,12 +127,12 @@ public class InventoryAdapter1  extends RecyclerView.Adapter<InventoryAdapter1.V
                         holder.status.setText("Out of Stock");
                         holder.status.setTextColor(Color.parseColor("#FF0000"));
                         holder.toggle.setToggleOff(true);
+
                     }
               }
                 else{
                 Toast.makeText(holder.view.getContext(),"Waiting for approval",Toast.LENGTH_LONG).show();
             }
-
             }
         });
 
@@ -139,9 +142,8 @@ public class InventoryAdapter1  extends RecyclerView.Adapter<InventoryAdapter1.V
                 if(on){
                     FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername())
                             .child("Products").child(holder.pushid.getText().toString()).child("Featured").setValue("Yes");
-
+                    holder.featured.setVisibility(View.VISIBLE);
                     DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Featured");
-
                     dref.runTransaction(new Transaction.Handler() {
                         @NonNull
                         @Override
@@ -162,9 +164,8 @@ public class InventoryAdapter1  extends RecyclerView.Adapter<InventoryAdapter1.V
                 else{
                     FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername())
                             .child("Products").child(holder.pushid.getText().toString()).child("Featured").setValue("No");
-
                     DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Featured");
-
+                    holder.featured.setVisibility(View.GONE);
                     dref.runTransaction(new Transaction.Handler() {
                         @NonNull
                         @Override
@@ -265,7 +266,7 @@ public class InventoryAdapter1  extends RecyclerView.Adapter<InventoryAdapter1.V
     public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
         public final View view;
 
-        TextView name,pushid,price,status,edit;
+        TextView name,pushid,price,status,edit,featured;
         ImageView indicator;
         ToggleButton toggle,feature;
         LinearLayout linear;
@@ -275,6 +276,7 @@ public class InventoryAdapter1  extends RecyclerView.Adapter<InventoryAdapter1.V
             this.view = view;
             name=view.findViewById(R.id.name);
             pushid=view.findViewById(R.id.pushid);
+            featured=view.findViewById(R.id.featured);
             price=view.findViewById(R.id.price);
             indicator=view.findViewById(R.id.indicator);
             toggle=view.findViewById(R.id.toggle);

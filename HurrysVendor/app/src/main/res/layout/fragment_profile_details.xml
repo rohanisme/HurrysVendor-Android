@@ -296,7 +296,7 @@
                     android:layout_marginTop="32dp"
                     android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
-                    android:text="Alternate Mobile Number"
+                    android:text="Back-up/Secondary Mobile Number"
                     android:textColor="@color/black" />
 
                 <LinearLayout
@@ -1438,6 +1438,32 @@
                     android:layout_marginTop="32dp"
                     android:background="#ffffff"
                     android:fontFamily="@font/cera_pro_medium"
+                    android:text="Minimum Order Value"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/minimum"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginEnd="19dp"
+                    android:background="@drawable/border_line"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:inputType="numberDecimal"
+                    android:paddingStart="10dp"
+                    android:text="Will be entered by admin"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginTop="32dp"
+                    android:background="#ffffff"
+                    android:fontFamily="@font/cera_pro_medium"
                     android:text="Delivery Time"
                     android:textColor="@color/black" />
 
@@ -1452,6 +1478,20 @@
                     android:fontFamily="@font/cera_pro_medium"
                     android:inputType="numberDecimal"
                     android:paddingStart="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginEnd="19dp"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:paddingStart="10dp"
+                    android:text="Please Contact Support if you want to change any details"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 

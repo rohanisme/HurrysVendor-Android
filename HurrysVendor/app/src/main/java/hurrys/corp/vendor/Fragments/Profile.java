@@ -61,9 +61,9 @@ public class Profile extends Fragment {
     private ImageView i1,i2,i3;
     private Session session;
 
-    private TextView name,userid,lastorder;
+    private TextView name,userid,lastorder,minimum;
     private CircleImageView pp;
-    private LinearLayout l2,l3,l4,l5,logout,edit;
+    private LinearLayout l2,l3,l4,l5,logout,edit,l20,l300,l40,l41;
 
 
     private Uri imageUri;
@@ -76,7 +76,7 @@ public class Profile extends Fragment {
     private final int RESULT_CROP = 400;
     private StorageReference mstorageReference;
     private ProgressBar progressBar2;
-    private ToggleButton status,selfpickup;
+    private ToggleButton status,selfpickup,online;
 
     private int mHour;
     private int mMinute;
@@ -127,10 +127,16 @@ public class Profile extends Fragment {
         l3=v.findViewById(R.id.l3);
         l4=v.findViewById(R.id.l4);
         l5=v.findViewById(R.id.l5);
+        l20=v.findViewById(R.id.l20);
+        l300=v.findViewById(R.id.l300);
+        l40=v.findViewById(R.id.l40);
+        l41=v.findViewById(R.id.l41);
         edit=v.findViewById(R.id.edit);
         status=v.findViewById(R.id.status);
         selfpickup=v.findViewById(R.id.selfpickup);
+        online=v.findViewById(R.id.online);
         lastorder=v.findViewById(R.id.lastorder);
+        minimum=v.findViewById(R.id.minimum);
 
         FirebaseDatabase.getInstance().getReference().child("Vendor")
                 .child(session.getusername())
@@ -140,6 +146,9 @@ public class Profile extends Fragment {
                         if(dataSnapshot.exists()){
                             if(dataSnapshot.child("LastOrder").exists())
                                 lastorder.setText(dataSnapshot.child("LastOrder").getValue().toString());
+                            if(dataSnapshot.child("MinimumOrder").exists())
+                                minimum.setText("\u00a3"+dataSnapshot.child("MinimumOrder").getValue().toString());
+
                             if(dataSnapshot.child("SelfPickup").exists()){
                                 if(dataSnapshot.child("SelfPickup").getValue().toString().equals("Active")){
                                     selfpickup.setToggleOn(true);
@@ -148,6 +157,16 @@ public class Profile extends Fragment {
                                     selfpickup.setToggleOff(false);
                                 }
                             }
+
+                            if(dataSnapshot.child("Online").exists()){
+                                if(dataSnapshot.child("Online").getValue().toString().equals("Active")){
+                                    online.setToggleOn(true);
+                                }
+                                else{
+                                    online.setToggleOff(false);
+                                }
+                            }
+
                         }
                     }
 
@@ -209,11 +228,19 @@ public class Profile extends Fragment {
             public void onToggle(boolean on) {
                 if(on){
                     FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Status").setValue("Active");
+                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("SelfPickup").setValue("Active");
+                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Online").setValue("Active");
                     session.setstatus("Active");
+                    selfpickup.setToggleOn(true);
+                    online.setToggleOn(true);
                 }
                 else{
                     FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Status").setValue("InActive");
+                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("SelfPickup").setValue("InActive");
+                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Online").setValue("InActive");
                     session.setstatus("InActive");
+                    selfpickup.setToggleOff(true);
+                    online.setToggleOff(true);
                 }
             }
         });
@@ -223,11 +250,28 @@ public class Profile extends Fragment {
             public void onToggle(boolean on) {
                 if(on){
                     FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("SelfPickup").setValue("Active");
+                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Status").setValue("Active");
+                    status.setToggleOn(true);
                     session.setstatus("Active");
                 }
                 else{
                     FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("SelfPickup").setValue("InActive");
-                    session.setstatus("InActive");
+
+                }
+            }
+        });
+
+        online.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
+            @Override
+            public void onToggle(boolean on) {
+                if(on){
+                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Online").setValue("Active");
+                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Status").setValue("Active");
+                    session.setstatus("Active");
+                    status.setToggleOn(true);
+                }
+                else{
+                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Online").setValue("InActive");
                 }
             }
         });
@@ -259,7 +303,7 @@ public class Profile extends Fragment {
                 final CharSequence[] items = {"Take Photo", "Choose from Library",
                         "Cancel"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), AlertDialog.THEME_HOLO_LIGHT);
-                builder.setTitle("Add Photo!");
+                builder.setTitle("Add FPhoto!");
 
                 //SET ITEMS AND THERE LISTENERS
                 builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -291,7 +335,38 @@ public class Profile extends Fragment {
         name.setText(session.getstorename());
         userid.setText(session.getusername());
 
+        if(session.getcategory().equals("Food Delivery")||session.getcategory().equals("Home Food")) {
+            l20.setVisibility(View.VISIBLE);
+        }
+        else{
+            l20.setVisibility(View.GONE);
+        }
 
+        l20.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(getActivity()!=null) {
+                    Fragment fragment = new AddMenuFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
+                }
+            }
+        });
+
+        l300.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(getActivity()!=null) {
+                    Fragment fragment = new PastOrders();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
+                }
+            }
+        });
 
         l2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -330,10 +405,34 @@ public class Profile extends Fragment {
                             .addToBackStack(null)
                             .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
                 }
+            }
+        });
 
+        l40.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                if(getActivity()!=null) {
+                    Fragment fragment = new RaiseRequest();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
+                }
+            }
+        });
 
+        l41.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                if(getActivity()!=null) {
+                    Fragment fragment = new PendingRequest();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
+                }
             }
         });
 

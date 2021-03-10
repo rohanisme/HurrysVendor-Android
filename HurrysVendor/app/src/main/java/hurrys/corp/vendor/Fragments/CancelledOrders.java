@@ -192,7 +192,7 @@ public class CancelledOrders extends Fragment {
                                         ) {
                                             @Override
                                             protected void populateViewHolder(hurrys.corp.vendor.Models.OrderDetails.ViewHolder viewHolder, OrderDetails1 orderDetails, int position) {
-                                                viewHolder.setDetails2(getContext(), orderDetails.Name, orderDetails.Price, orderDetails.Type, orderDetails.Qty, orderDetails.Image);
+                                                viewHolder.setDetails2(getContext(), orderDetails.Name, orderDetails.Price, orderDetails.Type, orderDetails.Qty, orderDetails.Image,orderDetails.Customised,orderDetails.CustomisedQty);
                                             }
 
                                             @Override

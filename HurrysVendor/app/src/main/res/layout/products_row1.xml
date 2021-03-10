@@ -27,7 +27,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="0.9">
 
             <TextView
                 android:id="@+id/name"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="0.9">
 
             <TextView
                 android:id="@+id/gender"
@@ -68,6 +68,21 @@
                 android:textColor="@color/colorBlack"/>
 
 
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/close"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="0.2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/close"/>
 
         </LinearLayout>
 

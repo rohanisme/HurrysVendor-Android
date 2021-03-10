@@ -85,14 +85,12 @@
         android:layout_marginTop="80dp"
         android:fontFamily="@font/cera_pro_bold"
         android:gravity="center"
-        android:text="Click the button below to start\nreceiving order"
+        android:text="Click the button below to start\nUploading Menu"
         android:textColor="#999999"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/f" />
-
-
 
     <Button
         android:id="@+id/go"

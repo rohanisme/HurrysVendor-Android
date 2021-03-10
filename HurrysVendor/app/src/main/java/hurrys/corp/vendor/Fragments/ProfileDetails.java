@@ -48,7 +48,7 @@ public class ProfileDetails extends Fragment {
     private ImageView doc1,doc2,doc3,doc4,doc5,doc6,doc7,doc8,back1,back2,back3;
     private LinearLayout stage1,stage2,stage3,z1,z2,z3,substage1,substage2,substage3;
     private ProgressBar progressBar;
-    private TextView dob,otime,ctime;
+    private TextView dob,otime,ctime,minimum;
     private TextView name,email,anumber,address,postcode,bankaccount,bnumber,bcnumber,bsortcode,bankname,businessname,baddress,bdescription,deliverytime,dname,vatcode,paddress;
     private TextView commision;
     private TextView gender,category;
@@ -113,6 +113,7 @@ public class ProfileDetails extends Fragment {
         address=v.findViewById(R.id.address);
         postcode=v.findViewById(R.id.postcode);
         bankaccount=v.findViewById(R.id.bankaccount);
+        minimum=v.findViewById(R.id.minimum);
         bnumber=v.findViewById(R.id.bnumber);
         bcnumber=v.findViewById(R.id.bcnumber);
         bsortcode=v.findViewById(R.id.bsortcode);
@@ -294,6 +295,9 @@ public class ProfileDetails extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
                             Users users=dataSnapshot.getValue(Users.class);
+
+                            if(dataSnapshot.child("MinimumOrder").exists())
+                                minimum.setText("\u00a3"+dataSnapshot.child("MinimumOrder").getValue().toString());
 
                             assert users != null;
                             name.setText(users.Name);

@@ -86,7 +86,7 @@ public class AddProducts_Edit extends Fragment {
     private ArrayList<String> sname1= new ArrayList<String>();
     private ArrayList<String> spushid= new ArrayList<String>();
     private ArrayList<String> category1 =new ArrayList<String>();
-
+    private  int temp=0;
     private BottomSheetDialog bottomSheetDialog;
 
     private ArrayList<String> subcategoryname= new ArrayList<String>();
@@ -94,6 +94,7 @@ public class AddProducts_Edit extends Fragment {
 
     private String a;
     private int selection=0;
+    int count = 0;
 
     private Session session;
     private Uri imageUri;
@@ -278,14 +279,74 @@ public class AddProducts_Edit extends Fragment {
             }
         });
 
+        v.setFocusableInTouchMode(true);
+        v.requestFocus();
+        v.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    if(temp==0) {
+                        temp++;
+                        if(getContext()!=null) {
+                            SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                                    .setTitleText("Are you sure you want to exit! Your data will not be saved")
+                                    .setConfirmText("Yes")
+                                    .setCancelText("No")
+                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            sweetAlertDialog.dismiss();
+                                            if (getActivity() != null)
+                                                getActivity().onBackPressed();
+                                        }
+                                    })
+                                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            sweetAlertDialog.dismiss();
+                                            temp = 0;
+                                        }
+                                    });
+
+                            sDialog.setCancelable(false);
+                            sDialog.show();
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+
         ImageView back = v.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().onBackPressed();
+                if(getContext()!=null) {
+                    SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Are you sure you want to exit! Your data will not be saved")
+                            .setConfirmText("Yes")
+                            .setCancelText("No")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                    if (getActivity() != null)
+                                        getActivity().onBackPressed();
+                                }
+                            })
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                }
+                            });
+
+                    sDialog.setCancelable(false);
+                    sDialog.show();
+                }
+
             }
         });
-
         FirebaseDatabase.getInstance().getReference().child("Vendor")
                 .child(session.getusername())
                 .child("SubCategory")
@@ -358,6 +419,8 @@ public class AddProducts_Edit extends Fragment {
             }
         });
 
+
+
         pushid=getArguments().getString("pushid");
 
         FirebaseDatabase.getInstance().getReference().child("Vendor")
@@ -368,8 +431,10 @@ public class AddProducts_Edit extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
                             for(DataSnapshot v:dataSnapshot.getChildren()){
-                                subcategoryname.add(v.child("Name").getValue().toString());
-                                subcategorypushid.add(v.child("PushId").getValue().toString());
+                                if(v.child("Name").exists()&&v.child("PushId").exists()) {
+                                    subcategoryname.add(v.child("Name").getValue().toString());
+                                    subcategorypushid.add(v.child("PushId").getValue().toString());
+                                }
                             }
 
                             if(getContext()!=null) {
@@ -507,6 +572,8 @@ public class AddProducts_Edit extends Fragment {
                     Toast.makeText(getContext(),"Select Product Category",Toast.LENGTH_LONG).show();
                     return;
                 }
+
+                session.settemp(""+(subcategorypushid.get(subcategoryname.indexOf(subcategory.getSelectedItem().toString()))));
 
                 FirebaseDatabase.getInstance().getReference().child("Vendor")
                         .child(session.getusername())
@@ -746,7 +813,6 @@ public class AddProducts_Edit extends Fragment {
                 mref.child("ItemDescription").setValue(details.getText().toString());
                 mref.child("ItemCategory").setValue(itemcategory.getSelectedItem().toString());
                 mref.child("SubCategory").setValue(subcategory.getSelectedItem().toString());
-                mref.child("ApprovalStatus").setValue("Pending");
                 mref.child("Status").setValue("Active");
                 mref.child("ItemImage1").setValue(path);
                 mref.child("ItemImage2").setValue(path2);
@@ -757,6 +823,9 @@ public class AddProducts_Edit extends Fragment {
                 mref.child("Seller").setValue(seller.getText().toString());
                 mref.child("ShellLife").setValue(shell.getText().toString());
                 mref.child("Manufacture").setValue(shell.getText().toString());
+
+                if(count>0)
+                    mref.child("ApprovalStatus").setValue("Pending");
 
                 mref.child("Weights").setValue(null);
 

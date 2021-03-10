@@ -35,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import hurrys.corp.vendor.Configurations.Session;
 import hurrys.corp.vendor.Models.Category.Category;
 import hurrys.corp.vendor.Models.Category.Sub;
@@ -58,7 +59,6 @@ public class InventoryFragment extends Fragment {
     private ArrayList<Inventory> inventories=new ArrayList<Inventory>();
     private InventoryAdapter inventoryAdapter;
     private InventoryAdapter1 inventoryAdapter1;
-    private FloatingActionButton plus;
 
     private LinearLayout l1,search_layout;
     private ImageView searchicon;
@@ -70,12 +70,11 @@ public class InventoryFragment extends Fragment {
     private SubCategory subCategoryAdapter;
 
     private LinearLayout offline;
-    private Button go;
+    private Button go,category,plus;
 
-    private LinearLayout z1,z2;
-    private LinearLayout l10,l11;
-    private TextView t1,t2;
-    private View s1,s2;
+    LinearLayout z1,z2,z3,header;
+    TextView t1,t2,t3;
+    View s1,s2,s3;
 
     public InventoryFragment() {
         // Required empty public constructor
@@ -107,18 +106,21 @@ public class InventoryFragment extends Fragment {
         }
 
 
-
-
-
-        z1=v.findViewById(R.id.z1);
-        z2=v.findViewById(R.id.z2);
-        t1=v.findViewById(R.id.t1);
-        t2=v.findViewById(R.id.t2);
-        s1=v.findViewById(R.id.s1);
-        s2=v.findViewById(R.id.s2);
+        z1 = v.findViewById(R.id.z1);
+        z2 = v.findViewById(R.id.z2);
+        z3 = v.findViewById(R.id.z3);
+        t1 = v.findViewById(R.id.t1);
+        t2 = v.findViewById(R.id.t2);
+        t3 = v.findViewById(R.id.t3);
+        s1 = v.findViewById(R.id.s1);
+        s2 = v.findViewById(R.id.s2);
+        s3 = v.findViewById(R.id.s3);
         plus=v.findViewById(R.id.plus);
+        category=v.findViewById(R.id.category);
         go=v.findViewById(R.id.go);
         offline=v.findViewById(R.id.offline);
+        header=v.findViewById(R.id.header);
+
 
         search=v.findViewById(R.id.txtSearch);
         clear=v.findViewById(R.id.clear);
@@ -135,11 +137,7 @@ public class InventoryFragment extends Fragment {
         inventoryAdapter=new InventoryAdapter(inventories);
         inventoryAdapter1=new InventoryAdapter1(inventories);
         recyclerView=v.findViewById(R.id.recyclerView);
-        l10=v.findViewById(R.id.l10);
-        l11=v.findViewById(R.id.l11);
 
-        l10.setVisibility(View.VISIBLE);
-        l11.setVisibility(View.GONE);
 
         t2.setTextColor(Color.parseColor("#00B246"));
         t1.setTextColor(Color.parseColor("#808080"));
@@ -148,35 +146,54 @@ public class InventoryFragment extends Fragment {
 
         session =new Session(getActivity());
 
-        loadproducts();
+        t1.setTextColor(Color.parseColor("#00B246"));
+        t2.setTextColor(Color.parseColor("#808080"));
+        t3.setTextColor(Color.parseColor("#808080"));
+        s1.setBackgroundColor(Color.parseColor("#00B246"));
+        s2.setBackgroundColor(Color.parseColor("#eaeaea"));
+        s3.setBackgroundColor(Color.parseColor("#eaeaea"));
+
+        loadApproved();
 
         z1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(session.getcategory().equals("Food Delivery")||session.getcategory().equals("Home Food")) {
-                        Toast.makeText(getContext(),"Add Category while adding products",Toast.LENGTH_LONG).show();
-                }
-                else {
-                    loadcategories();
-                    offline.setVisibility(View.GONE);
-                    t1.setTextColor(Color.parseColor("#00B246"));
-                    t2.setTextColor(Color.parseColor("#808080"));
-                    s1.setBackgroundColor(Color.parseColor("#00B246"));
-                    s2.setBackgroundColor(Color.parseColor("#eaeaea"));
-                }
+                t1.setTextColor(Color.parseColor("#00B246"));
+                t2.setTextColor(Color.parseColor("#808080"));
+                t3.setTextColor(Color.parseColor("#808080"));
+                s1.setBackgroundColor(Color.parseColor("#00B246"));
+                s2.setBackgroundColor(Color.parseColor("#eaeaea"));
+                s3.setBackgroundColor(Color.parseColor("#eaeaea"));
+                loadApproved();
             }
         });
 
         z2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadproducts();
                 t2.setTextColor(Color.parseColor("#00B246"));
                 t1.setTextColor(Color.parseColor("#808080"));
+                t3.setTextColor(Color.parseColor("#808080"));
                 s2.setBackgroundColor(Color.parseColor("#00B246"));
                 s1.setBackgroundColor(Color.parseColor("#eaeaea"));
+                s3.setBackgroundColor(Color.parseColor("#eaeaea"));
+                loadPending();
             }
         });
+
+        z3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                t3.setTextColor(Color.parseColor("#00B246"));
+                t2.setTextColor(Color.parseColor("#808080"));
+                t1.setTextColor(Color.parseColor("#808080"));
+                s3.setBackgroundColor(Color.parseColor("#00B246"));
+                s2.setBackgroundColor(Color.parseColor("#eaeaea"));
+                s1.setBackgroundColor(Color.parseColor("#eaeaea"));
+                loadRejected();
+            }
+        });
+
 
 
 
@@ -193,38 +210,51 @@ public class InventoryFragment extends Fragment {
                     }
                 }
                 else{
-                    Fragment fragment = new AddProducts();
-                    if(getActivity()!=null) {
-                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                        fragmentManager.beginTransaction()
-                                .addToBackStack(null)
-                                .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
-                    }
+                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername())
+                            .child("SubCategory").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.exists()){
+                                Fragment fragment = new AddProducts();
+                                if(getActivity()!=null) {
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    fragmentManager.beginTransaction()
+                                            .addToBackStack(null)
+                                            .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
+                                }
+                            }
+                            else{
+                                if(getContext()!=null) {
+                                    SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                                            .setTitleText("Alert!")
+                                            .setContentText("First create categories to add products!")
+                                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                @Override
+                                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                    sweetAlertDialog.dismiss();
+                                                }
+                                            });
+                                    sDialog.setCancelable(false);
+                                    sDialog.show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
                 }
             }
         });
 
-        go.setOnClickListener(new View.OnClickListener() {
+        category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(session.getcategory().equals("Food Delivery")||session.getcategory().equals("Home Food")) {
-                    Fragment fragment = new AddFoodItems();
-                    if(getActivity()!=null) {
-                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                        fragmentManager.beginTransaction()
-                                .addToBackStack(null)
-                                .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
-                    }
-                }
-                else{
-                    Fragment fragment = new AddProducts();
-                    if(getActivity()!=null) {
-                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                        fragmentManager.beginTransaction()
-                                .addToBackStack(null)
-                                .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
-                    }
-                }
+                loadcategories();
             }
         });
 
@@ -287,18 +317,13 @@ public class InventoryFragment extends Fragment {
             }
         });
 
-        if(session.getcategory().equals("Food Delivery")||session.getcategory().equals("Home Food")) {
-                l10.setVisibility(View.GONE);
-                l11.setVisibility(View.VISIBLE);
-        }
-
 
         return v;
     }
 
     public void loadcategories(){
 
-        plus.setVisibility(View.GONE);
+        header.setVisibility(View.GONE);
         subcategory.clear();
         subCategoryAdapter=new SubCategory(subcategory);
 
@@ -337,48 +362,75 @@ public class InventoryFragment extends Fragment {
 
     }
 
-    public void loadproducts(){
-        plus.setVisibility(View.VISIBLE);
+
+    public void loadApproved(){
+
+        inventories.clear();
+        inventoryAdapter = new InventoryAdapter(inventories);
+        recyclerView.setAdapter(inventoryAdapter);
+
         if(session.getcategory().equals("Food Delivery")||session.getcategory().equals("Home Food")) {
             FirebaseDatabase.getInstance().getReference().child("Vendor")
                     .child(session.getusername())
                     .child("Products")
                     .orderByChild("ApprovalStatus")
+                    .equalTo("Approved")
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
-                                inventories.clear();
                                 recyclerView.setVisibility(View.VISIBLE);
-                                offline.setVisibility(View.GONE);
-                                plus.setVisibility(View.VISIBLE);
                                 for (DataSnapshot v : dataSnapshot.getChildren()) {
                                     if (v.exists()) {
                                         String foodtype = "";
+                                        String a ="",b="",c="",d="",e="";
                                         if (v.child("FoodImage").exists())
                                             foodtype = v.child("FoodImage").getValue().toString();
+
+                                        if (v.child("ItemName").exists())
+                                            a = v.child("ItemName").getValue().toString();
+
+                                        if (v.child("PushId").exists())
+                                            b = v.child("PushId").getValue().toString();
+
+                                        if (v.child("Status").exists())
+                                            c = v.child("Status").getValue().toString();
+
+                                        String f ="";
+                                        if (v.child("Type").exists()) {
+                                            d = "Meal";
+                                            f = "Yes";
+                                        }
+
+                                        if (v.child("SellingPrice").exists())
+                                            e = v.child("SellingPrice").getValue().toString();
+
+                                        if(v.child("Portions").exists())
+                                            f="Yes";
+
+                                        if(v.child("Addons").exists())
+                                            f="Yes";
+
+
                                         inventories.add(new Inventory(
-                                                v.child("ItemName").getValue().toString(),
-                                                v.child("PushId").getValue().toString(),
-                                                v.child("Status").getValue().toString(),
+                                                a,
+                                                b,
+                                                c,
                                                 foodtype,
-                                                v.child("ApprovalStatus").getValue().toString(),
-                                                v.child("SellingPrice").getValue().toString(),
-                                                ""
+                                                "Approved",
+                                                e,
+                                                d,
+                                                f,
+                                                d
                                         ));
                                     }
                                 }
+
                                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
                                 recyclerView.setLayoutManager(mLayoutManager);
                                 inventoryAdapter = new InventoryAdapter(inventories);
                                 recyclerView.setAdapter(inventoryAdapter);
-                                plus.setVisibility(View.VISIBLE);
                                 recyclerView.setVisibility(View.VISIBLE);
-                            }
-                            else{
-                                recyclerView.setVisibility(View.GONE);
-                                offline.setVisibility(View.VISIBLE);
-                                plus.setVisibility(View.GONE);
                             }
                         }
 
@@ -393,14 +445,13 @@ public class InventoryFragment extends Fragment {
                     .child(session.getusername())
                     .child("Products")
                     .orderByChild("ApprovalStatus")
+                    .equalTo("Approved")
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
                                 inventories.clear();
                                 recyclerView.setVisibility(View.VISIBLE);
-                                offline.setVisibility(View.GONE);
-                                plus.setVisibility(View.VISIBLE);
                                 for (DataSnapshot v : dataSnapshot.getChildren()) {
                                     if (v.exists()) {
                                         String foodtype = "",featured="";
@@ -416,7 +467,9 @@ public class InventoryFragment extends Fragment {
                                                 foodtype,
                                                 v.child("ApprovalStatus").getValue().toString(),
                                                 "",
-                                                featured
+                                                featured,
+                                                "",
+                                                ""
                                         ));
                                     }
                                 }
@@ -424,15 +477,10 @@ public class InventoryFragment extends Fragment {
                                 recyclerView.setLayoutManager(mLayoutManager);
                                 inventoryAdapter1 = new InventoryAdapter1(inventories);
                                 recyclerView.setAdapter(inventoryAdapter1);
-                                plus.setVisibility(View.VISIBLE);
                                 recyclerView.setVisibility(View.VISIBLE);
-                                offline.setVisibility(View.GONE);
-                                plus.setVisibility(View.VISIBLE);
                             }
                             else{
                                 recyclerView.setVisibility(View.GONE);
-                                offline.setVisibility(View.VISIBLE);
-                                plus.setVisibility(View.GONE);
                             }
                         }
 
@@ -443,5 +491,336 @@ public class InventoryFragment extends Fragment {
                     });
 
         }
+
+    }
+
+    public void loadRejected(){
+        inventories.clear();
+        inventoryAdapter = new InventoryAdapter(inventories);
+        recyclerView.setAdapter(inventoryAdapter);
+
+        if(session.getcategory().equals("Food Delivery")||session.getcategory().equals("Home Food")) {
+            FirebaseDatabase.getInstance().getReference().child("Vendor")
+                    .child(session.getusername())
+                    .child("Products")
+                    .orderByChild("ApprovalStatus")
+                    .equalTo("Rejected")
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                for (DataSnapshot v : dataSnapshot.getChildren()) {
+                                    if (v.exists()) {
+                                        String foodtype = "";
+                                        String a ="",b="",c="",d="",e="";
+                                        if (v.child("FoodImage").exists())
+                                            foodtype = v.child("FoodImage").getValue().toString();
+
+                                        if (v.child("ItemName").exists())
+                                            a = v.child("ItemName").getValue().toString();
+
+                                        if (v.child("PushId").exists())
+                                            b = v.child("PushId").getValue().toString();
+
+                                        if (v.child("Status").exists())
+                                            c = v.child("Status").getValue().toString();
+
+                                        String f ="";
+                                        if (v.child("Type").exists()) {
+                                            d = "Meal";
+                                            f = "Yes";
+                                        }
+
+                                        if (v.child("SellingPrice").exists())
+                                            e = v.child("SellingPrice").getValue().toString();
+
+                                        if(v.child("Portions").exists())
+                                            f="Yes";
+
+                                        if(v.child("Addons").exists())
+                                            f="Yes";
+
+
+                                        inventories.add(new Inventory(
+                                                a,
+                                                b,
+                                                c,
+                                                foodtype,
+                                                "Approved",
+                                                e,
+                                                d,
+                                                f,
+                                                d
+                                        ));
+                                    }
+                                }
+                            }
+
+                            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                            recyclerView.setLayoutManager(mLayoutManager);
+                            inventoryAdapter = new InventoryAdapter(inventories);
+                            recyclerView.setAdapter(inventoryAdapter);
+                            recyclerView.setVisibility(View.VISIBLE);
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+        }
+        else{
+            FirebaseDatabase.getInstance().getReference().child("Vendor")
+                    .child(session.getusername())
+                    .child("Products")
+                    .orderByChild("ApprovalStatus")
+                    .equalTo("Rejected")
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                inventories.clear();
+                                recyclerView.setVisibility(View.VISIBLE);
+                                for (DataSnapshot v : dataSnapshot.getChildren()) {
+                                    if (v.exists()) {
+                                        String foodtype = "",featured="";
+                                        if (v.child("ItemImage1").exists())
+                                            foodtype = v.child("ItemImage1").getValue().toString();
+                                        if (v.child("Featured").exists())
+                                            featured = v.child("Featured").getValue().toString();
+
+                                        inventories.add(new Inventory(
+                                                v.child("ItemName").getValue().toString(),
+                                                v.child("PushId").getValue().toString(),
+                                                v.child("Status").getValue().toString(),
+                                                foodtype,
+                                                v.child("ApprovalStatus").getValue().toString(),
+                                                "",
+                                                featured,
+                                                "",
+                                                ""
+                                        ));
+                                    }
+                                }
+                                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                                recyclerView.setLayoutManager(mLayoutManager);
+                                inventoryAdapter1 = new InventoryAdapter1(inventories);
+                                recyclerView.setAdapter(inventoryAdapter1);
+                                recyclerView.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                recyclerView.setVisibility(View.GONE);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+        }
+    }
+
+    public void loadPending(){
+        inventories.clear();
+        inventoryAdapter = new InventoryAdapter(inventories);
+        recyclerView.setAdapter(inventoryAdapter);
+        if(session.getcategory().equals("Food Delivery")||session.getcategory().equals("Home Food")) {
+            FirebaseDatabase.getInstance().getReference().child("Vendor")
+                    .child(session.getusername())
+                    .child("Products")
+                    .orderByChild("ApprovalStatus")
+                    .equalTo("Pending")
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                recyclerView.setVisibility(View.VISIBLE);
+                                for (DataSnapshot v : dataSnapshot.getChildren()) {
+                                    if (v.exists()) {
+                                        String foodtype = "";
+                                        String a ="",b="",c="",d="",e="";
+                                        if (v.child("FoodImage").exists())
+                                            foodtype = v.child("FoodImage").getValue().toString();
+
+                                        if (v.child("ItemName").exists())
+                                            a = v.child("ItemName").getValue().toString();
+
+                                        if (v.child("PushId").exists())
+                                            b = v.child("PushId").getValue().toString();
+
+                                        if (v.child("Status").exists())
+                                            c = v.child("Status").getValue().toString();
+
+                                        String f ="";
+                                        if (v.child("Type").exists()) {
+                                            d = "Meal";
+                                            f = "Yes";
+                                        }
+
+                                        if (v.child("SellingPrice").exists())
+                                            e = v.child("SellingPrice").getValue().toString();
+
+                                        if(v.child("Portions").exists())
+                                            f="Yes";
+
+                                        if(v.child("Addons").exists())
+                                            f="Yes";
+
+
+                                        inventories.add(new Inventory(
+                                                a,
+                                                b,
+                                                c,
+                                                foodtype,
+                                                "Pending",
+                                                e,
+                                                d,
+                                                f,
+                                                d
+                                        ));
+                                    }
+                                }
+
+
+                                FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                        .child(session.getusername())
+                                        .child("Products")
+                                        .orderByChild("ApprovalStatus")
+                                        .equalTo("")
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                if (dataSnapshot.exists()) {
+                                                    for (DataSnapshot v : dataSnapshot.getChildren()) {
+                                                        if (v.exists()) {
+                                                            String foodtype = "";
+                                                            String a ="",b="",c="",d="",e="";
+                                                            if (v.child("FoodImage").exists())
+                                                                foodtype = v.child("FoodImage").getValue().toString();
+
+                                                            if (v.child("ItemName").exists())
+                                                                a = v.child("ItemName").getValue().toString();
+
+                                                            if (v.child("PushId").exists())
+                                                                b = v.child("PushId").getValue().toString();
+
+                                                            if (v.child("Status").exists())
+                                                                c = v.child("Status").getValue().toString();
+
+                                                            String f ="";
+                                                            if (v.child("Type").exists()) {
+                                                                d = "Meal";
+                                                                f = "Yes";
+                                                            }
+
+                                                            if (v.child("SellingPrice").exists())
+                                                                e = v.child("SellingPrice").getValue().toString();
+
+                                                            if(v.child("Portions").exists()) {
+                                                                f = "Yes";
+                                                                d = "Portions";
+                                                            }
+
+                                                            if(v.child("Addons").exists()) {
+                                                                f = "Yes";
+                                                                d = "Addons";
+                                                            }
+
+
+                                                            inventories.add(new Inventory(
+                                                                    a,
+                                                                    b,
+                                                                    c,
+                                                                    foodtype,
+                                                                    "Approved",
+                                                                    e,
+                                                                    d,
+                                                                    f,
+                                                                    d
+                                                            ));
+                                                        }
+                                                    }
+
+
+                                                }
+
+                                                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                                                recyclerView.setLayoutManager(mLayoutManager);
+                                                inventoryAdapter = new InventoryAdapter(inventories);
+                                                recyclerView.setAdapter(inventoryAdapter);
+                                                recyclerView.setVisibility(View.VISIBLE);
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+        }
+        else{
+            FirebaseDatabase.getInstance().getReference().child("Vendor")
+                    .child(session.getusername())
+                    .child("Products")
+                    .orderByChild("ApprovalStatus")
+                    .equalTo("Pending")
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                inventories.clear();
+                                recyclerView.setVisibility(View.VISIBLE);
+                                for (DataSnapshot v : dataSnapshot.getChildren()) {
+                                    if (v.exists()) {
+                                        String foodtype = "",featured="";
+                                        if (v.child("ItemImage1").exists())
+                                            foodtype = v.child("ItemImage1").getValue().toString();
+                                        if (v.child("Featured").exists())
+                                            featured = v.child("Featured").getValue().toString();
+
+                                        inventories.add(new Inventory(
+                                                v.child("ItemName").getValue().toString(),
+                                                v.child("PushId").getValue().toString(),
+                                                v.child("Status").getValue().toString(),
+                                                foodtype,
+                                                v.child("ApprovalStatus").getValue().toString(),
+                                                "",
+                                                featured,
+                                                "",
+                                                ""
+                                        ));
+                                    }
+                                }
+                                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                                recyclerView.setLayoutManager(mLayoutManager);
+                                inventoryAdapter1 = new InventoryAdapter1(inventories);
+                                recyclerView.setAdapter(inventoryAdapter1);
+                                recyclerView.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                recyclerView.setVisibility(View.GONE);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+        }
+
     }
 }

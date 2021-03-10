@@ -1,10 +1,13 @@
 package hurrys.corp.vendor.Fragments;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -20,6 +24,7 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +33,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ahmedelsayed.sunmiprinterutill.PrintMe;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -42,6 +48,7 @@ import com.google.firebase.database.annotations.Nullable;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -65,12 +72,12 @@ public class OrderDetailsFragment extends Fragment {
     private Session session;
     private RecyclerView mRecyclerView;
     private DatabaseReference mref;
-    private TextView orderid, date, daname, address, support;
+    private TextView orderid, date, daname, address, support,instructions;
     private LinearLayout deliveryrow,deliveryamountrow;
 
-    private TextView subtotal, discount, commision, delivery, grandtotal, status, number;
+    private TextView subtotal, discount, commision, delivery, grandtotal, status, number,deliverytype,slot,paymenttype,deliverytypetext;
 
-    private Button accpet, accpet1,accept2, ready, decline, delivered, dispatched;
+    private Button accpet, accpet1,accept2, ready, decline, delivered, dispatched,print;
     private double gtot = 0, dbalance = 0;
     private BottomSheetDialog bottomSheetDialog;
 
@@ -81,6 +88,8 @@ public class OrderDetailsFragment extends Fragment {
     CircleImageView pp;
     TextView deliveryname;
     ImageView call, openMenu;
+
+    private PrintMe printMe;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -103,12 +112,21 @@ public class OrderDetailsFragment extends Fragment {
         orderid = v.findViewById(R.id.orderid);
         date = v.findViewById(R.id.date);
 
+        printMe =  new PrintMe(getContext());
+
         daname = v.findViewById(R.id.daname);
         address = v.findViewById(R.id.address);
         support = v.findViewById(R.id.support);
         status = v.findViewById(R.id.status);
         dispatched = v.findViewById(R.id.dispatched);
         delivered = v.findViewById(R.id.delivered);
+        deliverytype=v.findViewById(R.id.delivertype);
+        paymenttype=v.findViewById(R.id.paymenttype);
+        instructions=v.findViewById(R.id.instructions);
+        print=v.findViewById(R.id.print);
+        slot=v.findViewById(R.id.slot);
+
+        print.setVisibility(View.GONE);
 
         subtotal = v.findViewById(R.id.subtotal);
         delivery = v.findViewById(R.id.delivery);
@@ -128,6 +146,7 @@ public class OrderDetailsFragment extends Fragment {
         call = v.findViewById(R.id.call);
         openMenu = v.findViewById(R.id.openMenu);
         number = v.findViewById(R.id.number);
+        deliverytypetext = v.findViewById(R.id.deliverytypetext);
 
 
         ImageView back = v.findViewById(R.id.back);
@@ -184,6 +203,49 @@ public class OrderDetailsFragment extends Fragment {
                                 selection = dataSnapshot.child("DeliverySelection").getValue().toString();
                             }
 
+                            if(dataSnapshot.child("Payment").exists()){
+                                paymenttype.setText(dataSnapshot.child("Payment").getValue().toString());
+                            }
+
+                            if(dataSnapshot.child("VendorInstructions").exists()){
+                                if(!TextUtils.isEmpty(dataSnapshot.child("VendorInstructions").getValue().toString()))
+                                    instructions.setText(dataSnapshot.child("VendorInstructions").getValue().toString());
+                                else
+                                    instructions.setText("No Special Instructions");
+                            }
+                            else
+                                instructions.setText("No Special Instructions");
+
+                            if(dataSnapshot.child("DeliverySelection").exists()){
+                                if(dataSnapshot.child("DeliverySelection").getValue().toString().equals("Self")){
+                                    deliverytype.setText("Self Delivery");
+                                }
+                                else if(dataSnapshot.child("DeliverySelection").getValue().toString().equals("Self PickUp")){
+                                    deliverytype.setText("Self Pickup");}
+                                else{
+                                    deliverytype.setText("Delivery By Hurrys");
+                                    }
+                            }
+
+                            if(dataSnapshot.child("DeliveryTime").exists()){
+                                if(dataSnapshot.child("DeliveryTime").getValue().toString().equals("Immediately")){
+                                    slot.setText("Immediately");
+                                }
+                                else{
+                                    try {
+                                        String a[] = dataSnapshot.child("DeliveryDate").getValue().toString().split("-");
+                                        slot.setText(dataSnapshot.child("DeliveryTime").getValue().toString() + " - " + a[2] +"/"+ a[1] +"/"+ a[0]);
+                                    }
+                                    catch (Exception e){
+                                        slot.setText(dataSnapshot.child("DeliveryTime").getValue().toString() + "\n" + dataSnapshot.child("DeliveryDate").getValue().toString());
+                                    }
+                                }
+                            }
+
+                            if (dataSnapshot.child("Status").getValue().toString().equals("1")) {
+                                deliverytype.setVisibility(View.GONE);
+                                deliverytypetext.setVisibility(View.GONE);
+                            }
 
                             double price = Double.parseDouble(subtotal.getText().toString().substring(1));
                             double del = Double.parseDouble(delivery.getText().toString().substring(1));
@@ -195,7 +257,7 @@ public class OrderDetailsFragment extends Fragment {
 
 
                             deliveryamountrow.setVisibility(View.GONE);
-                            double gtot = (price - tot );
+                            gtot = (price - tot );
 
                             if(selection.equals("Self")){
                                 gtot = gtot + del;
@@ -224,7 +286,8 @@ public class OrderDetailsFragment extends Fragment {
                                     ready.setVisibility(View.GONE);
                                     dispatched.setVisibility(View.GONE);
                                     delivered.setVisibility(View.GONE);
-                                } else if (dataSnapshot.child("Status").getValue().toString().equals("2")) {
+                                }
+                                else if (dataSnapshot.child("Status").getValue().toString().equals("2")) {
                                     ready.setVisibility(View.VISIBLE);
                                     decline.setVisibility(View.GONE);
                                     accpet.setVisibility(View.GONE);
@@ -232,7 +295,8 @@ public class OrderDetailsFragment extends Fragment {
                                     accpet1.setVisibility(View.GONE);
                                     dispatched.setVisibility(View.GONE);
                                     delivered.setVisibility(View.GONE);
-                                } else if (dataSnapshot.child("Status").getValue().toString().equals("3")) {
+                                }
+                                else if (dataSnapshot.child("Status").getValue().toString().equals("3")) {
                                     if (!TextUtils.isEmpty(selection)) {
                                         if (selection.equals("Self")) {
                                             ready.setVisibility(View.GONE);
@@ -244,7 +308,8 @@ public class OrderDetailsFragment extends Fragment {
                                             delivered.setVisibility(View.GONE);
                                         }
                                     }
-                                } else if (dataSnapshot.child("Status").getValue().toString().equals("4")) {
+                                }
+                                else if (dataSnapshot.child("Status").getValue().toString().equals("4")) {
                                     if (!TextUtils.isEmpty(selection)) {
                                         if (selection.equals("Self")||selection.equals("Self PickUp")) {
                                             ready.setVisibility(View.GONE);
@@ -256,7 +321,8 @@ public class OrderDetailsFragment extends Fragment {
                                             delivered.setVisibility(View.VISIBLE);
                                         }
                                     }
-                                } else {
+                                }
+                                else {
                                     ready.setVisibility(View.GONE);
                                     accpet.setVisibility(View.GONE);
                                     accept2.setVisibility(View.GONE);
@@ -283,26 +349,32 @@ public class OrderDetailsFragment extends Fragment {
                                 status.setText("PENDING");
                                 status.setTextColor(Color.parseColor("#b38400"));
                                 status.setBackgroundColor(Color.parseColor("#FFF0C5"));
+                                print.setVisibility(View.GONE);
                             } else if (dataSnapshot.child("Status").getValue().toString().equals("2")) {
                                 status.setText("PREPARING");
                                 status.setTextColor(Color.parseColor("#00B246"));
                                 status.setBackgroundColor(Color.parseColor("#e5f7ec"));
+                                print.setVisibility(View.VISIBLE);
                             } else if (dataSnapshot.child("Status").getValue().toString().equals("3")) {
                                 status.setText("READY TO DELIVERY");
                                 status.setTextColor(Color.parseColor("#00B246"));
                                 status.setBackgroundColor(Color.parseColor("#e5f7ec"));
+                                print.setVisibility(View.VISIBLE);
                             } else if (dataSnapshot.child("Status").getValue().toString().equals("4")) {
                                 status.setText("AWAITING DELIVERY");
                                 status.setTextColor(Color.parseColor("#00B246"));
                                 status.setBackgroundColor(Color.parseColor("#e5f7ec"));
+                                print.setVisibility(View.VISIBLE);
                             } else if (dataSnapshot.child("Status").getValue().toString().equals("5")) {
                                 status.setText("DELIVERED");
                                 status.setTextColor(Color.parseColor("#00B246"));
                                 status.setBackgroundColor(Color.parseColor("#e5f7ec"));
+                                print.setVisibility(View.VISIBLE);
                             } else if (dataSnapshot.child("Status").getValue().toString().equals("10")) {
                                 status.setText("CANCELLED");
                                 status.setTextColor(Color.parseColor("#FF0000"));
                                 status.setBackgroundColor(Color.parseColor("#F1B2B2"));
+                                print.setVisibility(View.GONE);
                             }
 
 
@@ -362,7 +434,7 @@ public class OrderDetailsFragment extends Fragment {
                                         ) {
                                             @Override
                                             protected void populateViewHolder(ViewHolder viewHolder, OrderDetails1 orderDetails, int position) {
-                                                viewHolder.setDetails2(getContext(), orderDetails.Name, orderDetails.Price, orderDetails.Type, orderDetails.Qty, orderDetails.Image);
+                                                viewHolder.setDetails2(getContext(), orderDetails.Name, orderDetails.Price, orderDetails.Type, orderDetails.Qty, orderDetails.Image,orderDetails.Customised,orderDetails.CustomisedQty);
                                             }
 
                                             @Override
@@ -482,6 +554,14 @@ public class OrderDetailsFragment extends Fragment {
             }
         });
 
+        print.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                printMe.sendViewToPrinter(v.findViewById(R.id.print_me_layout));
+//                Toast.makeText(getContext(),"Service Not Available",Toast.LENGTH_LONG).show();
+            }
+        });
+
         accpet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -495,13 +575,60 @@ public class OrderDetailsFragment extends Fragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Hurrys");
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
-                                    if (getActivity() != null)
-                                        getActivity().onBackPressed();
+
+                                    if(slot.getText().toString().equals("Immediately")){
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Hurrys");
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
+                                        session.setselection("On");
+                                        if (getActivity() != null)
+                                            getActivity().onBackPressed();
+                                    }
+                                    else {
+                                        final EditText editText = new EditText(getContext());
+                                        FrameLayout container1 = new FrameLayout(getActivity());
+                                        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                        params.leftMargin = getResources().getDimensionPixelSize(R.dimen.dialog_marginLeft);
+                                        params.rightMargin = getResources().getDimensionPixelSize(R.dimen.dialog_marginLeft);
+                                        params.topMargin = getResources().getDimensionPixelSize(R.dimen.dialog_margin);
+                                        params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.dialog_margin);
+                                        editText.setLayoutParams(params);
+                                        editText.setGravity(Gravity.CENTER);
+                                        container1.addView(editText);
+                                        editText.setText(session.getdeliverytime());
+                                        editText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                                        SweetAlertDialog dialog = new SweetAlertDialog(getContext(), SweetAlertDialog.NORMAL_TYPE)
+                                                .setTitleText("Please mention the delivery time in mins")
+                                                .setConfirmText("Ok")
+                                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                    @Override
+                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                                                        String reason = editText.getText().toString();
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Hurrys");
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliveryTimeSelected").setValue("" + reason);
+                                                        session.setselection("On");
+                                                        sweetAlertDialog.dismiss();
+                                                        if (getActivity() != null)
+                                                            getActivity().onBackPressed();
+
+                                                    }
+                                                })
+                                                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                    @Override
+                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                        sweetAlertDialog.dismiss();
+                                                    }
+                                                });
+                                        dialog.setCustomView(container1);
+                                        dialog.show();
+                                    }
 
                                 }
                             })
@@ -533,13 +660,59 @@ public class OrderDetailsFragment extends Fragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Self");
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
-                                    if (getActivity() != null)
-                                        getActivity().onBackPressed();
+
+                                    if(slot.getText().toString().equals("Immediately")){
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Self");
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
+                                        session.setselection("On");
+                                        if (getActivity() != null)
+                                            getActivity().onBackPressed();
+                                    }
+                                    else {
+                                        final EditText editText = new EditText(getContext());
+                                        FrameLayout container1 = new FrameLayout(getActivity());
+                                        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                        params.leftMargin = getResources().getDimensionPixelSize(R.dimen.dialog_marginLeft);
+                                        params.rightMargin = getResources().getDimensionPixelSize(R.dimen.dialog_marginLeft);
+                                        params.topMargin = getResources().getDimensionPixelSize(R.dimen.dialog_margin);
+                                        params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.dialog_margin);
+                                        editText.setLayoutParams(params);
+                                        editText.setGravity(Gravity.CENTER);
+                                        container1.addView(editText);
+                                        editText.setText(session.getdeliverytime());
+                                        editText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                                        SweetAlertDialog dialog = new SweetAlertDialog(getContext(), SweetAlertDialog.NORMAL_TYPE)
+                                                .setTitleText("Please mention the delivery time in mins")
+                                                .setConfirmText("Ok")
+                                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                    @Override
+                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                        String reason = editText.getText().toString();
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Self");
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliveryTimeSelected").setValue("" + reason);
+                                                        sweetAlertDialog.dismiss();
+                                                        session.setselection("On");
+                                                        if (getActivity() != null)
+                                                            getActivity().onBackPressed();
+
+                                                    }
+                                                })
+                                                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                    @Override
+                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                        sweetAlertDialog.dismiss();
+                                                    }
+                                                });
+                                        dialog.setCustomView(container1);
+                                        dialog.show();
+                                    }
 
                                 }
                             })
@@ -571,13 +744,63 @@ public class OrderDetailsFragment extends Fragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Self PickUp");
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
-                                    FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
-                                    if (getActivity() != null)
-                                        getActivity().onBackPressed();
+
+                                    if(slot.getText().toString().equals("Immediately")){
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Self PickUp");
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
+                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
+                                        session.setselection("On");
+                                        if (getActivity() != null)
+                                            getActivity().onBackPressed();
+                                    }
+                                    else {
+                                        final EditText editText = new EditText(getContext());
+                                        FrameLayout container1 = new FrameLayout(getActivity());
+                                        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                        params.leftMargin = getResources().getDimensionPixelSize(R.dimen.dialog_marginLeft);
+                                        params.rightMargin = getResources().getDimensionPixelSize(R.dimen.dialog_marginLeft);
+                                        params.topMargin = getResources().getDimensionPixelSize(R.dimen.dialog_margin);
+                                        params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.dialog_margin);
+                                        editText.setLayoutParams(params);
+                                        editText.setGravity(Gravity.CENTER);
+                                        container1.addView(editText);
+                                        editText.setText(session.getdeliverytime());
+                                        editText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                                        SweetAlertDialog dialog = new SweetAlertDialog(getContext(), SweetAlertDialog.NORMAL_TYPE)
+                                                .setTitleText("Please mention the delivery time in mins")
+                                                .setConfirmText("Ok")
+                                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                    @Override
+                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                                                        String reason = editText.getText().toString();
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Self PickUp");
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
+                                                        FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliveryTimeSelected").setValue("" + reason);
+                                                        session.setselection("On");
+                                                        sweetAlertDialog.dismiss();
+                                                        if (getActivity() != null)
+                                                            getActivity().onBackPressed();
+
+
+                                                    }
+                                                })
+                                                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                    @Override
+                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                        sweetAlertDialog.dismiss();
+                                                    }
+                                                });
+                                        dialog.setCustomView(container1);
+                                        dialog.show();
+                                    }
+
+
 
                                 }
                             })
@@ -606,6 +829,7 @@ public class OrderDetailsFragment extends Fragment {
                     SweetAlertDialog dialog = new SweetAlertDialog(getContext(), SweetAlertDialog.NORMAL_TYPE)
                             .setTitleText("Please mention the reason for rejection")
                             .setConfirmText("Ok")
+                            .setCancelText("Cancel")
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -636,8 +860,13 @@ public class OrderDetailsFragment extends Fragment {
                                     }
 
                                 }
+                            })
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                }
                             });
-
                     dialog.setCustomView(editText);
                     dialog.show();
                 }

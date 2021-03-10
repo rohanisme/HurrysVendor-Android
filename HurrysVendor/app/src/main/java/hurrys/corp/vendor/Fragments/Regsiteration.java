@@ -33,6 +33,7 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -87,6 +88,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import hurrys.corp.vendor.Activities.RegisterDetails;
@@ -103,14 +106,15 @@ public class Regsiteration extends Fragment {
         // Required empty public constructor
     }
 
-    private ImageView doc1,doc2,doc3,doc4,doc5,doc6,doc7,doc8,next,next1,register,back1,back2,back3,bi1,bi2,bi3,close1,close2,close3,close4,close5,close6,close7,close8;
+    private ImageView doc1,doc2,doc3,doc4,doc5,doc6,doc7,doc8,next,next1,register,back1,back3,bi1,bi2,bi3,close1,close2,close3,close4,close5,close6,close7,close8;
+    private LinearLayout back2;
     private TextView previous0,previous,previous1,bt1,bt2,bt3;
     private LinearLayout stage1,stage2,stage3,l1,l2,l3,progress,substage1,substage2,substage3;
     private ProgressBar progressBar;
     private TextView dob,otime,ctime;
     private EditText name,email,anumber,address,postcode,bankaccount,bnumber,bcnumber,bsortcode,bankname,businessname,baddress,bdescription,deliverytime,dname,vatcode;
-    private TextView paddress;
-    private TextView comments,commision;
+    private TextView paddress,deliveryinfo;
+    private TextView comments,commision,minimum;
     private Spinner gender,category;
     private Session session;
     private String path1="",path2="",path3="",path4="",path5="",path6="",path7="",path8="";
@@ -119,6 +123,8 @@ public class Regsiteration extends Fragment {
     private Button substagebtn1,substagebtn2,substagebtn3;
 
     private ImageView one,two,three,line1,line2;
+
+    TextView t1,t2,t3,t4,t5,t6,t7,t8;
 
     private ArrayList<String> gender1=new ArrayList<String>();
 
@@ -144,7 +150,6 @@ public class Regsiteration extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -178,6 +183,14 @@ public class Regsiteration extends Fragment {
         close6=v.findViewById(R.id.close6);
         close7=v.findViewById(R.id.close7);
         close8=v.findViewById(R.id.close8);
+        t1=v.findViewById(R.id.t1);
+        t2=v.findViewById(R.id.t2);
+        t3=v.findViewById(R.id.t3);
+        t4=v.findViewById(R.id.t4);
+        t5=v.findViewById(R.id.t5);
+        t6=v.findViewById(R.id.t6);
+        t7=v.findViewById(R.id.t7);
+        t8=v.findViewById(R.id.t8);
         l1=v.findViewById(R.id.l1);
         l2=v.findViewById(R.id.l2);
         l3=v.findViewById(R.id.l3);
@@ -186,6 +199,7 @@ public class Regsiteration extends Fragment {
         three=v.findViewById(R.id.three);
         line1=v.findViewById(R.id.line1);
         line2=v.findViewById(R.id.line2);
+        deliveryinfo=v.findViewById(R.id.deliveryinfo);
 
         country=v.findViewById(R.id.country);
 
@@ -217,6 +231,7 @@ public class Regsiteration extends Fragment {
         otime=v.findViewById(R.id.otime);
         ctime=v.findViewById(R.id.ctime);
         commision=v.findViewById(R.id.commision);
+        minimum=v.findViewById(R.id.minimum);
         deliverytime=v.findViewById(R.id.deliverytime);
         b1=v.findViewById(R.id.b1);
         b2=v.findViewById(R.id.b2);
@@ -253,6 +268,178 @@ public class Regsiteration extends Fragment {
         category1.add("Health & Wellness");
 
 
+        t1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tooltip tooltip = new Tooltip.Builder(t1)
+                        .setText("Upload a clear image showing profile photo")
+                        .setTextColor(Color.WHITE)
+                        .setBackgroundColor(Color.DKGRAY)
+                        .setGravity(Gravity.TOP)
+                        .setCornerRadius(8f)
+                        .show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        tooltip.dismiss();
+                    }
+                }, 3000);
+            }
+        });
+
+        deliveryinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tooltip tooltip = new Tooltip.Builder(deliveryinfo)
+                        .setText(""+Html.fromHtml("<p>Delivery Time = eg 40 min = 40 min <br/>1hr 30 min = 90 Min</p>"))
+                        .setTextColor(Color.WHITE)
+                        .setBackgroundColor(Color.DKGRAY)
+                        .setGravity(Gravity.TOP)
+                        .setCornerRadius(8f)
+                        .show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        tooltip.dismiss();
+                    }
+                }, 3000);
+            }
+        });
+
+        t2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tooltip tooltip = new Tooltip.Builder(t2)
+                        .setText("National ID card/Passport")
+                        .setTextColor(Color.WHITE)
+                        .setBackgroundColor(Color.DKGRAY)
+                        .setGravity(Gravity.TOP)
+                        .setCornerRadius(8f)
+                        .show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        tooltip.dismiss();
+                    }
+                }, 3000);
+            }
+        });
+
+
+        t3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tooltip tooltip = new Tooltip.Builder(t3)
+                        .setText("Any bill dated with in the last 6 months")
+                        .setTextColor(Color.WHITE)
+                        .setBackgroundColor(Color.DKGRAY)
+                        .setGravity(Gravity.TOP)
+                        .setCornerRadius(8f)
+                        .show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        tooltip.dismiss();
+                    }
+                }, 3000);
+            }
+        });
+
+        t4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tooltip tooltip = new Tooltip.Builder(t4)
+                        .setText("Upload a clear image of your brand as it will be displayed on your shop")
+                        .setTextColor(Color.WHITE)
+                        .setBackgroundColor(Color.DKGRAY)
+                        .setGravity(Gravity.TOP)
+                        .setCornerRadius(8f)
+                        .show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        tooltip.dismiss();
+                    }
+                }, 3000);
+            }
+        });
+
+        t5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tooltip tooltip = new Tooltip.Builder(t5)
+                        .setText("Statement Dated within last 6 months")
+                        .setTextColor(Color.WHITE)
+                        .setBackgroundColor(Color.DKGRAY)
+                        .setGravity(Gravity.TOP)
+                        .setCornerRadius(8f)
+                        .show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        tooltip.dismiss();
+                    }
+                }, 3000);
+            }
+        });
+
+        t6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tooltip tooltip = new Tooltip.Builder(t6)
+                        .setText("Upload a clear image showing a validity document")
+                        .setTextColor(Color.WHITE)
+                        .setBackgroundColor(Color.DKGRAY)
+                        .setGravity(Gravity.TOP)
+                        .setCornerRadius(8f)
+                        .show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        tooltip.dismiss();
+                    }
+                }, 3000);
+            }
+        });
+
+
+        t7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tooltip tooltip = new Tooltip.Builder(t7)
+                        .setText("Upload a clear image showing Food License Number and validity")
+                        .setTextColor(Color.WHITE)
+                        .setBackgroundColor(Color.DKGRAY)
+                        .setGravity(Gravity.TOP)
+                        .setCornerRadius(8f)
+                        .show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        tooltip.dismiss();
+                    }
+                }, 3000);
+            }
+        });
+
+        t8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tooltip tooltip = new Tooltip.Builder(t8)
+                        .setText("Upload a clear image showing signature")
+                        .setTextColor(Color.WHITE)
+                        .setBackgroundColor(Color.DKGRAY)
+                        .setGravity(Gravity.TOP)
+                        .setCornerRadius(8f)
+                        .show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        tooltip.dismiss();
+                    }
+                }, 3000);
+            }
+        });
 
         if(getContext()!=null){
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.spinner , category1);
@@ -442,7 +629,7 @@ public class Regsiteration extends Fragment {
             }
         });
 
-        if(!TextUtils.isEmpty(session.getaddress())&&session.gettemp().equals("Location"))
+        if(!TextUtils.isEmpty(session.getaddress())&&session.gettemp().equals("Location")||TextUtils.isEmpty(session.getaddress())&&session.gettemp().equals("Location"))
         {
             stage1.setVisibility(View.GONE);
             stage2.setVisibility(View.GONE);
@@ -451,9 +638,7 @@ public class Regsiteration extends Fragment {
             substage2.setVisibility(View.VISIBLE);
             substage3.setVisibility(View.GONE);
             progress.setVisibility(View.GONE);
-            paddress.setText(session.getaddress());
         }
-
 
         v.setFocusableInTouchMode(true);
         v.requestFocus();
@@ -1008,6 +1193,7 @@ public class Regsiteration extends Fragment {
                                 substage3.setVisibility(View.GONE);
                                 progress.setVisibility(View.GONE);
                                 paddress.setText(session.getaddress());
+                                session.settemp("");
                             }
 
                             path1=users.Doc1;
@@ -1142,9 +1328,13 @@ public class Regsiteration extends Fragment {
                     return;
                 }
 
-//                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+//                final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+//                Pattern pattern;
+//                Matcher matcher;
+//                pattern = Pattern.compile(EMAIL_PATTERN);
+//                matcher = pattern.matcher(email.getText().toString());
 //
-//                if (!email.getText().toString().matches(emailPattern))
+//                if (matcher.matches())
 //                {
 //                    email.setError("Enter Valid EmailId");
 //                    email.requestFocus();
@@ -1170,7 +1360,7 @@ public class Regsiteration extends Fragment {
                 mref.child("Gender").setValue(gender.getSelectedItem().toString());
                 mref.child("Email").setValue(email.getText().toString());
                 mref.child("MobileNumber").setValue(session.getnumber());
-                mref.child("AlternateNumber").setValue(anumber.getText().toString());
+                mref.child("AlternateNumber").setValue(country.getSelectedCountryCodeWithPlus()+anumber.getText().toString());
                 mref.child("Address").setValue(address.getText().toString());
                 mref.child("PostCode").setValue(postcode.getText().toString());
 
@@ -1453,11 +1643,19 @@ public class Regsiteration extends Fragment {
                     return;
                 }
 
+                if(bnumber.getText().toString().length()!=8){
+                    bnumber.setError("Please enter 8 Digits Account Number");
+                    bnumber.requestFocus();
+                    return;
+                }
+
                 if(!bnumber.getText().toString().equals(bcnumber.getText().toString())){
                     bcnumber.setError("Account Number and Confirm Account Number doesn't match");
                     bcnumber.requestFocus();
                     return;
                 }
+
+
 
 
                 if(TextUtils.isEmpty(bsortcode.getText().toString())){
@@ -1514,11 +1712,11 @@ public class Regsiteration extends Fragment {
                     return;
                 }
 
-                if(TextUtils.isEmpty(vatcode.getText().toString())){
-                    vatcode.setError("Enter VAT Code");
-                    vatcode.requestFocus();
-                    return;
-                }
+//                if(TextUtils.isEmpty(vatcode.getText().toString())){
+//                    vatcode.setError("Enter VAT Code");
+//                    vatcode.requestFocus();
+//                    return;
+//                }
 
                 if(TextUtils.isEmpty(baddress.getText().toString())){
                     baddress.setError("Enter Business Address");
@@ -1582,15 +1780,17 @@ public class Regsiteration extends Fragment {
                     return;
                 }
 
-                if(Double.parseDouble(deliverytime.getText().toString())<=60&&Double.parseDouble(deliverytime.getText().toString())>=10){
+                if(Double.parseDouble(deliverytime.getText().toString())>=60&&Double.parseDouble(deliverytime.getText().toString())<=10){
                     deliverytime.setError("Enter Time Between 10-60 Mins");
                     deliverytime.requestFocus();
+                    return;
                 }
 
                 DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername());
                 mref.child("StoreOpenTime").setValue(otime.getText().toString());
                 mref.child("StoreCloseTime").setValue(ctime.getText().toString());
                 mref.child("Commission").setValue(commision.getText().toString());
+                mref.child("MinimumOrder").setValue(minimum.getText().toString());
                 mref.child("DeliveryTime").setValue(deliverytime.getText().toString());
 
                 stage1.setVisibility(View.GONE);
@@ -1666,9 +1866,13 @@ public class Regsiteration extends Fragment {
                     return;
                 }
 
-//                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+//                final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+//                Pattern pattern;
+//                Matcher matcher;
+//                pattern = Pattern.compile(EMAIL_PATTERN);
+//                matcher = pattern.matcher(email.getText().toString());
 //
-//                if (!email.getText().toString().matches(emailPattern))
+//                if (matcher.matches())
 //                {
 //                    email.setError("Enter Valid EmailId");
 //                    email.requestFocus();
@@ -1700,17 +1904,26 @@ public class Regsiteration extends Fragment {
                     return;
                 }
 
+
                 if(TextUtils.isEmpty(bcnumber.getText().toString())){
                     bcnumber.setError("Enter Confirm Bank Account Number");
                     bcnumber.requestFocus();
                     return;
                 }
 
+                if(bnumber.getText().toString().length()!=8){
+                    bnumber.setError("Please enter 8 Digits Account Number");
+                    bnumber.requestFocus();
+                    return;
+                }
+
+
                 if(!bnumber.getText().toString().equals(bcnumber.getText().toString())){
                     bcnumber.setError("Account Number and Confirm Account Number doesn't match");
                     bcnumber.requestFocus();
                     return;
                 }
+
 
 
                 if(TextUtils.isEmpty(bsortcode.getText().toString())){
@@ -1743,15 +1956,15 @@ public class Regsiteration extends Fragment {
                     return;
                 }
                 if(TextUtils.isEmpty(path5)){
-                    Toast.makeText(getContext(),"Upload Insurance",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Upload Food/Shop License",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(TextUtils.isEmpty(path6)){
-                    Toast.makeText(getContext(),"Upload Vehicle Registration Certificate",Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if(TextUtils.isEmpty(path6)){
+//                    Toast.makeText(getContext(),"Upload Vehicle Registration Certificate",Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
                 if(TextUtils.isEmpty(path7)){
-                    Toast.makeText(getContext(),"Upload Driving License",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Upload Brand Logo",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -1778,7 +1991,7 @@ public class Regsiteration extends Fragment {
                                     mref.child("Gender").setValue(gender.getSelectedItem().toString());
                                     mref.child("Email").setValue(email.getText().toString());
                                     mref.child("MobileNumber").setValue(session.getnumber());
-                                    mref.child("AlternateNumber").setValue(anumber.getText().toString());
+                                    mref.child("AlternateNumber").setValue(country.getSelectedCountryCodeWithPlus()+anumber.getText().toString());
                                     mref.child("Address").setValue(address.getText().toString());
                                     mref.child("PostCode").setValue(postcode.getText().toString());
                                     mref.child("AccountName").setValue( bankaccount.getText().toString());
@@ -1803,7 +2016,7 @@ public class Regsiteration extends Fragment {
                                     if(getContext()!=null) {
                                         new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
                                                 .setTitleText("Submitted Successfully!")
-                                                .setContentText("Hurrys will contact u within 24hours!")
+                                                .setContentText("Hurrys will contact you within 24hours!")
                                                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                                     @Override
                                                     public void onClick(SweetAlertDialog sweetAlertDialog) {

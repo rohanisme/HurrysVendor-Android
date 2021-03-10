@@ -13,6 +13,7 @@
        android:layout_height="wrap_content"
        android:layout_marginTop="16dp"
        android:layout_marginStart="16dp"
+       android:layout_marginEnd="16dp"
        android:orientation="horizontal"
        android:weightSum="2">
 
@@ -42,7 +43,6 @@
                android:layout_width="match_parent"
                android:layout_height="match_parent"
                android:text="DELETE"
-               android:paddingEnd="16dp"
                android:gravity="right"
                android:textColor="#FF0000"
                android:fontFamily="@font/cera_pro_medium"
@@ -58,6 +58,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
         android:weightSum="2">
@@ -67,7 +69,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginStart="16dp"
             android:orientation="vertical"
             android:layout_weight="1">
 
@@ -101,7 +102,7 @@
             android:gravity="center"
             android:layout_marginStart="16dp"
             android:orientation="vertical"
-            android:layout_weight="0.7">
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="match_parent"
@@ -133,6 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
+            android:visibility="gone"
             android:layout_weight="0.2">
 
             <ImageView
@@ -153,7 +155,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/landmark"
-        android:layout_margin="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="32dp"
         android:background="#00b246"
         android:text="UPDATE"
         android:fontFamily="@font/cera_pro_bold"

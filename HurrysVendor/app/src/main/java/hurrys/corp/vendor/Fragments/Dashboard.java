@@ -53,9 +53,9 @@ public class Dashboard extends Fragment {
 
     private Session sessions;
 
-    private LinearLayout z1,z2,offline,online,onlinepast;
-    private TextView t1,t2,earnings,earnings1,earnings2,paymentdate,paymentdate1;
-    private View s1,s2;
+    private LinearLayout z1,z2,z3,offline,online,onlinepast;
+    private TextView t1,t2,t3,earnings,earnings1,earnings2,paymentdate,paymentdate1;
+    private View s1,s2,s3;
     private Button go;
     private RecyclerView recyclerView;
 
@@ -92,10 +92,13 @@ public class Dashboard extends Fragment {
 
         z1=v.findViewById(R.id.z1);
         z2=v.findViewById(R.id.z2);
+        z3=v.findViewById(R.id.z3);
         t1=v.findViewById(R.id.t1);
         t2=v.findViewById(R.id.t2);
+        t3=v.findViewById(R.id.t3);
         s1=v.findViewById(R.id.s1);
         s2=v.findViewById(R.id.s2);
+        s3=v.findViewById(R.id.s3);
         go=v.findViewById(R.id.go);
         offline=v.findViewById(R.id.offline);
         online=v.findViewById(R.id.online);
@@ -118,10 +121,15 @@ public class Dashboard extends Fragment {
         mLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(mLayoutManager);
 
-        t1.setTextColor(Color.parseColor("#00B246"));
-        t2.setTextColor(Color.parseColor("#808080"));
-        s1.setBackgroundColor(Color.parseColor("#00B246"));
-        s2.setBackgroundColor(Color.parseColor("#eaeaea"));
+//        t1.setTextColor(Color.parseColor("#00B246"));
+//        t2.setTextColor(Color.parseColor("#808080"));
+//        t3.setTextColor(Color.parseColor("#808080"));
+//        s1.setBackgroundColor(Color.parseColor("#00B246"));
+//        s2.setBackgroundColor(Color.parseColor("#eaeaea"));
+//        s3.setBackgroundColor(Color.parseColor("#eaeaea"));
+
+
+
 
 
         z1.setOnClickListener(new View.OnClickListener() {
@@ -136,11 +144,13 @@ public class Dashboard extends Fragment {
                     offline.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
                 }
-
+                sessions.setselection("New");
                 t1.setTextColor(Color.parseColor("#00B246"));
                 t2.setTextColor(Color.parseColor("#808080"));
+                t3.setTextColor(Color.parseColor("#808080"));
                 s1.setBackgroundColor(Color.parseColor("#00B246"));
                 s2.setBackgroundColor(Color.parseColor("#eaeaea"));
+                s3.setBackgroundColor(Color.parseColor("#eaeaea"));
 
 
             }
@@ -154,13 +164,32 @@ public class Dashboard extends Fragment {
                 loadpast();
                 offline.setVisibility(View.GONE);
 
+                sessions.setselection("Past");
                 t2.setTextColor(Color.parseColor("#00B246"));
                 t1.setTextColor(Color.parseColor("#808080"));
+                t3.setTextColor(Color.parseColor("#808080"));
                 s2.setBackgroundColor(Color.parseColor("#00B246"));
                 s1.setBackgroundColor(Color.parseColor("#eaeaea"));
+                s3.setBackgroundColor(Color.parseColor("#eaeaea"));
             }
         });
 
+        z3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                recyclerView.setVisibility(View.VISIBLE);
+                loadOngoing();
+                offline.setVisibility(View.GONE);
+                sessions.setselection("On");
+                t3.setTextColor(Color.parseColor("#00B246"));
+                t1.setTextColor(Color.parseColor("#808080"));
+                t2.setTextColor(Color.parseColor("#808080"));
+                s3.setBackgroundColor(Color.parseColor("#00B246"));
+                s1.setBackgroundColor(Color.parseColor("#eaeaea"));
+                s2.setBackgroundColor(Color.parseColor("#eaeaea"));
+            }
+        });
 
 
         FirebaseDatabase.getInstance().getReference().child("Vendor").child(sessions.getusername())
@@ -174,11 +203,99 @@ public class Dashboard extends Fragment {
                                 recyclerView.setVisibility(View.VISIBLE);
                                 load();
                                 offline.setVisibility(View.GONE);
+                                if(sessions.getselection().equals("New")){
+                                    if(sessions.getstatus().equals("Active")){
+                                        recyclerView.setVisibility(View.VISIBLE);
+                                        load();
+                                        offline.setVisibility(View.GONE);
+                                    }
+                                    else{
+                                        offline.setVisibility(View.VISIBLE);
+                                        recyclerView.setVisibility(View.GONE);
+                                    }
+                                    sessions.setselection("New");
+                                    t1.setTextColor(Color.parseColor("#00B246"));
+                                    t2.setTextColor(Color.parseColor("#808080"));
+                                    t3.setTextColor(Color.parseColor("#808080"));
+                                    s1.setBackgroundColor(Color.parseColor("#00B246"));
+                                    s2.setBackgroundColor(Color.parseColor("#eaeaea"));
+                                    s3.setBackgroundColor(Color.parseColor("#eaeaea"));
+                                }
+                                else if(sessions.getselection().equals("On")){
+
+                                    recyclerView.setVisibility(View.VISIBLE);
+                                    loadOngoing();
+                                    offline.setVisibility(View.GONE);
+
+                                    t3.setTextColor(Color.parseColor("#00B246"));
+                                    t1.setTextColor(Color.parseColor("#808080"));
+                                    t2.setTextColor(Color.parseColor("#808080"));
+                                    s3.setBackgroundColor(Color.parseColor("#00B246"));
+                                    s1.setBackgroundColor(Color.parseColor("#eaeaea"));
+                                    s2.setBackgroundColor(Color.parseColor("#eaeaea"));
+
+                                }
+                                else if(sessions.getselection().equals("Past")){
+                                    recyclerView.setVisibility(View.VISIBLE);
+                                    loadpast();
+                                    offline.setVisibility(View.GONE);
+
+                                    t2.setTextColor(Color.parseColor("#00B246"));
+                                    t1.setTextColor(Color.parseColor("#808080"));
+                                    t3.setTextColor(Color.parseColor("#808080"));
+                                    s2.setBackgroundColor(Color.parseColor("#00B246"));
+                                    s1.setBackgroundColor(Color.parseColor("#eaeaea"));
+                                    s3.setBackgroundColor(Color.parseColor("#eaeaea"));
+                                }
                             }
                             else{
                                 sessions.setstatus("InActive");
                                 offline.setVisibility(View.VISIBLE);
                                 recyclerView.setVisibility(View.GONE);
+                                if(sessions.getselection().equals("New")){
+                                    if(sessions.getstatus().equals("Active")){
+                                        recyclerView.setVisibility(View.VISIBLE);
+                                        load();
+                                        offline.setVisibility(View.GONE);
+                                    }
+                                    else{
+                                        offline.setVisibility(View.VISIBLE);
+                                        recyclerView.setVisibility(View.GONE);
+                                    }
+                                    sessions.setselection("New");
+                                    t1.setTextColor(Color.parseColor("#00B246"));
+                                    t2.setTextColor(Color.parseColor("#808080"));
+                                    t3.setTextColor(Color.parseColor("#808080"));
+                                    s1.setBackgroundColor(Color.parseColor("#00B246"));
+                                    s2.setBackgroundColor(Color.parseColor("#eaeaea"));
+                                    s3.setBackgroundColor(Color.parseColor("#eaeaea"));
+                                }
+                                else if(sessions.getselection().equals("On")){
+
+                                    recyclerView.setVisibility(View.VISIBLE);
+                                    loadOngoing();
+                                    offline.setVisibility(View.GONE);
+
+                                    t3.setTextColor(Color.parseColor("#00B246"));
+                                    t1.setTextColor(Color.parseColor("#808080"));
+                                    t2.setTextColor(Color.parseColor("#808080"));
+                                    s3.setBackgroundColor(Color.parseColor("#00B246"));
+                                    s1.setBackgroundColor(Color.parseColor("#eaeaea"));
+                                    s2.setBackgroundColor(Color.parseColor("#eaeaea"));
+
+                                }
+                                else if(sessions.getselection().equals("Past")){
+                                    recyclerView.setVisibility(View.VISIBLE);
+                                    loadpast();
+                                    offline.setVisibility(View.GONE);
+
+                                    t2.setTextColor(Color.parseColor("#00B246"));
+                                    t1.setTextColor(Color.parseColor("#808080"));
+                                    t3.setTextColor(Color.parseColor("#808080"));
+                                    s2.setBackgroundColor(Color.parseColor("#00B246"));
+                                    s1.setBackgroundColor(Color.parseColor("#eaeaea"));
+                                    s3.setBackgroundColor(Color.parseColor("#eaeaea"));
+                                }
                             }
                         }
                     }
@@ -424,7 +541,7 @@ public class Dashboard extends Fragment {
                 ) {
                     @Override
                     protected void populateViewHolder(ViewHolder viewHolder, hurrys.corp.vendor.Models.Orders.Orders order, int position) {
-                        viewHolder.setDetails(getContext(),order.CName,order.Address,order.Subtotal,order.Pushid,order.OrderNo,order.OrderDateTime,order.Qty,order.Payment,order.Status,order.DeliveryPartner,order.DeliveryNumber,order.DeliveryImage,order.Taxes,order.DeliveryCharges,order.DeliverySelection);
+                        viewHolder.setDetails(getContext(),order.CName,order.Address,order.Subtotal,order.Pushid,order.OrderNo,order.OrderDateTime,order.Qty,order.Payment,order.Status,order.DeliveryName,order.DeliveryNumber,order.DeliveryImage,order.Taxes,order.DeliveryCharges,order.DeliverySelection);
                     }
 
                     @Override
@@ -490,6 +607,86 @@ public class Dashboard extends Fragment {
         recyclerView.setVisibility(View.VISIBLE);
 
 }
+
+    public void loadOngoing(){
+
+        final Query firebasequery = FirebaseDatabase.getInstance().getReference().child("Orders").orderByChild("SellerStatus").equalTo(sessions.getusername());
+
+        final FirebaseRecyclerAdapter<hurrys.corp.vendor.Models.Orders.Orders, ViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<hurrys.corp.vendor.Models.Orders.Orders, ViewHolder>(
+                        hurrys.corp.vendor.Models.Orders.Orders.class,
+                        R.layout.new_orders_row,
+                        ViewHolder.class,
+                        firebasequery
+                ) {
+                    @Override
+                    protected void populateViewHolder(ViewHolder viewHolder, hurrys.corp.vendor.Models.Orders.Orders order, int position) {
+                        viewHolder.setDetailsOngoing(getContext(),order.CName,order.Address,order.Subtotal,order.Pushid,order.OrderNo,order.OrderDateTime,order.Qty,order.Payment,order.Status,order.DeliveryName,order.DeliveryNumber,order.DeliveryImage,order.Taxes,order.DeliveryCharges,order.DeliverySelection);
+                    }
+
+                    @Override
+                    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                        ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
+                        viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                            @Override
+                            public void onItemClick(View v, int position) {
+
+
+                                TextView number=v.findViewById(R.id.number);
+
+                                ImageView call=v.findViewById(R.id.call);
+
+                                call.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                                        intent.setData(Uri.parse("tel:"+number.getText().toString()));
+                                        startActivity(intent);
+                                    }
+                                });
+
+                                TextView pushid = v.findViewById(R.id.pushid);
+                                Bundle bundle = new Bundle();
+                                Fragment fragment = new OrderDetailsFragment();
+                                bundle.putString("pushid", pushid.getText().toString());
+                                fragment.setArguments(bundle);
+                                if(getActivity()!=null) {
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    fragmentManager.beginTransaction()
+                                            .addToBackStack(null)
+                                            .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
+                                }
+
+                            }
+
+                            @Override
+                            public void onItemLongClick(View v, int position) {
+
+                            }
+                        });
+                        return viewHolder;
+                    }
+
+                    @Override
+                    protected void onDataChanged() {
+                        super.onDataChanged();
+                        if(getItemCount()==0){
+                            onlinepast.setVisibility(View.GONE);
+                            online.setVisibility(View.VISIBLE);
+                            offline.setVisibility(View.GONE);
+                        }
+                        else{
+                            onlinepast.setVisibility(View.GONE);
+                            online.setVisibility(View.GONE);
+                            offline.setVisibility(View.GONE);
+                        }
+                    }
+                };
+
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
+        recyclerView.setVisibility(View.VISIBLE);
+
+    }
 
     public void loadpast(){
 

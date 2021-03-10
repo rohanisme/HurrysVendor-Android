@@ -18,14 +18,14 @@ public class Orders {
     public String Address;
     public String Qty;
     public String Payment;
-    public String DeliveryPartner;
+    public String DeliveryName;
     public String DeliveryNumber;
     public String DeliveryImage;
     public String DeliverySelection;
 
     public  Orders(){}
 
-    public Orders(String OrderNo,String ItemDetails,String Pushid,String OrderDateTime,String Status,String SellerCommission,String Subtotal,String DeliveryCharges,String Seller,String OrderType,String VendorCustomer,String CName,String Address,String Qty,String Payment,String DeliveryPartner,String DeliveryNumber,String DeliveryImage,String Taxes,String DeliverySelection){
+    public Orders(String OrderNo,String ItemDetails,String Pushid,String OrderDateTime,String Status,String SellerCommission,String Subtotal,String DeliveryCharges,String Seller,String OrderType,String VendorCustomer,String CName,String Address,String Qty,String Payment,String DeliveryName,String DeliveryNumber,String DeliveryImage,String Taxes,String DeliverySelection){
         this.OrderDateTime=OrderDateTime;
         this.ItemsDetails=ItemDetails;
         this.Pushid=Pushid;
@@ -41,7 +41,7 @@ public class Orders {
         this.Address=Address;
         this.Qty=Qty;
         this.Payment=Payment;
-        this.DeliveryPartner=DeliveryPartner;
+        this.DeliveryName=DeliveryName;
         this.DeliveryNumber=DeliveryNumber;
         this.DeliveryImage=DeliveryImage;
         this.Taxes=Taxes;

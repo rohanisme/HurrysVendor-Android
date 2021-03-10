@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
@@ -68,6 +68,34 @@
 
                     <View
                         android:id="@+id/s1"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="4dp"
+                        android:background="#eaeaea"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/z3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/t3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ongoing Orders"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/colorDarkgrey"
+                        android:textSize="14dp"
+                        android:fontFamily="@font/cera_pro_medium"/>
+
+                    <View
+                        android:id="@+id/s3"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_marginTop="4dp"
