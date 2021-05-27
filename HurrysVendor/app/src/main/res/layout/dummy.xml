@@ -14,16 +14,36 @@
         android:background="#ffffff"
         >
 
-        <ImageView
-            android:layout_margin="16dp"
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/logo"
-            />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_margin="16dp"
+                android:id="@+id/imageView"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:src="@drawable/hurrysicon_black"
+                />
+
+            <ImageView
+                android:id="@+id/imageVie45w"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:src="@drawable/logoblack"
+                />
+
+        </LinearLayout>
+
+
 
         <TextView
+            android:id="@+id/pstorename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Wingstop Shop"
@@ -48,6 +68,7 @@
             android:textColor="#ffffff"
             />
         <TextView
+            android:id="@+id/porderid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="#5500"
@@ -58,6 +79,7 @@
             android:textColor="#000000"
             />
         <TextView
+            android:id="@+id/pdeliverytime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Delivery in 40Mins"

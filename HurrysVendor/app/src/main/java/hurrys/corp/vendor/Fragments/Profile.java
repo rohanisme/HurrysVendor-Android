@@ -19,10 +19,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -77,6 +81,10 @@ public class Profile extends Fragment {
     private StorageReference mstorageReference;
     private ProgressBar progressBar2;
     private ToggleButton status,selfpickup,online;
+
+    boolean selfpickupStatus = false;
+    boolean onlinedeliveryStatus = false;
+
 
     private int mHour;
     private int mMinute;
@@ -152,18 +160,22 @@ public class Profile extends Fragment {
                             if(dataSnapshot.child("SelfPickup").exists()){
                                 if(dataSnapshot.child("SelfPickup").getValue().toString().equals("Active")){
                                     selfpickup.setToggleOn(true);
+                                    selfpickupStatus = true;
                                 }
                                 else{
                                     selfpickup.setToggleOff(false);
+                                    selfpickupStatus = false;
                                 }
                             }
 
                             if(dataSnapshot.child("Online").exists()){
                                 if(dataSnapshot.child("Online").getValue().toString().equals("Active")){
                                     online.setToggleOn(true);
+                                    onlinedeliveryStatus = true;
                                 }
                                 else{
                                     online.setToggleOff(false);
+                                    onlinedeliveryStatus = false;
                                 }
                             }
 
@@ -233,6 +245,8 @@ public class Profile extends Fragment {
                     session.setstatus("Active");
                     selfpickup.setToggleOn(true);
                     online.setToggleOn(true);
+                    selfpickupStatus = true;
+                    onlinedeliveryStatus = true;
                 }
                 else{
                     FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Status").setValue("InActive");
@@ -241,9 +255,12 @@ public class Profile extends Fragment {
                     session.setstatus("InActive");
                     selfpickup.setToggleOff(true);
                     online.setToggleOff(true);
+                    selfpickupStatus = false;
+                    onlinedeliveryStatus = false;
                 }
             }
         });
+
 
         selfpickup.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
             @Override
@@ -253,9 +270,45 @@ public class Profile extends Fragment {
                     FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Status").setValue("Active");
                     status.setToggleOn(true);
                     session.setstatus("Active");
+                    selfpickupStatus = true;
                 }
                 else{
-                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("SelfPickup").setValue("InActive");
+                    if(onlinedeliveryStatus) {
+                        FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("SelfPickup").setValue("InActive");
+                        selfpickupStatus = false;
+                    }
+                    else{
+                        if(getContext()!=null) {
+                            SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                                    .setTitleText("By Switching of both the option. You will stop receiving the orders")
+                                    .setConfirmText("Yes")
+                                    .setCancelText("No")
+                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            sweetAlertDialog.dismiss();
+
+                                            FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("SelfPickup").setValue("InActive");
+                                            FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Status").setValue("InActive");
+                                            status.setToggleOff(true);
+                                            session.setstatus("InActive");
+                                            selfpickupStatus = false;
+
+
+                                        }
+                                    })
+                                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            sweetAlertDialog.dismiss();
+                                            selfpickup.setToggleOn(true);
+                                        }
+                                    });
+
+                            sDialog.setCancelable(false);
+                            sDialog.show();
+                        }
+                    }
 
                 }
             }
@@ -269,9 +322,42 @@ public class Profile extends Fragment {
                     FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Status").setValue("Active");
                     session.setstatus("Active");
                     status.setToggleOn(true);
+                    onlinedeliveryStatus = true;
                 }
-                else{
-                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Online").setValue("InActive");
+                else {
+                    if (selfpickupStatus) {
+                        FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Online").setValue("InActive");
+                        onlinedeliveryStatus = false;
+                    }
+                    else{
+                        if(getContext()!=null) {
+                            SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                                    .setTitleText("By Switching of both the option. You will stop receiving the orders")
+                                    .setConfirmText("Yes")
+                                    .setCancelText("No")
+                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            sweetAlertDialog.dismiss();
+                                            FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Online").setValue("InActive");
+                                            FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Status").setValue("InActive");
+                                            status.setToggleOff(true);
+                                            session.setstatus("InActive");
+                                            onlinedeliveryStatus = false;
+                                        }
+                                    })
+                                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            sweetAlertDialog.dismiss();
+                                            online.setToggleOn(true);
+                                        }
+                                    });
+
+                            sDialog.setCancelable(false);
+                            sDialog.show();
+                        }
+                    }
                 }
             }
         });

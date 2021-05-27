@@ -48,6 +48,7 @@ import com.google.firebase.database.annotations.Nullable;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -62,40 +63,38 @@ import hurrys.corp.vendor.R;
 
 public class OrderDetailsFragment extends Fragment {
 
-
     public OrderDetailsFragment() {
         // Required empty public constructor
     }
 
     private String pushid = "";
-
     private Session session;
-    private RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView,precyclerview;
     private DatabaseReference mref;
     private TextView orderid, date, daname, address, support,instructions;
     private LinearLayout deliveryrow,deliveryamountrow;
-
     private TextView subtotal, discount, commision, delivery, grandtotal, status, number,deliverytype,slot,paymenttype,deliverytypetext;
-
     private Button accpet, accpet1,accept2, ready, decline, delivered, dispatched,print;
     private double gtot = 0, dbalance = 0;
     private BottomSheetDialog bottomSheetDialog;
-
+    TextView storename;
     String selection = "";
-
     DataSnapshot d;
+    double max=0;
+
+    private ArrayList<String> foodpushid=new ArrayList<String>();
+    private ArrayList<String> quantity=new ArrayList<String>();
 
     CircleImageView pp;
     TextView deliveryname;
     ImageView call, openMenu;
-
     private PrintMe printMe;
+    TextView pstorename,porderno,pdeliverytime,pdeliverynote,psubmitted,paddress,pcustomer,pphone,pcookinginstructions,pqty,psubtotal,pdeliveryfee,ptotal;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
     }
 
     @Override
@@ -111,9 +110,7 @@ public class OrderDetailsFragment extends Fragment {
 
         orderid = v.findViewById(R.id.orderid);
         date = v.findViewById(R.id.date);
-
         printMe =  new PrintMe(getContext());
-
         daname = v.findViewById(R.id.daname);
         address = v.findViewById(R.id.address);
         support = v.findViewById(R.id.support);
@@ -125,9 +122,8 @@ public class OrderDetailsFragment extends Fragment {
         instructions=v.findViewById(R.id.instructions);
         print=v.findViewById(R.id.print);
         slot=v.findViewById(R.id.slot);
-
+//        storename=v.findViewById(R.id.storename);
         print.setVisibility(View.GONE);
-
         subtotal = v.findViewById(R.id.subtotal);
         delivery = v.findViewById(R.id.delivery);
         commision = v.findViewById(R.id.commision);
@@ -148,6 +144,24 @@ public class OrderDetailsFragment extends Fragment {
         number = v.findViewById(R.id.number);
         deliverytypetext = v.findViewById(R.id.deliverytypetext);
 
+        //Printing Data
+        pstorename = v.findViewById(R.id.pstorename);
+        porderno = v.findViewById(R.id.porderno);
+        pdeliverytime = v.findViewById(R.id.pdeliverytime);
+        pdeliverynote = v.findViewById(R.id.pdeliverynote);
+        psubmitted = v.findViewById(R.id.psubmitted);
+        paddress = v.findViewById(R.id.paddress);
+        pcustomer = v.findViewById(R.id.pcustomer);
+        pphone = v.findViewById(R.id.pphone);
+        pcookinginstructions = v.findViewById(R.id.pcookinginstructions);
+        pqty = v.findViewById(R.id.pqty);
+        psubtotal = v.findViewById(R.id.psubtotal);
+        pdeliveryfee = v.findViewById(R.id.pdeliveryfee);
+        ptotal = v.findViewById(R.id.ptotal);
+        precyclerview = v.findViewById(R.id.precyclerview);
+
+        LinearLayoutManager mLayoutManager1 = new LinearLayoutManager(getContext());
+        precyclerview.setLayoutManager(mLayoutManager1);
 
         ImageView back = v.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -158,12 +172,10 @@ public class OrderDetailsFragment extends Fragment {
             }
         });
 
-
         session = new Session(getContext());
         mRecyclerView = v.findViewById(R.id.recyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
-
 
         support.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,9 +190,7 @@ public class OrderDetailsFragment extends Fragment {
             }
         });
 
-
         pushid = getArguments().getString("pushid");
-
 
         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -188,10 +198,15 @@ public class OrderDetailsFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             orderid.setText("Order ID : #" + dataSnapshot.child("OrderNo").getValue().toString().substring(5));
+                            porderno.setText("#" + dataSnapshot.child("OrderNo").getValue().toString().substring(5));
+                            pdeliverytime.setText("Delivery By : 21:50");
+
+
                             DecimalFormat form = new DecimalFormat("0.00");
                             d = dataSnapshot;
 
                             date.setText(dataSnapshot.child("OrderDateTime").getValue().toString());
+                            psubmitted.setText("Submitted : "+dataSnapshot.child("OrderDateTime").getValue().toString());
                             subtotal.setText("\u00a3" + form.format(Double.parseDouble(dataSnapshot.child("Subtotal").getValue().toString())));
                             discount.setText("\u00a3" + form.format(Double.parseDouble(dataSnapshot.child("Discount").getValue().toString())));
                             delivery.setText("\u00a3" + form.format(Double.parseDouble(dataSnapshot.child("DeliveryCharges").getValue().toString())));
@@ -263,13 +278,23 @@ public class OrderDetailsFragment extends Fragment {
                                 gtot = gtot + del;
                                 deliveryamountrow.setVisibility(View.VISIBLE);
                             }
+                            psubtotal.setText("\u00a3" + form.format(Math.round(price * 100.0) / 100.0));
+                            pdeliveryfee.setText("\u00a3" + form.format(Math.round(del * 100.0) / 100.0));
+                            ptotal.setText("\u00a3" + form.format(Math.round(gtot * 100.0) / 100.0));
 
                             commision.setText("\u00a3" + form.format(Math.round(tot * 100.0) / 100.0));
                             grandtotal.setText("\u00a3" + form.format(Math.round(gtot * 100.0) / 100.0));
                             gtot = Double.parseDouble(grandtotal.getText().toString().substring(1));
 
                             address.setText(dataSnapshot.child("Address").getValue().toString());
+                            paddress.setText("Address : "+dataSnapshot.child("Address").getValue().toString());
                             daname.setText(dataSnapshot.child("CName").getValue().toString());
+                            pcustomer.setText("Customer : "+dataSnapshot.child("CName").getValue().toString());
+                            pphone.setText("Phone Number : "+dataSnapshot.child("Number").getValue().toString());
+                            pstorename.setText(session.getstorename());
+
+                            pqty.setText(dataSnapshot.child("Qty").getValue().toString());
+                            pcookinginstructions.setText(dataSnapshot.child("VendorInstructions").getValue().toString());
 
                                 if (dataSnapshot.child("Status").getValue().toString().equals("1")) {
                                    if(!selection.equals("Self PickUp")){
@@ -344,39 +369,42 @@ public class OrderDetailsFragment extends Fragment {
                             } else
                                 deliveryrow.setVisibility(View.GONE);
 
-
                             if (dataSnapshot.child("Status").getValue().toString().equals("1")) {
                                 status.setText("PENDING");
                                 status.setTextColor(Color.parseColor("#b38400"));
                                 status.setBackgroundColor(Color.parseColor("#FFF0C5"));
                                 print.setVisibility(View.GONE);
-                            } else if (dataSnapshot.child("Status").getValue().toString().equals("2")) {
+                            }
+                            else if (dataSnapshot.child("Status").getValue().toString().equals("2")) {
                                 status.setText("PREPARING");
                                 status.setTextColor(Color.parseColor("#00B246"));
                                 status.setBackgroundColor(Color.parseColor("#e5f7ec"));
                                 print.setVisibility(View.VISIBLE);
-                            } else if (dataSnapshot.child("Status").getValue().toString().equals("3")) {
+                            }
+                            else if (dataSnapshot.child("Status").getValue().toString().equals("3")) {
                                 status.setText("READY TO DELIVERY");
                                 status.setTextColor(Color.parseColor("#00B246"));
                                 status.setBackgroundColor(Color.parseColor("#e5f7ec"));
                                 print.setVisibility(View.VISIBLE);
-                            } else if (dataSnapshot.child("Status").getValue().toString().equals("4")) {
+                            }
+                            else if (dataSnapshot.child("Status").getValue().toString().equals("4")) {
                                 status.setText("AWAITING DELIVERY");
                                 status.setTextColor(Color.parseColor("#00B246"));
                                 status.setBackgroundColor(Color.parseColor("#e5f7ec"));
                                 print.setVisibility(View.VISIBLE);
-                            } else if (dataSnapshot.child("Status").getValue().toString().equals("5")) {
+                            }
+                            else if (dataSnapshot.child("Status").getValue().toString().equals("5")) {
                                 status.setText("DELIVERED");
                                 status.setTextColor(Color.parseColor("#00B246"));
                                 status.setBackgroundColor(Color.parseColor("#e5f7ec"));
                                 print.setVisibility(View.VISIBLE);
-                            } else if (dataSnapshot.child("Status").getValue().toString().equals("10")) {
+                            }
+                            else if (dataSnapshot.child("Status").getValue().toString().equals("10")) {
                                 status.setText("CANCELLED");
                                 status.setTextColor(Color.parseColor("#FF0000"));
                                 status.setBackgroundColor(Color.parseColor("#F1B2B2"));
                                 print.setVisibility(View.GONE);
                             }
-
 
                             if (dataSnapshot.child("OrderType").getValue().toString().equals("Others")) {
                                 mref = FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Cart");
@@ -466,6 +494,91 @@ public class OrderDetailsFragment extends Fragment {
                                 mRecyclerView.setAdapter(firebaseRecyclerAdapter);
                             }
 
+                            if (dataSnapshot.child("OrderType").getValue().toString().equals("Others")) {
+                                mref = FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Cart");
+
+                                FirebaseRecyclerAdapter<OrderDetails, ViewHolder> firebaseRecyclerAdapter =
+                                        new FirebaseRecyclerAdapter<OrderDetails, ViewHolder>(
+                                                OrderDetails.class,
+                                                R.layout.orders_details_rowprint,
+                                                ViewHolder.class,
+                                                mref
+                                        ) {
+                                            @Override
+                                            protected void populateViewHolder(ViewHolder viewHolder, OrderDetails orderDetails, int position) {
+                                                viewHolder.setDetailsPrint(getContext(), orderDetails.Image, orderDetails.Name, orderDetails.Price, orderDetails.Qty, orderDetails.Total, orderDetails.Units);
+
+                                            }
+
+                                            @Override
+                                            public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+                                                final ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
+                                                viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                                                    @Override
+                                                    public void onItemClick(View v, final int position) {
+
+                                                    }
+
+                                                    @Override
+                                                    public void onItemLongClick(View v, int position) {
+
+                                                    }
+                                                });
+                                                return viewHolder;
+                                            }
+
+                                            @Override
+                                            protected void onDataChanged() {
+                                                super.onDataChanged();
+
+                                            }
+
+                                        };
+                                precyclerview.setAdapter(firebaseRecyclerAdapter);
+                            }
+                            else {
+                                mref = FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Cart");
+                                FirebaseRecyclerAdapter<OrderDetails1, ViewHolder> firebaseRecyclerAdapter =
+                                        new FirebaseRecyclerAdapter<OrderDetails1, ViewHolder>(
+                                                OrderDetails1.class,
+                                                R.layout.orders_details_rowprint,
+                                                ViewHolder.class,
+                                                mref
+                                        ) {
+                                            @Override
+                                            protected void populateViewHolder(ViewHolder viewHolder, OrderDetails1 orderDetails, int position) {
+                                                viewHolder.setDetailsPrint2(getContext(), orderDetails.Name, orderDetails.Price, orderDetails.Type, orderDetails.Qty, orderDetails.Image,orderDetails.Customised,orderDetails.CustomisedQty);
+                                            }
+
+                                            @Override
+                                            public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+                                                final ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
+                                                viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                                                    @Override
+                                                    public void onItemClick(View v, final int position) {
+
+                                                    }
+
+                                                    @Override
+                                                    public void onItemLongClick(View v, int position) {
+
+                                                    }
+                                                });
+                                                return viewHolder;
+                                            }
+
+                                            @Override
+                                            protected void onDataChanged() {
+                                                super.onDataChanged();
+
+                                            }
+
+                                        };
+
+                                precyclerview.setAdapter(firebaseRecyclerAdapter);
+                            }
 
                         }
                     }
@@ -476,15 +589,21 @@ public class OrderDetailsFragment extends Fragment {
                     }
                 });
 
-
-        call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + number.getText().toString()));
-                startActivity(intent);
-            }
-        });
+         call.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:" + number.getText().toString()));
+                        startActivity(intent);
+                    }
+                    catch (Exception e){
+                        new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                                .setTitleText("Delivery Partner Number : "+number.getText().toString())
+                                .show();
+                    }
+                }
+            });
 
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -522,41 +641,10 @@ public class OrderDetailsFragment extends Fragment {
         SimpleDateFormat df1 = new SimpleDateFormat("dd, MMM yyyy  HH:MM");
         final String date2 = df1.format(currentDate);
 
-        bottomSheetDialog = new BottomSheetDialog(getContext());
-        final View bottomSheetDialogView = getLayoutInflater().inflate(R.layout.bottom_deliveryselection, null);
-        bottomSheetDialog.setContentView(bottomSheetDialogView);
-
-        RadioGroup radioGroup = bottomSheetDialogView.findViewById(R.id.radio);
-        Button submit = bottomSheetDialogView.findViewById(R.id.submit);
-
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                int selectedId = radioGroup.getCheckedRadioButtonId();
-
-                bottomSheetDialog.dismiss();
-
-                if (selectedId == -1) {
-                    Toast.makeText(getContext(), "Please select a required option", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                RadioButton radioButton = (RadioButton) bottomSheetDialogView.findViewById(selectedId);
-                FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("3");
-                FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue(radioButton.getText().toString());
-                FirebaseDatabase.getInstance().getReference().child("PendingOrders").child(pushid).setValue(d.getValue());
-                FirebaseDatabase.getInstance().getReference().child("PendingOrders").child(pushid).child("Status").setValue("2");
-                FirebaseDatabase.getInstance().getReference().child("PendingOrders").child(pushid).child("SellerName").setValue(session.getstorename());
-                FirebaseDatabase.getInstance().getReference().child("PendingOrders").child(pushid).child("SellerAddress").setValue(session.getaddress());
-                FirebaseDatabase.getInstance().getReference().child("PendingOrders").child(pushid).child("SellerNumber").setValue(session.getnumber());
-
-            }
-        });
-
         print.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                storename.setText("Rohan");
                 printMe.sendViewToPrinter(v.findViewById(R.id.print_me_layout));
 //                Toast.makeText(getContext(),"Service Not Available",Toast.LENGTH_LONG).show();
             }
@@ -576,15 +664,23 @@ public class OrderDetailsFragment extends Fragment {
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
 
-                                    if(slot.getText().toString().equals("Immediately")){
+                                    if(!slot.getText().toString().equals("Immediately")){
+
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Hurrys");
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
                                         session.setselection("On");
-                                        if (getActivity() != null)
-                                            getActivity().onBackPressed();
+
+                                        if(session.getcategory().equals("Home Food")){
+                                            reduceCartData();
+                                        }
+                                        else {
+                                            if (getActivity() != null)
+                                                getActivity().onBackPressed();
+                                        }
+
                                     }
                                     else {
                                         final EditText editText = new EditText(getContext());
@@ -598,7 +694,14 @@ public class OrderDetailsFragment extends Fragment {
                                         editText.setGravity(Gravity.CENTER);
                                         container1.addView(editText);
                                         editText.setText(session.getdeliverytime());
-                                        editText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                                        int a = Integer.parseInt(session.getdeliverytime());
+                                        if(a<=90){
+                                            max = 90;
+                                        }
+                                        else{
+                                            max = a;
+                                        }
+                                        editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
                                         SweetAlertDialog dialog = new SweetAlertDialog(getContext(), SweetAlertDialog.NORMAL_TYPE)
                                                 .setTitleText("Please mention the delivery time in mins")
                                                 .setConfirmText("Ok")
@@ -607,6 +710,24 @@ public class OrderDetailsFragment extends Fragment {
                                                     public void onClick(SweetAlertDialog sweetAlertDialog) {
 
                                                         String reason = editText.getText().toString();
+
+
+
+                                                        if(TextUtils.isEmpty(reason)){
+                                                           editText.setError("Enter Minutes");
+                                                           return;
+                                                        }
+
+                                                        if(Integer.parseInt(reason)>max){
+                                                            editText.setError("Maximum Minutes can be "+max +" Mins only");
+                                                            return;
+                                                        }
+
+                                                        if(Integer.parseInt(reason)<=30){
+                                                            editText.setError("Minimim Minutes can be 30 Mins only");
+                                                            return;
+                                                        }
+
                                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
                                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Hurrys");
                                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
@@ -615,8 +736,14 @@ public class OrderDetailsFragment extends Fragment {
                                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliveryTimeSelected").setValue("" + reason);
                                                         session.setselection("On");
                                                         sweetAlertDialog.dismiss();
-                                                        if (getActivity() != null)
-                                                            getActivity().onBackPressed();
+
+                                                        if(session.getcategory().equals("Home Food")){
+                                                            reduceCartData();
+                                                        }
+                                                        else {
+                                                            if (getActivity() != null)
+                                                                getActivity().onBackPressed();
+                                                        }
 
                                                     }
                                                 })
@@ -661,15 +788,22 @@ public class OrderDetailsFragment extends Fragment {
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
 
-                                    if(slot.getText().toString().equals("Immediately")){
+                                    if(!slot.getText().toString().equals("Immediately")){
+
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Self");
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
                                         session.setselection("On");
-                                        if (getActivity() != null)
-                                            getActivity().onBackPressed();
+
+                                        if(session.getcategory().equals("Home Food")){
+                                            reduceCartData();
+                                        }
+                                        else {
+                                            if (getActivity() != null)
+                                                getActivity().onBackPressed();
+                                        }
                                     }
                                     else {
                                         final EditText editText = new EditText(getContext());
@@ -683,7 +817,14 @@ public class OrderDetailsFragment extends Fragment {
                                         editText.setGravity(Gravity.CENTER);
                                         container1.addView(editText);
                                         editText.setText(session.getdeliverytime());
-                                        editText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                                        int a = Integer.parseInt(session.getdeliverytime());
+                                        if(a<=90){
+                                            max = 90;
+                                        }
+                                        else{
+                                            max = a;
+                                        }
+                                        editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
                                         SweetAlertDialog dialog = new SweetAlertDialog(getContext(), SweetAlertDialog.NORMAL_TYPE)
                                                 .setTitleText("Please mention the delivery time in mins")
                                                 .setConfirmText("Ok")
@@ -691,6 +832,22 @@ public class OrderDetailsFragment extends Fragment {
                                                     @Override
                                                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                                                         String reason = editText.getText().toString();
+
+                                                        if(TextUtils.isEmpty(reason)){
+                                                            editText.setError("Enter Minutes");
+                                                            return;
+                                                        }
+
+                                                        if(Integer.parseInt(reason)>max){
+                                                            editText.setError("Maximum Minutes can be "+max +" Mins only");
+                                                            return;
+                                                        }
+
+                                                        if(Integer.parseInt(reason)<=30){
+                                                            editText.setError("Minimim Minutes can be 30 Mins only");
+                                                            return;
+                                                        }
+
                                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
                                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Self");
                                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
@@ -699,8 +856,14 @@ public class OrderDetailsFragment extends Fragment {
                                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliveryTimeSelected").setValue("" + reason);
                                                         sweetAlertDialog.dismiss();
                                                         session.setselection("On");
-                                                        if (getActivity() != null)
-                                                            getActivity().onBackPressed();
+
+                                                        if(session.getcategory().equals("Home Food")){
+                                                            reduceCartData();
+                                                        }
+                                                        else {
+                                                            if (getActivity() != null)
+                                                                getActivity().onBackPressed();
+                                                        }
 
                                                     }
                                                 })
@@ -746,14 +909,20 @@ public class OrderDetailsFragment extends Fragment {
                                     sweetAlertDialog.dismiss();
 
                                     if(slot.getText().toString().equals("Immediately")){
+
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Self PickUp");
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerName").setValue(session.getstorename());
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
                                         session.setselection("On");
-                                        if (getActivity() != null)
-                                            getActivity().onBackPressed();
+                                        if(session.getcategory().equals("Home Food")){
+                                            reduceCartData();
+                                        }
+                                        else {
+                                            if (getActivity() != null)
+                                                getActivity().onBackPressed();
+                                        }
                                     }
                                     else {
                                         final EditText editText = new EditText(getContext());
@@ -784,8 +953,14 @@ public class OrderDetailsFragment extends Fragment {
                                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliveryTimeSelected").setValue("" + reason);
                                                         session.setselection("On");
                                                         sweetAlertDialog.dismiss();
-                                                        if (getActivity() != null)
-                                                            getActivity().onBackPressed();
+
+                                                        if(session.getcategory().equals("Home Food")){
+                                                            reduceCartData();
+                                                        }
+                                                        else {
+                                                            if (getActivity() != null)
+                                                                getActivity().onBackPressed();
+                                                        }
 
 
                                                     }
@@ -1051,6 +1226,7 @@ public class OrderDetailsFragment extends Fragment {
 
             }
         });
+
 //        handover.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -1094,7 +1270,6 @@ public class OrderDetailsFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         getActivity().getMenuInflater().inflate(R.menu.option_menu_item, menu);
         super.onCreateOptionsMenu(menu, inflater);
-
     }
 
     /*@Override
@@ -1117,4 +1292,683 @@ public class OrderDetailsFragment extends Fragment {
 
         return false;
     }*/
+
+    public void reduceCartData(){
+      FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Cart")
+              .addListenerForSingleValueEvent(new ValueEventListener() {
+                  @Override
+                  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                      if(dataSnapshot.exists()){
+                            long qty = dataSnapshot.getChildrenCount();
+
+                              for (DataSnapshot v : dataSnapshot.getChildren()) {
+                                  foodpushid.add(v.child("PushId").getValue().toString());
+                                  quantity.add(v.child("Qty").getValue().toString());
+                              }
+
+                              if(0<qty){
+                                  final double[] a = {0};
+                                DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                        .child(session.getusername())
+                                        .child("Products")
+                                        .child(foodpushid.get(0)).child("Stock");
+
+                                dref.runTransaction(new Transaction.Handler() {
+                                    @NonNull
+                                    @Override
+                                    public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                        double value = 0;
+                                        if (currentData.getValue() != null) {
+                                            value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(0));
+                                            a[0] = value;
+                                        }
+                                        currentData.setValue(value);
+                                        return Transaction.success(currentData);
+                                    }
+                                    @Override
+                                    public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                            if(a[0]<=0){
+                                                FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                        .child(session.getusername())
+                                                        .child("Products")
+                                                        .child(foodpushid.get(0)).child("Status").setValue("InActive");
+                                            }
+                                    }
+                                });
+                            }
+
+                              if(1<qty){
+                                  final double[] a = {0};
+                                DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                        .child(session.getusername())
+                                        .child("Products")
+                                        .child(foodpushid.get(1)).child("Stock");
+
+                                dref.runTransaction(new Transaction.Handler() {
+                                    @NonNull
+                                    @Override
+                                    public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                        double value = 0;
+                                        if (currentData.getValue() != null) {
+                                            value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(1));
+                                            a[0] = value;
+                                        }
+                                        currentData.setValue(value);
+                                        return Transaction.success(currentData);
+                                    }
+                                    @Override
+                                    public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                        if(a[0]<=0){
+                                            FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                    .child(session.getusername())
+                                                    .child("Products")
+                                                    .child(foodpushid.get(1)).child("Status").setValue("InActive");
+                                        }
+                                    }
+                                });
+                            }
+
+                              if(2<qty){
+                                  final double[] a = {0};
+                                DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                        .child(session.getusername())
+                                        .child("Products")
+                                        .child(foodpushid.get(2)).child("Stock");
+
+                                dref.runTransaction(new Transaction.Handler() {
+                                    @NonNull
+                                    @Override
+                                    public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                        double value = 0;
+                                        if (currentData.getValue() != null) {
+                                            value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(2));
+                                            a[0] = value;
+                                        }
+                                        currentData.setValue(value);
+                                        return Transaction.success(currentData);
+                                    }
+                                    @Override
+                                    public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                        if(a[0]<=0){
+                                            FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                    .child(session.getusername())
+                                                    .child("Products")
+                                                    .child(foodpushid.get(2)).child("Status").setValue("InActive");
+                                        }
+                                    }
+                                });
+                            }
+
+                              if(3<qty){
+                                  final double[] a = {0};
+                                DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                        .child(session.getusername())
+                                        .child("Products")
+                                        .child(foodpushid.get(3)).child("Stock");
+
+                                dref.runTransaction(new Transaction.Handler() {
+                                    @NonNull
+                                    @Override
+                                    public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                        double value = 0;
+                                        if (currentData.getValue() != null) {
+                                            value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(3));
+                                            a[0] = value;
+                                        }
+                                        currentData.setValue(value);
+                                        return Transaction.success(currentData);
+                                    }
+                                    @Override
+                                    public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                        if(a[0]<=0){
+                                            FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                    .child(session.getusername())
+                                                    .child("Products")
+                                                    .child(foodpushid.get(3)).child("Status").setValue("InActive");
+                                        }
+                                    }
+                                });
+                            }
+
+                              if(4<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(4)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(4));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(4)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(5<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(5)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(5));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(5)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(6<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(6)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(6));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(6)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(7<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(7)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(7));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(7)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(8<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(8)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(8));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(8)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(9<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(9)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(9));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(9)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(10<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(10)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(10));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(10)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(11<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(11)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(11));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(11)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(12<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(12)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(12));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(12)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(13<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(13)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(13));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(13)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(14<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(14)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(14));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(14)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(15<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(15)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(15));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(15)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(16<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(16)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(16));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(16)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(17<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(17)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(17));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(17)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(18<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(18)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(18));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(18)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(19<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(19)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(19));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(19)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+                              if(20<qty){
+                                  final double[] a = {0};
+                                  DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                          .child(session.getusername())
+                                          .child("Products")
+                                          .child(foodpushid.get(20)).child("Stock");
+
+                                  dref.runTransaction(new Transaction.Handler() {
+                                      @NonNull
+                                      @Override
+                                      public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                          double value = 0;
+                                          if (currentData.getValue() != null) {
+                                              value = Double.parseDouble(currentData.getValue().toString()) - Integer.parseInt(quantity.get(20));
+                                              a[0] = value;
+                                          }
+                                          currentData.setValue(value);
+                                          return Transaction.success(currentData);
+                                      }
+                                      @Override
+                                      public void onComplete(@androidx.annotation.Nullable DatabaseError databaseError, boolean b, @androidx.annotation.Nullable DataSnapshot dataSnapshot) {
+                                          if(a[0]<=0){
+                                              FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                                      .child(session.getusername())
+                                                      .child("Products")
+                                                      .child(foodpushid.get(20)).child("Status").setValue("InActive");
+                                          }
+                                      }
+                                  });
+                              }
+
+
+                          if (getActivity() != null)
+                              getActivity().onBackPressed();
+
+                      }
+                  }
+
+                  @Override
+                  public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                  }
+              });
+
+    }
 }

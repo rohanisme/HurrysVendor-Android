@@ -76,6 +76,26 @@ public  class ViewHolder extends RecyclerView.ViewHolder {
 
     }
 
+    public void setDetailsPrint(Context ctx,String Image,String Name,String Price,String Qty,String Total,String Units){
+
+        TextView name,units,total,qty;
+        name=mView.findViewById(R.id.name);
+        units=mView.findViewById(R.id.units);
+        total=mView.findViewById(R.id.total);
+        qty=mView.findViewById(R.id.qty);
+
+        name.setText(Name);
+        if(!TextUtils.isEmpty(Units)) {
+            if(!Units.equals("null"))
+                units.setText(Units);
+        }
+
+        total.setText("\u00a3"+Total);
+        qty.setText("x "+Qty);
+        total.setVisibility(View.GONE);
+
+    }
+
     public void setDetails1(Context ctx,String Name,String RPrice,String Type,String Qty){
         TextView name,qty,total;
         ImageView indicator;
@@ -121,6 +141,34 @@ public  class ViewHolder extends RecyclerView.ViewHolder {
         }
 
 
+
+        name = mView.findViewById(R.id.name);
+        qty = mView.findViewById(R.id.qty);
+        total = mView.findViewById(R.id.total);
+
+        units.setVisibility(View.GONE);
+        total.setVisibility(View.GONE);
+        total.setText("\u00a3"+RPrice);
+
+        name.setText(Name);
+        if(TextUtils.isEmpty(Customised))
+            qty.setText("x "+Qty +" ("+Type+")");
+        else{
+            qty.setText("x "+Qty);
+            if(!TextUtils.isEmpty(CustomisedQty))
+                units.setText("("+CustomisedQty+")");
+            units.setVisibility(View.VISIBLE);
+        }
+
+
+    }
+
+    public void setDetailsPrint2(Context ctx,String Name,String RPrice,String Type,String Qty,String Image,String Customised,String CustomisedQty){
+        TextView name,units,total,qty;
+        name=mView.findViewById(R.id.name);
+        units=mView.findViewById(R.id.units);
+        total=mView.findViewById(R.id.total);
+        qty=mView.findViewById(R.id.qty);
 
         name = mView.findViewById(R.id.name);
         qty = mView.findViewById(R.id.qty);

@@ -45,6 +45,9 @@ public class Session {
     }
 
 
+
+
+
     public void setname(String usename)
     {
         prefs.edit().putString("name", usename).commit();

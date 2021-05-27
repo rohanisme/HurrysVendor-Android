@@ -493,12 +493,16 @@ public class Dashboard extends Fragment {
 //                });
 
         FirebaseDatabase.getInstance().getReference().child("Vendor").child(sessions.getusername())
-                .child("Address")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
-                            sessions.setaddress(dataSnapshot.getValue().toString());
+                            if(dataSnapshot.child("Address").exists())
+                                sessions.setaddress(dataSnapshot.child("Address").getValue().toString());
+                            if(dataSnapshot.child("BusinessName").exists())
+                                sessions.setstorename(dataSnapshot.child("BusinessName").getValue().toString());
+                            if(dataSnapshot.child("MobileNumber").exists())
+                                sessions.setnumber(dataSnapshot.child("MobileNumber").getValue().toString());
                         }
                     }
 
@@ -507,6 +511,8 @@ public class Dashboard extends Fragment {
 
                     }
                 });
+
+
 
         go.setOnClickListener(new View.OnClickListener() {
             @Override

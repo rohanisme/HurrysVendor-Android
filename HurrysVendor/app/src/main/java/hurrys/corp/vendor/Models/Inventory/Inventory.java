@@ -10,10 +10,20 @@ public class Inventory {
     public String Featured;
     public String Customised;
     public String Type;
+    public String CategoryType;
+    public String Stock;
 
     public Inventory(){}
 
-    public Inventory(String ItemName,String PushId,String Status,String FoodType,String AStatus,String SellingPrice,String Featured,String Customised,String Type){
+    public String getStock() {
+        return Stock;
+    }
+
+    public void setStock(String stock) {
+        Stock = stock;
+    }
+
+    public Inventory(String ItemName, String PushId, String Status, String FoodType, String AStatus, String SellingPrice, String Featured, String Customised, String Type, String CategoryType, String Stock){
         this.ItemName=ItemName;
         this.PushId=PushId;
         this.Status=Status;
@@ -23,5 +33,9 @@ public class Inventory {
         this.Featured=Featured;
         this.Customised=Customised;
         this.Type=Type;
+        this.CategoryType=CategoryType;
+        this.Stock=Stock;
     }
+
+
 }

@@ -79,7 +79,7 @@ public class AddMenuFragment extends Fragment {
 
         session = new Session(getActivity());
         inventories.clear();
-        inventoryAdapter = new InventoryAdapter(inventories);
+        inventoryAdapter = new InventoryAdapter(inventories,getContext());
         inventoryAdapter1 = new InventoryAdapter1(inventories);
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +183,7 @@ public class AddMenuFragment extends Fragment {
     public void loadApproved(){
 
         inventories.clear();
-        inventoryAdapter = new InventoryAdapter(inventories);
+        inventoryAdapter = new InventoryAdapter(inventories,getContext());
         recyclerView.setAdapter(inventoryAdapter);
 
         if(session.getcategory().equals("Food Delivery")||session.getcategory().equals("Home Food")) {
@@ -228,6 +228,9 @@ public class AddMenuFragment extends Fragment {
                                         if(v.child("Addons").exists())
                                             f="Yes";
 
+                                        String g="";
+                                        if(v.child("Stock").exists())
+                                            g=""+v.child("Stock").getValue().toString();
 
                                         inventories.add(new Inventory(
                                                 a,
@@ -238,14 +241,16 @@ public class AddMenuFragment extends Fragment {
                                                 e,
                                                 d,
                                                 f,
-                                                d
+                                                d,
+                                                session.getcategory(),
+                                                g
                                         ));
                                     }
                                 }
 
                                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
                                 recyclerView.setLayoutManager(mLayoutManager);
-                                inventoryAdapter = new InventoryAdapter(inventories);
+                               inventoryAdapter = new InventoryAdapter(inventories,getContext());
                                 recyclerView.setAdapter(inventoryAdapter);
                                 recyclerView.setVisibility(View.VISIBLE);
                             }
@@ -277,6 +282,8 @@ public class AddMenuFragment extends Fragment {
                                         if (v.child("Featured").exists())
                                             featured = v.child("Featured").getValue().toString();
 
+
+
                                         inventories.add(new Inventory(
                                                 v.child("ItemName").getValue().toString(),
                                                 v.child("PushId").getValue().toString(),
@@ -286,6 +293,8 @@ public class AddMenuFragment extends Fragment {
                                                 "",
                                                 featured,
                                                 "",
+                                                "",
+                                                session.getcategory(),
                                                 ""
                                         ));
                                     }
@@ -313,7 +322,7 @@ public class AddMenuFragment extends Fragment {
 
     public void loadRejected(){
         inventories.clear();
-        inventoryAdapter = new InventoryAdapter(inventories);
+       inventoryAdapter = new InventoryAdapter(inventories,getContext());
         recyclerView.setAdapter(inventoryAdapter);
 
         if(session.getcategory().equals("Food Delivery")||session.getcategory().equals("Home Food")) {
@@ -357,6 +366,9 @@ public class AddMenuFragment extends Fragment {
                                         if(v.child("Addons").exists())
                                             f="Yes";
 
+                                        String g="";
+                                        if(v.child("Stock").exists())
+                                            g=""+v.child("Stock").getValue().toString();
 
                                         inventories.add(new Inventory(
                                                 a,
@@ -367,7 +379,9 @@ public class AddMenuFragment extends Fragment {
                                                 e,
                                                 d,
                                                 f,
-                                                d
+                                                d,
+                                                session.getcategory(),
+                                                g
                                         ));
                                     }
                                 }
@@ -375,7 +389,7 @@ public class AddMenuFragment extends Fragment {
 
                             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
                             recyclerView.setLayoutManager(mLayoutManager);
-                            inventoryAdapter = new InventoryAdapter(inventories);
+                           inventoryAdapter = new InventoryAdapter(inventories,getContext());
                             recyclerView.setAdapter(inventoryAdapter);
                             recyclerView.setVisibility(View.VISIBLE);
 
@@ -407,6 +421,10 @@ public class AddMenuFragment extends Fragment {
                                         if (v.child("Featured").exists())
                                             featured = v.child("Featured").getValue().toString();
 
+                                        String g="";
+                                        if(v.child("Stock").exists())
+                                            g=""+v.child("Stock").getValue().toString();
+
                                         inventories.add(new Inventory(
                                                 v.child("ItemName").getValue().toString(),
                                                 v.child("PushId").getValue().toString(),
@@ -416,7 +434,9 @@ public class AddMenuFragment extends Fragment {
                                                 "",
                                                 featured,
                                                 "",
-                                                ""
+                                                "",
+                                                session.getcategory(),
+                                                g
                                         ));
                                     }
                                 }
@@ -442,7 +462,7 @@ public class AddMenuFragment extends Fragment {
 
     public void loadPending(){
         inventories.clear();
-        inventoryAdapter = new InventoryAdapter(inventories);
+       inventoryAdapter = new InventoryAdapter(inventories,getContext());
         recyclerView.setAdapter(inventoryAdapter);
         if(session.getcategory().equals("Food Delivery")||session.getcategory().equals("Home Food")) {
             FirebaseDatabase.getInstance().getReference().child("Vendor")
@@ -486,6 +506,10 @@ public class AddMenuFragment extends Fragment {
                                         if(v.child("Addons").exists())
                                             f="Yes";
 
+                                        String g="";
+                                        if(v.child("Stock").exists())
+                                            g=""+v.child("Stock").getValue().toString();
+
 
                                         inventories.add(new Inventory(
                                                 a,
@@ -496,7 +520,9 @@ public class AddMenuFragment extends Fragment {
                                                 e,
                                                 d,
                                                 f,
-                                                d
+                                                d,
+                                                session.getcategory(),
+                                                g
                                         ));
                                     }
                                 }
@@ -546,6 +572,9 @@ public class AddMenuFragment extends Fragment {
                                                                 d = "Addons";
                                                             }
 
+                                                            String g="";
+                                                            if(v.child("Stock").exists())
+                                                                g=""+v.child("Stock").getValue().toString();
 
                                                             inventories.add(new Inventory(
                                                                     a,
@@ -556,7 +585,9 @@ public class AddMenuFragment extends Fragment {
                                                                     e,
                                                                     d,
                                                                     f,
-                                                                    d
+                                                                    d,
+                                                                    session.getcategory(),
+                                                                    g
                                                             ));
                                                         }
                                                     }
@@ -566,7 +597,7 @@ public class AddMenuFragment extends Fragment {
 
                                                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
                                                 recyclerView.setLayoutManager(mLayoutManager);
-                                                inventoryAdapter = new InventoryAdapter(inventories);
+                                               inventoryAdapter = new InventoryAdapter(inventories,getContext());
                                                 recyclerView.setAdapter(inventoryAdapter);
                                                 recyclerView.setVisibility(View.VISIBLE);
 
@@ -578,6 +609,88 @@ public class AddMenuFragment extends Fragment {
                                             }
                                         });
 
+                            }
+                            else{
+                                FirebaseDatabase.getInstance().getReference().child("Vendor")
+                                        .child(session.getusername())
+                                        .child("Products")
+                                        .orderByChild("ApprovalStatus")
+                                        .equalTo("")
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                if (dataSnapshot.exists()) {
+                                                    for (DataSnapshot v : dataSnapshot.getChildren()) {
+                                                        if (v.exists()) {
+                                                            String foodtype = "";
+                                                            String a ="",b="",c="",d="",e="";
+                                                            if (v.child("FoodImage").exists())
+                                                                foodtype = v.child("FoodImage").getValue().toString();
+
+                                                            if (v.child("ItemName").exists())
+                                                                a = v.child("ItemName").getValue().toString();
+
+                                                            if (v.child("PushId").exists())
+                                                                b = v.child("PushId").getValue().toString();
+
+                                                            if (v.child("Status").exists())
+                                                                c = v.child("Status").getValue().toString();
+
+                                                            String f ="";
+                                                            if (v.child("Type").exists()) {
+                                                                d = "Meal";
+                                                                f = "Yes";
+                                                            }
+
+                                                            if (v.child("SellingPrice").exists())
+                                                                e = v.child("SellingPrice").getValue().toString();
+
+                                                            if(v.child("Portions").exists()) {
+                                                                f = "Yes";
+                                                                d = "Portions";
+                                                            }
+
+                                                            if(v.child("Addons").exists()) {
+                                                                f = "Yes";
+                                                                d = "Addons";
+                                                            }
+
+                                                            String g="";
+                                                            if(v.child("Stock").exists())
+                                                                g=""+v.child("Stock").getValue().toString();
+
+                                                            inventories.add(new Inventory(
+                                                                    a,
+                                                                    b,
+                                                                    c,
+                                                                    foodtype,
+                                                                    "Approved",
+                                                                    e,
+                                                                    d,
+                                                                    f,
+                                                                    d,
+                                                                    session.getcategory(),
+                                                                    g
+                                                            ));
+                                                        }
+                                                    }
+
+
+                                                }
+
+                                                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                                                recyclerView.setLayoutManager(mLayoutManager);
+                                                inventoryAdapter = new InventoryAdapter(inventories,getContext());
+                                                recyclerView.setAdapter(inventoryAdapter);
+                                                recyclerView.setVisibility(View.VISIBLE);
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
                             }
                         }
 
@@ -616,6 +729,8 @@ public class AddMenuFragment extends Fragment {
                                                 "",
                                                 featured,
                                                 "",
+                                                "",
+                                                session.getcategory(),
                                                 ""
                                         ));
                                     }

@@ -81,8 +81,10 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         double tot = price * (com / 100.0);
         double gtot = price - tot ;
 
-        if(DeliverySelection.equals("Self")){
-            gtot = gtot + del;
+        if(!TextUtils.isEmpty(DeliverySelection)) {
+            if (DeliverySelection.equals("Self")) {
+                gtot = gtot + del;
+            }
         }
 
 

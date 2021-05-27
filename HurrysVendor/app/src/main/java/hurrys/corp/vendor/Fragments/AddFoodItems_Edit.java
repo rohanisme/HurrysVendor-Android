@@ -26,6 +26,7 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +59,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.zcw.togglebutton.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,6 +72,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import hurrys.corp.vendor.Configurations.Session;
 import hurrys.corp.vendor.Models.Category.Category;
 import hurrys.corp.vendor.Models.Category.Category1;
+import hurrys.corp.vendor.Models.Portions.Portions;
+import hurrys.corp.vendor.Models.Portions.PortionsAdapter;
 import hurrys.corp.vendor.Models.Product.Product;
 import hurrys.corp.vendor.Models.Product.ProductsAdapter;
 import hurrys.corp.vendor.R;
@@ -92,8 +96,8 @@ public class AddFoodItems_Edit extends Fragment {
     private ArrayList<String> itemcategory1 = new ArrayList<String>();
     private ArrayList<String> sname1= new ArrayList<String>();
     private ArrayList<String> spushid= new ArrayList<String>();
-    private ProductsAdapter portions;
-    private ArrayList<Product> portions1=new ArrayList<Product>();
+    private PortionsAdapter portions;
+    private ArrayList<Portions> portions1=new ArrayList<Portions>();
     String a;
     private BottomSheetDialog bottomSheetDialog;
     private Session session;
@@ -417,7 +421,7 @@ public class AddFoodItems_Edit extends Fragment {
         products.clear();
 
         productsAdapter = new ProductsAdapter(products);
-        portions = new ProductsAdapter(portions1);
+        portions = new PortionsAdapter(portions1);
 
         FirebaseDatabase.getInstance().getReference().child("Vendor")
                 .child(session.getusername())
@@ -479,17 +483,16 @@ public class AddFoodItems_Edit extends Fragment {
                                                 if(dataSnapshot.child("Portions").exists()) {
                                                     for (DataSnapshot v : dataSnapshot.child("Portions").getChildren())
                                                     {
-                                                        portions1.add(new Product((v.child("Name").getValue().toString()),"\u00a3"+v.child("Price").getValue().toString()));
+                                                        portions1.add(new Portions((v.child("Name").getValue().toString()),"\u00a3"+v.child("Price").getValue().toString(),Boolean.valueOf(v.child("Default").getValue().toString())));
                                                     }
+
 
                                                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
                                                     r2.setLayoutManager(mLayoutManager);
 
-                                                    portions = new ProductsAdapter(portions1);
+                                                    portions = new PortionsAdapter(portions1);
 
                                                     r2.setAdapter(portions);
-
-
 
                                                 }
 
@@ -707,82 +710,122 @@ public class AddFoodItems_Edit extends Fragment {
             @Override
             public void onClick(View view) {
 
-                bottomSheetDialog=new BottomSheetDialog(getContext());
-                final View bottomSheetDialogView=getLayoutInflater().inflate(R.layout.bottom_variationsothers,null);
-                bottomSheetDialog.setContentView(bottomSheetDialogView);
+                if(getContext()!=null) {
+                    bottomSheetDialog = new BottomSheetDialog(getContext());
+                    final View bottomSheetDialogView = getLayoutInflater().inflate(R.layout.bottom_variationportions, null);
+                    bottomSheetDialog.setContentView(bottomSheetDialogView);
 
-                EditText addons=bottomSheetDialogView.findViewById(R.id.addons);
-                EditText payment=bottomSheetDialogView.findViewById(R.id.payment);
-                TextView cancel=bottomSheetDialogView.findViewById(R.id.cancel);
-                Button add=bottomSheetDialogView.findViewById(R.id.add);
+                    EditText addons = bottomSheetDialogView.findViewById(R.id.addons);
+                    EditText payment = bottomSheetDialogView.findViewById(R.id.payment);
+                    TextView cancel = bottomSheetDialogView.findViewById(R.id.cancel);
+                    ToggleButton defaultstatus = bottomSheetDialogView.findViewById(R.id.defaultstatus);
+                    Button add = bottomSheetDialogView.findViewById(R.id.add);
 
-                payment.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(10,2)});
+                    final Boolean[] isChecked = {false};
 
-                add.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(TextUtils.isEmpty(addons.getText().toString())){
-                            addons.setError("Enter Quantity");
-                            addons.requestFocus();
-                            return;
-                        }
-
-                        if(TextUtils.isEmpty(payment.getText().toString())){
-                            payment.setError("Enter Price");
-                            payment.requestFocus();
-                            return;
-                        }
-
-                        int temp=0,position=0;
-                        for(int i=0;i<portions.getItemCount();i++){
-                            Product product = portions1.get(i);
-                            if(product.Name.equals(addons.getText().toString())) {
-                                temp++;
-                                position = i;
+                    defaultstatus.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
+                        @Override
+                        public void onToggle(boolean on) {
+                            if(on){
+                                isChecked[0] = true;
+                                payment.setText("0");
+                                payment.setEnabled(false);
+                            }
+                            else {
+                                isChecked[0] = false;
+                                payment.setEnabled(true);
                             }
                         }
+                    });
+                    payment.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
 
-                        if(temp==0)
-                            portions1.add(new Product(addons.getText().toString(),"\u00a3"+payment.getText().toString()));
-                        else
-                            portions1.set(position,new Product(addons.getText().toString(),"\u00a3"+payment.getText().toString()));
-
-
-                        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-                        r2.setLayoutManager(mLayoutManager);
-
-                        portions = new ProductsAdapter(portions1);
-
-                        r2.setAdapter(portions);
-
-                        addons.setText("");
-                        payment.setText("");
-
-                        if(getActivity()!=null) {
-                            View v = getActivity().getCurrentFocus();
-                            if (v != null) {
-                                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                                assert imm != null;
-                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    add.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (TextUtils.isEmpty(addons.getText().toString())) {
+                                addons.setError("Enter Quantity");
+                                addons.requestFocus();
+                                return;
                             }
+
+                            if (TextUtils.isEmpty(payment.getText().toString())) {
+                                payment.setError("Enter Price");
+                                payment.requestFocus();
+                                return;
+                            }
+
+                            add.setEnabled(false);
+
+                            int temp = 0, position = 0;
+                            for (int i = 0; i < portions.getItemCount(); i++) {
+                                Portions product = portions1.get(i);
+                                if (product.Name.equals(addons.getText().toString())) {
+                                    temp++;
+                                    position = i;
+                                }
+                            }
+
+                            if (temp == 0) {
+                                if(isChecked[0]) {
+                                    for(int i=0;i<portions1.size();i++){
+                                        Portions Portions = portions1.get(i);
+                                        Portions.setDefault(false);
+                                    }
+                                    portions1.add(new Portions(addons.getText().toString(), "\u00a3" + payment.getText().toString(), true));
+                                }
+                                else
+                                    portions1.add(new Portions(addons.getText().toString(), "\u00a3" + payment.getText().toString(),false));
+                            }
+                            else {
+                                if(isChecked[0]) {
+                                    portions1.set(position, new Portions(addons.getText().toString(), "\u00a3" + payment.getText().toString(), true));
+                                    for(int i=0;i<portions1.size();i++){
+                                        if(i!=position) {
+                                            Portions Portions = portions1.get(i);
+                                            Portions.setDefault(false);
+                                        }
+                                    }
+                                }
+                                else
+                                    portions1.set(position, new Portions(addons.getText().toString(), "\u00a3" + payment.getText().toString(),false));
+                            }
+
+
+                            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                            r2.setLayoutManager(mLayoutManager);
+
+                            portions = new PortionsAdapter(portions1);
+
+                            r2.setAdapter(portions);
+
+                            addons.setText("");
+                            payment.setText("");
+
+                            if (getActivity() != null) {
+                                View v = getActivity().getCurrentFocus();
+                                if (v != null) {
+                                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                    assert imm != null;
+                                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                                }
+                            }
+
+                            bottomSheetDialog.dismiss();
                         }
+                    });
 
-                        bottomSheetDialog.dismiss();
-                    }
-                });
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            addons.setText("");
+                            payment.setText("");
+                            bottomSheetDialog.dismiss();
+                        }
+                    });
 
-                cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        addons.setText("");
-                        payment.setText("");
-                        bottomSheetDialog.dismiss();
-                    }
-                });
+                    bottomSheetDialog.show();
 
-                bottomSheetDialog.show();
-
-
+                }
             }
         });
 
@@ -830,6 +873,20 @@ public class AddFoodItems_Edit extends Fragment {
                     return;
                 }
 
+                int temp = 0;
+                for (int i = 0; i < portions.getItemCount(); i++) {
+                    Portions product = portions1.get(i);
+                    if(product.isDefault())
+                        temp++;
+                }
+
+                if(portions.getItemCount()>0) {
+                    if (temp == 0) {
+                        Toast.makeText(getContext(), "Please mark any item as default in portions", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                }
+
 
                 DatabaseReference mref=FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Products").child(pushid);
                 mref.child("PushId").setValue(mref.getKey());
@@ -862,11 +919,12 @@ public class AddFoodItems_Edit extends Fragment {
                 }
 
                 for (int i = 0; i < portions.getItemCount(); i++) {
-                    Product product = portions1.get(i);
+                    Portions product = portions1.get(i);
                     DatabaseReference mref1=mref.child("Portions").push();
                     mref1.child("Name").setValue(product.PushId);
                     mref1.child("PushId").setValue(mref1.getKey());
                     mref1.child("Price").setValue(product.Name.substring(1));
+                    mref1.child("Default").setValue(product.Default);
                     mref1.child("Status").setValue("Active");
                 }
 
@@ -903,7 +961,7 @@ public class AddFoodItems_Edit extends Fragment {
                 r1.setAdapter(productsAdapter);
 
                 portions1.clear();
-                portions = new ProductsAdapter(portions1);
+                portions = new PortionsAdapter(portions1);
                 r2.setAdapter(portions);
 
                 if(getActivity()!=null) {

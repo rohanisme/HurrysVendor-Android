@@ -10,7 +10,7 @@ android {
         applicationId "hurrys.corp.vendor"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 8
+        versionCode 16
         versionName "1.0.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -24,9 +24,7 @@ android {
     }
 
     lintOptions {
-
         checkReleaseBuilds false
-
     }
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'

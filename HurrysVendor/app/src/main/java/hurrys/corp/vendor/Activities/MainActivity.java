@@ -217,6 +217,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        if(TextUtils.isEmpty(session.getselection())){
+            session.setselection("New");
+        }
+
+
         FirebaseDatabase.getInstance().getReference().child("Vendor")
                 .child(session.getusername())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -354,69 +359,69 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        final SweetAlertDialog sDialog = new SweetAlertDialog(this, SweetAlertDialog.BUTTON_CONFIRM);
-        sDialog.setTitleText("App Update!");
-        sDialog.setContentText("Please update the app for a faster and better experience!");
-        sDialog.setConfirmText("Update");
-        sDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-            @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                sweetAlertDialog.dismiss();
-                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                } catch (android.content.ActivityNotFoundException anfe) {
-                    anfe.printStackTrace();
-                }
-            }
-        });
-
-        PackageManager manager = this.getPackageManager();
-        PackageInfo info = null;
-        try {
-            info = manager.getPackageInfo(this.getPackageName(), PackageManager.GET_ACTIVITIES);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
-        try {
-            assert info != null;
-            final int version = info.versionCode;
-
-
-            FirebaseDatabase.getInstance().getReference().child("AppContent").child("Application").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        double vno = Double.parseDouble(dataSnapshot.child("VendorAppVersion").getValue().toString());
-                        String imp = dataSnapshot.child("IMP").getValue().toString();
-                        if (version != vno) {
-                            if (imp.equals("No")) {
-                                sDialog.show();
-                                sDialog.setCancelText("No");
-                                sDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                    @Override
-                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                        sweetAlertDialog.dismiss();
-                                    }
-                                });
-                            } else {
-                                sDialog.show();
-                                sDialog.setCancelable(false);
-                            }
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                }
-            });
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+//        final SweetAlertDialog sDialog = new SweetAlertDialog(this, SweetAlertDialog.BUTTON_CONFIRM);
+//        sDialog.setTitleText("App Update!");
+//        sDialog.setContentText("Please update the app for a faster and better experience!");
+//        sDialog.setConfirmText("Update");
+//        sDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//            @Override
+//            public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                sweetAlertDialog.dismiss();
+//                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+//                try {
+//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+//                } catch (android.content.ActivityNotFoundException anfe) {
+//                    anfe.printStackTrace();
+//                }
+//            }
+//        });
+//
+//        PackageManager manager = this.getPackageManager();
+//        PackageInfo info = null;
+//        try {
+//            info = manager.getPackageInfo(this.getPackageName(), PackageManager.GET_ACTIVITIES);
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        try {
+//            assert info != null;
+//            final int version = info.versionCode;
+//
+//
+//            FirebaseDatabase.getInstance().getReference().child("AppContent").child("Application").addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    if (dataSnapshot.exists()) {
+//                        double vno = Double.parseDouble(dataSnapshot.child("VendorAppVersion").getValue().toString());
+//                        String imp = dataSnapshot.child("IMP").getValue().toString();
+//                        if (version != vno) {
+//                            if (imp.equals("No")) {
+//                                sDialog.show();
+//                                sDialog.setCancelText("No");
+//                                sDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                                    @Override
+//                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                                        sweetAlertDialog.dismiss();
+//                                    }
+//                                });
+//                            } else {
+//                                sDialog.show();
+//                                sDialog.setCancelable(false);
+//                            }
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//                }
+//            });
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
 
     }
 

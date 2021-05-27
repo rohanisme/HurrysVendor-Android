@@ -1,12 +1,16 @@
 package hurrys.corp.vendor.Models.Inventory;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -29,8 +33,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.zcw.togglebutton.ToggleButton;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import hurrys.corp.vendor.Activities.MainActivity;
 import hurrys.corp.vendor.Configurations.Session;
 import hurrys.corp.vendor.Fragments.AddFoodItems;
@@ -48,10 +55,12 @@ public class InventoryAdapter  extends RecyclerView.Adapter<InventoryAdapter.Vie
     private ArrayList<Inventory> invetories;
     private ArrayList<Inventory> inventoriesfilterable;
     private Session session;
+    private Context mContext;
 
-    public InventoryAdapter(ArrayList<Inventory> inventories) {
+    public InventoryAdapter(ArrayList<Inventory> inventories, Context context) {
         this.inventoriesfilterable = inventories;
         this.invetories = inventories;
+        mContext = context;
     }
 
 
@@ -104,7 +113,6 @@ public class InventoryAdapter  extends RecyclerView.Adapter<InventoryAdapter.Vie
                         .into(holder.indicator);
         }
 
-
         if(inventory.Status.equals("Active")){
             holder.toggle.setToggleOn(true);
             holder.status.setText("In Stock");
@@ -115,6 +123,83 @@ public class InventoryAdapter  extends RecyclerView.Adapter<InventoryAdapter.Vie
             holder.status.setText("Out of Stock");
             holder.status.setTextColor(Color.parseColor("#FF0000"));
         }
+
+        if(inventory.CategoryType.equals("Home Food")){
+            holder.stock.setVisibility(View.VISIBLE);
+            holder.stockavailable.setVisibility(View.VISIBLE);
+            if(!TextUtils.isEmpty(inventory.Stock)) {
+                holder.stockavailable.setText("Stock : " + inventory.Stock);
+                if (Integer.parseInt(inventory.Stock) <= 0) {
+                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Products").child(inventory.PushId).child("Status").setValue("InActive");
+                    holder.toggle.setToggleOff(true);
+                    holder.status.setText("Out of Stock");
+                    holder.status.setTextColor(Color.parseColor("#FF0000"));
+                }
+            }
+            else{
+                FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Products").child(inventory.PushId).child("Stock").setValue(0);
+            }
+        }
+        else{
+            holder.stock.setVisibility(View.GONE);
+            holder.stockavailable.setVisibility(View.GONE);
+        }
+
+
+        holder.stock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(holder.linear.getAlpha() == 0.5){
+                    return;
+                }
+
+                final EditText editText = new EditText(mContext);
+                editText.setText(inventory.Stock);
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+                SweetAlertDialog dialog = new SweetAlertDialog(mContext, SweetAlertDialog.NORMAL_TYPE)
+                        .setTitleText("Please mention the Stock available")
+                        .setConfirmText("Update")
+                        .setCancelText("Cancel")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                if (TextUtils.isEmpty(editText.getText().toString())) {
+                                    Toast.makeText(mContext, "Enter Stock", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+
+                                String reason = editText.getText().toString();
+                                inventory.setStock(reason);
+                                if(Integer.parseInt(reason)<=0){
+                                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Products").child(inventory.PushId).child("Status").setValue("InActive");
+                                    holder.toggle.setToggleOff(true);
+                                    holder.status.setText("Out of Stock");
+                                    holder.status.setTextColor(Color.parseColor("#FF0000"));
+                                }
+                                else{
+                                    FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Products").child(inventory.PushId).child("Status").setValue("Active");
+                                    holder.toggle.setToggleOn(true);
+                                    holder.status.setText("In Stock");
+                                    holder.status.setTextColor(Color.parseColor("#00B246"));
+                                }
+                                FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Products").child(inventory.PushId).child("Stock").setValue(Integer.parseInt(reason));
+                                    sweetAlertDialog.dismiss();
+                                holder.stockavailable.setText("Stock : "+inventory.Stock);
+                            }
+                        })
+                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismiss();
+                            }
+                        });
+                dialog.setCustomView(editText);
+                dialog.show();
+            }
+        });
+
+
 
         holder.price.setText("\u00a3"+inventory.SellingPrice);
 
@@ -280,11 +365,21 @@ public class InventoryAdapter  extends RecyclerView.Adapter<InventoryAdapter.Vie
 
                 if(holder.linear.getAlpha()==1.0f) {
                     if (on) {
-                        FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername())
-                                .child("Products").child(holder.pushid.getText().toString()).child("Status").setValue("Active");
-                        holder.toggle.setToggleOn(true);
-                        holder.status.setText("In Stock");
-                        holder.status.setTextColor(Color.parseColor("#00B246"));
+                        if(Integer.parseInt(inventory.Stock)>0) {
+                            FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername())
+                                    .child("Products").child(holder.pushid.getText().toString()).child("Status").setValue("Active");
+                            holder.toggle.setToggleOn(true);
+                            holder.status.setText("In Stock");
+                            holder.status.setTextColor(Color.parseColor("#00B246"));
+                        }
+                        else{
+                            FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername())
+                                    .child("Products").child(holder.pushid.getText().toString()).child("Status").setValue("InActive");
+                            holder.status.setText("Out of Stock");
+                            holder.status.setTextColor(Color.parseColor("#FF0000"));
+                            holder.toggle.setToggleOff(true);
+                            Toast.makeText(holder.view.getContext(),"Update the stock to make it active",Toast.LENGTH_LONG).show();
+                        }
                     } else {
                         FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername())
                                 .child("Products").child(holder.pushid.getText().toString()).child("Status").setValue("InActive");
@@ -390,7 +485,7 @@ public class InventoryAdapter  extends RecyclerView.Adapter<InventoryAdapter.Vie
     public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
         public final View view;
 
-        TextView name,pushid,price,status,edit,customised;
+        TextView name,pushid,price,status,edit,customised,stock,stockavailable;
         ImageView indicator;
         ToggleButton toggle;
         LinearLayout linear;
@@ -407,6 +502,8 @@ public class InventoryAdapter  extends RecyclerView.Adapter<InventoryAdapter.Vie
             linear=view.findViewById(R.id.linear);
             customised=view.findViewById(R.id.customised);
             edit=view.findViewById(R.id.edit);
+            stock=view.findViewById(R.id.stock);
+            stockavailable=view.findViewById(R.id.stockavailable);
 
         }
 

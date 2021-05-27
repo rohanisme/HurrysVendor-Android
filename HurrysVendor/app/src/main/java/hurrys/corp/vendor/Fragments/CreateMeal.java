@@ -501,6 +501,7 @@ public class CreateMeal extends Fragment {
                     return;
                 }
 
+                add.setEnabled(false);
 
                 DatabaseReference mref=FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Products").push();
                 mref.child("PushId").setValue(mref.getKey());
@@ -516,6 +517,7 @@ public class CreateMeal extends Fragment {
                 mref.child("ApprovalStatus").setValue("");
                 mref.child("Status").setValue("Active");
                 mref.child("FoodImage").setValue(path);
+                mref.child("Stock").setValue(0);
 
 //
 //                if(getContext()!=null) {
@@ -532,7 +534,6 @@ public class CreateMeal extends Fragment {
 //                    sDialog.show();
 //                }
 
-
                 path="No";
                 name.setText("");
                 details.setText("");
@@ -545,6 +546,7 @@ public class CreateMeal extends Fragment {
                 submit.setVisibility(View.VISIBLE);
 
                 session.settemp("");
+                add.setEnabled(true);
 
                 if(getActivity()!=null) {
                     Fragment fragment = new CreateTitle();

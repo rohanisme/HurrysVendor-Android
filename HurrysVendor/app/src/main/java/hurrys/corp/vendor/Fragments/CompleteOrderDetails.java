@@ -282,6 +282,7 @@ public class CompleteOrderDetails extends Fragment {
             public void onClick(View view) {
                 if(getActivity()!=null) {
                     Fragment fragment = new Dashboard();
+                    session.setselection("New");
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     fragmentManager.beginTransaction()
                             .addToBackStack(null)

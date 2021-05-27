@@ -17,6 +17,7 @@
             android:id="@+id/indicator"
             android:layout_width="60dp"
             android:layout_height="60dp"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -24,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:orientation="vertical"
-        android:layout_weight="1.3">
+        android:layout_weight="1.7">
 
         <TextView
             android:id="@+id/name"
@@ -41,7 +42,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="8dp"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -76,6 +77,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_weight="1">
 
                 <TextView
@@ -90,33 +92,31 @@
                     android:text="Featured   "
                     />
 
-            </LinearLayout>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:weightSum="2">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_weight="1">
                 <TextView
-                    android:id="@+id/featured"
+                    android:id="@+id/stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:text="Update Stock"
+                    />
+
+                <TextView
+                    android:id="@+id/stockavailable"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="14dp"
-                    android:visibility="gone"
                     android:layout_gravity="center"
-                    android:textColor="#FF0000"
+                    android:textColor="@color/colorPrimary"
                     android:fontFamily="@font/cera_pro_medium"
-                    android:text="Featured"
+                    android:text="Stock : 100000"
                     />
 
             </LinearLayout>
@@ -124,26 +124,38 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusable="false"
+                android:orientation="horizontal"
+                android:focusableInTouchMode="false"
                 android:layout_weight="1">
 
                 <com.zcw.togglebutton.ToggleButton
-                    android:id="@+id/feature"
+                    android:id="@+id/toggle"
                     android:layout_width="50dp"
                     android:clickable="false"
-                    android:visibility="gone"
-                    android:layout_margin="4dp"
+                    android:layout_margin="6dp"
                     android:focusableInTouchMode="false"
                     android:focusable="false"
-                    android:layout_gravity="center"
+                    android:layout_gravity="right"
                     android:layout_height="25dp"/>
+
+                <TextView
+                    android:id="@+id/edit"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="right"
+                    android:background="@drawable/pencil"
+                    android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:text=""
+                    />
+
+
 
             </LinearLayout>
 
-
         </LinearLayout>
-
-
-
 
         <TextView
             android:id="@+id/pushid"
@@ -154,29 +166,6 @@
             android:textColor="@color/quantum_black_secondary_text"
             android:fontFamily="@font/cera_pro_medium"
             />
-
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:visibility="gone"
-            android:textColor="@color/quantum_black_secondary_text"
-            android:fontFamily="@font/cera_pro_medium"
-            />
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:focusable="false"
-        android:orientation="vertical"
-        android:focusableInTouchMode="false"
-        android:layout_weight="0.3">
 
         <TextView
             android:id="@+id/price"
@@ -193,39 +182,18 @@
             />
 
         <TextView
-            android:id="@+id/edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="right"
-            android:drawableRight="@drawable/ic_pencil"
-            android:textColor="@color/colorPrimary"
+            android:textSize="16dp"
+            android:visibility="gone"
+            android:textColor="@color/quantum_black_secondary_text"
             android:fontFamily="@font/cera_pro_medium"
-            android:text=""
             />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="14dp"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:layout_gravity="right"
-            android:textColor="@color/colorPrimary"
-            android:fontFamily="@font/cera_pro_medium"
-            android:text="Stock"
-            />
-
-        <com.zcw.togglebutton.ToggleButton
-            android:id="@+id/toggle"
-            android:layout_width="50dp"
-            android:clickable="false"
-            android:layout_margin="6dp"
-            android:focusableInTouchMode="false"
-            android:focusable="false"
-            android:layout_gravity="right"
-            android:layout_height="25dp"/>
 
     </LinearLayout>
+
+
+
 
 </LinearLayout>

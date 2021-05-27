@@ -430,6 +430,7 @@ public class Login extends AppCompatActivity {
                                 session.setname(users.Name);
                                 session.setemail(users.Email);
                                 session.setcategory(users.Category);
+                                session.setselection("New");
                                 startActivity(intent);
                                 finish();
                             }

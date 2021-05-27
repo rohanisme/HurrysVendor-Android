@@ -49,6 +49,7 @@ public class CreateTitle extends Fragment {
     TextView txt;
     ArrayList<Title> titles = new ArrayList<Title>();
     TitleAdapter titleAdapter;
+    Boolean requiredStatus = false;
     private BottomSheetDialog bottomSheetDialog;
 
     public CreateTitle() {
@@ -103,10 +104,12 @@ public class CreateTitle extends Fragment {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        titles.clear();
+                        requiredStatus = true;
                         if(dataSnapshot.exists()){
-                            titles.clear();
                             for(DataSnapshot d:dataSnapshot.getChildren()){
-                                String a="",b="",c="";
+                                String a="",b="0",c="",e="0";
+                                double req = 0 , added = 0;
                                 if(d.child("Name").exists())
                                     a = d.child("Name").getValue().toString();
 
@@ -116,8 +119,24 @@ public class CreateTitle extends Fragment {
                                 if(d.child("PushId").exists())
                                     c = d.child("PushId").getValue().toString();
 
+                                if(d.child("ItemsAdded").exists())
+                                    e = d.child("ItemsAdded").getValue().toString();
+
+                                req = Double.parseDouble(b);
+                                added = Double.parseDouble(e);
+
+                                if(req == 0)
+                                    req = 1;
+
+                                if(added<req){
+                                    requiredStatus = false;
+                                }
+
                                 titles.add(new Title(a,b,c,pushid));
                             }
+                        }
+                        else{
+                            requiredStatus = false;
                         }
 
                         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -172,12 +191,15 @@ public class CreateTitle extends Fragment {
                             return;
                         }
 
+                        add.setEnabled(false);
+
                         DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Products").child(pushid)
                                 .child("Menu").push();
 
                         mref.child("Name").setValue(addons.getText().toString());
                         mref.child("Required").setValue(payment.getText().toString());
                         mref.child("PushId").setValue(mref.getKey());
+                        mref.child("ItemsAdded").setValue(0);
 
                         addons.setText("");
                         payment.setText("");
@@ -215,6 +237,22 @@ public class CreateTitle extends Fragment {
 
 
                 if (getContext() != null) {
+
+                    if(!requiredStatus){
+                       SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(getContext(),SweetAlertDialog.WARNING_TYPE)
+                               .setTitleText("Please Add all Required Items under Menu")
+                               .setConfirmText("Ok")
+                               .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                   @Override
+                                   public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                       sweetAlertDialog.dismiss();
+                                   }
+                               });
+
+                       sweetAlertDialog.show();
+                       return;
+                    }
+
                     SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("Are you sure you want to submit the meal for approval!")
                             .setConfirmText("Yes")

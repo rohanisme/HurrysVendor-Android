@@ -24,7 +24,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.Nullable;
 
 import java.util.ArrayList;
 
@@ -145,8 +148,8 @@ public class CreateItems extends Fragment {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        titles.clear();
                         if(dataSnapshot.exists()){
-                            titles.clear();
                             for(DataSnapshot d:dataSnapshot.getChildren()){
                                 String a="",b="",c="";
                                 if(d.child("Name").exists())
@@ -158,7 +161,7 @@ public class CreateItems extends Fragment {
                                 if(d.child("PushId").exists())
                                     c = d.child("PushId").getValue().toString();
 
-                                titles.add(new Items(a,b,c,pushid));
+                                titles.add(new Items(a,b,c,pushid,tpushid));
                             }
                         }
 
@@ -202,6 +205,8 @@ public class CreateItems extends Fragment {
                 add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+
                         if(TextUtils.isEmpty(addons.getText().toString())){
                             addons.setError("Enter Menu Title");
                             addons.requestFocus();
@@ -214,6 +219,8 @@ public class CreateItems extends Fragment {
                             return;
                         }
 
+                        add.setEnabled(false);
+
                         DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Products").child(pushid)
                                 .child("Items").push();
 
@@ -223,19 +230,41 @@ public class CreateItems extends Fragment {
                         mref.child("PushId").setValue(mref.getKey());
                         mref.child("Menu").setValue(tpushid);
 
-                        addons.setText("");
-                        payment.setText("");
+                        DatabaseReference dref = FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername()).child("Products").child(pushid).child("Menu").child(tpushid).child("ItemsAdded");
 
-                        if(getActivity()!=null) {
-                            View v = getActivity().getCurrentFocus();
-                            if (v != null) {
-                                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                                assert imm != null;
-                                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                            }
-                        }
+                        dref.runTransaction(new Transaction.Handler() {
+                                                @NonNull
+                                                @Override
+                                                public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                                                    double value = 0;
+                                                    if (currentData.getValue() != null) {
+                                                        value = Long.parseLong(currentData.getValue().toString()) + 1;
+                                                    }
+                                                    currentData.setValue(value);
+                                                    return Transaction.success(currentData);
+                                                }
 
-                        bottomSheetDialog.dismiss();
+                                                @Override
+                                                public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+
+                                                    addons.setText("");
+                                                    payment.setText("");
+
+                                                    if(getActivity()!=null) {
+                                                        View v = getActivity().getCurrentFocus();
+                                                        if (v != null) {
+                                                            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                                            assert imm != null;
+                                                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                                                        }
+                                                    }
+
+                                                    bottomSheetDialog.dismiss();
+
+                                                }
+                                            });
+
+
                     }
                 });
 
