@@ -46,7 +46,6 @@ import hurrys.corp.vendor.Models.Inventory.InventoryAdapter;
 import hurrys.corp.vendor.Models.Inventory.InventoryAdapter1;
 import hurrys.corp.vendor.R;
 
-
 public class InventoryFragment extends Fragment {
 
     private ImageView i1,i2,i4,i3;

@@ -84,12 +84,13 @@ public class SplashScreen extends AppCompatActivity {
                             });
                 } else {
                     if (session.getusername() != "") {
-//                        session.setselection("New");
+                        session.setselection("New");
                         session.settemp("");
                         startActivity(new Intent(SplashScreen.this,
                                 MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         finish();
-                    } else {
+                    }
+                    else {
                         startActivity(new Intent(SplashScreen.this,
                                 Login.class));
                         finish();

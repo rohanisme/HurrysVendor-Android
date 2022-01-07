@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c317bf75-d061-4485-80e5-80bb46556d3f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/HurrysVendor/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/HurrysVendor/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HurrysVendor/app/release/app-release.aab" beforeDir="false" afterPath="$PROJECT_DIR$/HurrysVendor/app/release/app-release.aab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HurrysVendor/app/release/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/HurrysVendor/app/release/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HurrysVendor/app/release/sumni-build.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HurrysVendor/app/src/main/java/hurrys/corp/vendor/Activities/SplashScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/HurrysVendor/app/src/main/java/hurrys/corp/vendor/Activities/SplashScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HurrysVendor/app/src/main/java/hurrys/corp/vendor/Fragments/CompleteOrderDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/HurrysVendor/app/src/main/java/hurrys/corp/vendor/Fragments/CompleteOrderDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HurrysVendor/app/src/main/java/hurrys/corp/vendor/Fragments/InventoryFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/HurrysVendor/app/src/main/java/hurrys/corp/vendor/Fragments/InventoryFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HurrysVendor/app/src/main/java/hurrys/corp/vendor/Fragments/OrderDetailsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/HurrysVendor/app/src/main/java/hurrys/corp/vendor/Fragments/OrderDetailsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HurrysVendor/app/src/main/java/hurrys/corp/vendor/Models/Inventory/InventoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/HurrysVendor/app/src/main/java/hurrys/corp/vendor/Models/Inventory/InventoryAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HurrysVendor/app/src/main/java/hurrys/corp/vendor/Models/Orders/ViewHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/HurrysVendor/app/src/main/java/hurrys/corp/vendor/Models/Orders/ViewHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HurrysVendor/app/src/main/res/layout/new_orders_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/HurrysVendor/app/src/main/res/layout/new_orders_row.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HurrysVendor/app/src/main/res/layout/orders_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/HurrysVendor/app/src/main/res/layout/orders_row.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="22p3onqzVgyhnl4CvJwlNt6SnJV" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/HurrysVendor" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c317bf75-d061-4485-80e5-80bb46556d3f" name="Default Changelist" comment="" />
+      <created>1640520878922</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1640520878922</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1640521114715">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1640521114715" />
+  </component>
+</project>

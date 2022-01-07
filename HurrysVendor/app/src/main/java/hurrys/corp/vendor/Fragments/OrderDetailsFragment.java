@@ -81,10 +81,8 @@ public class OrderDetailsFragment extends Fragment {
     String selection = "";
     DataSnapshot d;
     double max=0;
-
     private ArrayList<String> foodpushid=new ArrayList<String>();
     private ArrayList<String> quantity=new ArrayList<String>();
-
     CircleImageView pp;
     TextView deliveryname;
     ImageView call, openMenu;
@@ -232,10 +230,10 @@ public class OrderDetailsFragment extends Fragment {
                                 instructions.setText("No Special Instructions");
 
                             if(dataSnapshot.child("DeliverySelection").exists()){
-                                if(dataSnapshot.child("DeliverySelection").getValue().toString().equals("Self")){
+                                if(dataSnapshot.child("DeliverySelection").getValue().toString().equalsIgnoreCase("Self")){
                                     deliverytype.setText("Self Delivery");
                                 }
-                                else if(dataSnapshot.child("DeliverySelection").getValue().toString().equals("Self PickUp")){
+                                else if(dataSnapshot.child("DeliverySelection").getValue().toString().equalsIgnoreCase("Self PickUp")){
                                     deliverytype.setText("Self Pickup");}
                                 else{
                                     deliverytype.setText("Delivery By Hurrys");
@@ -243,7 +241,7 @@ public class OrderDetailsFragment extends Fragment {
                             }
 
                             if(dataSnapshot.child("DeliveryTime").exists()){
-                                if(dataSnapshot.child("DeliveryTime").getValue().toString().equals("Immediately")){
+                                if(dataSnapshot.child("DeliveryTime").getValue().toString().equalsIgnoreCase("Immediately")){
                                     slot.setText("Immediately");
                                 }
                                 else{
@@ -274,7 +272,7 @@ public class OrderDetailsFragment extends Fragment {
                             deliveryamountrow.setVisibility(View.GONE);
                             gtot = (price - tot );
 
-                            if(selection.equals("Self")){
+                            if(selection.equalsIgnoreCase("Self")){
                                 gtot = gtot + del;
                                 deliveryamountrow.setVisibility(View.VISIBLE);
                             }
@@ -286,7 +284,7 @@ public class OrderDetailsFragment extends Fragment {
                             grandtotal.setText("\u00a3" + form.format(Math.round(gtot * 100.0) / 100.0));
                             gtot = Double.parseDouble(grandtotal.getText().toString().substring(1));
 
-                            address.setText(dataSnapshot.child("Address").getValue().toString());
+                            address.setText(dataSnapshot.child("Flat").getValue().toString()+","+dataSnapshot.child("Address").getValue().toString());
                             paddress.setText("Address : "+dataSnapshot.child("Address").getValue().toString());
                             daname.setText(dataSnapshot.child("CName").getValue().toString());
                             pcustomer.setText("Customer : "+dataSnapshot.child("CName").getValue().toString());
@@ -297,7 +295,7 @@ public class OrderDetailsFragment extends Fragment {
                             pcookinginstructions.setText(dataSnapshot.child("VendorInstructions").getValue().toString());
 
                                 if (dataSnapshot.child("Status").getValue().toString().equals("1")) {
-                                   if(!selection.equals("Self PickUp")){
+                                   if(!selection.equalsIgnoreCase("Self PickUp")){
                                         accpet.setVisibility(View.VISIBLE);
                                         accpet1.setVisibility(View.VISIBLE);
                                         accept2.setVisibility(View.GONE);
@@ -323,7 +321,7 @@ public class OrderDetailsFragment extends Fragment {
                                 }
                                 else if (dataSnapshot.child("Status").getValue().toString().equals("3")) {
                                     if (!TextUtils.isEmpty(selection)) {
-                                        if (selection.equals("Self")) {
+                                        if (selection.equalsIgnoreCase("Self")) {
                                             ready.setVisibility(View.GONE);
                                             decline.setVisibility(View.GONE);
                                             accpet.setVisibility(View.GONE);
@@ -336,7 +334,7 @@ public class OrderDetailsFragment extends Fragment {
                                 }
                                 else if (dataSnapshot.child("Status").getValue().toString().equals("4")) {
                                     if (!TextUtils.isEmpty(selection)) {
-                                        if (selection.equals("Self")||selection.equals("Self PickUp")) {
+                                        if (selection.equalsIgnoreCase("Self")||selection.equalsIgnoreCase("Self PickUp")) {
                                             ready.setVisibility(View.GONE);
                                             decline.setVisibility(View.GONE);
                                             accept2.setVisibility(View.GONE);
@@ -406,7 +404,7 @@ public class OrderDetailsFragment extends Fragment {
                                 print.setVisibility(View.GONE);
                             }
 
-                            if (dataSnapshot.child("OrderType").getValue().toString().equals("Others")) {
+                            if (dataSnapshot.child("OrderType").getValue().toString().equalsIgnoreCase("Others")) {
                                 mref = FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Cart");
 
                                 FirebaseRecyclerAdapter<OrderDetails, ViewHolder> firebaseRecyclerAdapter =
@@ -494,7 +492,7 @@ public class OrderDetailsFragment extends Fragment {
                                 mRecyclerView.setAdapter(firebaseRecyclerAdapter);
                             }
 
-                            if (dataSnapshot.child("OrderType").getValue().toString().equals("Others")) {
+                            if (dataSnapshot.child("OrderType").getValue().toString().equalsIgnoreCase("Others")) {
                                 mref = FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Cart");
 
                                 FirebaseRecyclerAdapter<OrderDetails, ViewHolder> firebaseRecyclerAdapter =
@@ -664,7 +662,7 @@ public class OrderDetailsFragment extends Fragment {
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
 
-                                    if(!slot.getText().toString().equals("Immediately")){
+                                    if(!slot.getText().toString().equalsIgnoreCase("Immediately")){
 
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Hurrys");
@@ -673,7 +671,7 @@ public class OrderDetailsFragment extends Fragment {
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
                                         session.setselection("On");
 
-                                        if(session.getcategory().equals("Home Food")){
+                                        if(session.getcategory().equalsIgnoreCase("Home Food")){
                                             reduceCartData();
                                         }
                                         else {
@@ -737,7 +735,7 @@ public class OrderDetailsFragment extends Fragment {
                                                         session.setselection("On");
                                                         sweetAlertDialog.dismiss();
 
-                                                        if(session.getcategory().equals("Home Food")){
+                                                        if(session.getcategory().equalsIgnoreCase("Home Food")){
                                                             reduceCartData();
                                                         }
                                                         else {
@@ -788,7 +786,7 @@ public class OrderDetailsFragment extends Fragment {
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
 
-                                    if(!slot.getText().toString().equals("Immediately")){
+                                    if(!slot.getText().toString().equalsIgnoreCase("Immediately")){
 
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Self");
@@ -797,7 +795,7 @@ public class OrderDetailsFragment extends Fragment {
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
                                         session.setselection("On");
 
-                                        if(session.getcategory().equals("Home Food")){
+                                        if(session.getcategory().equalsIgnoreCase("Home Food")){
                                             reduceCartData();
                                         }
                                         else {
@@ -857,7 +855,7 @@ public class OrderDetailsFragment extends Fragment {
                                                         sweetAlertDialog.dismiss();
                                                         session.setselection("On");
 
-                                                        if(session.getcategory().equals("Home Food")){
+                                                        if(session.getcategory().equalsIgnoreCase("Home Food")){
                                                             reduceCartData();
                                                         }
                                                         else {
@@ -908,7 +906,7 @@ public class OrderDetailsFragment extends Fragment {
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
 
-                                    if(slot.getText().toString().equals("Immediately")){
+                                    if(slot.getText().toString().equalsIgnoreCase("Immediately")){
 
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("2");
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("DeliverySelection").setValue("Self PickUp");
@@ -916,7 +914,7 @@ public class OrderDetailsFragment extends Fragment {
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerAddress").setValue(session.getaddress());
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("SellerNumber").setValue(session.getnumber());
                                         session.setselection("On");
-                                        if(session.getcategory().equals("Home Food")){
+                                        if(session.getcategory().equalsIgnoreCase("Home Food")){
                                             reduceCartData();
                                         }
                                         else {
@@ -954,7 +952,7 @@ public class OrderDetailsFragment extends Fragment {
                                                         session.setselection("On");
                                                         sweetAlertDialog.dismiss();
 
-                                                        if(session.getcategory().equals("Home Food")){
+                                                        if(session.getcategory().equalsIgnoreCase("Home Food")){
                                                             reduceCartData();
                                                         }
                                                         else {
@@ -1061,7 +1059,7 @@ public class OrderDetailsFragment extends Fragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
-                                    if (selection.equals("Self PickUp")) {
+                                    if (selection.equalsIgnoreCase("Self PickUp")) {
                                         FirebaseDatabase.getInstance().getReference().child("Orders").child(pushid).child("Status").setValue("4");
                                     }
                                     else{
@@ -1095,7 +1093,7 @@ public class OrderDetailsFragment extends Fragment {
                                                     "Cr", "Order Total", orderid.getText().toString().substring(12), "Pending", pushid);
                                             rref1.setValue(earnings);
                                             if (getContext() != null) {
-                                                if (selection.equals("Self")) {
+                                                if (selection.equalsIgnoreCase("Self")) {
                                                     SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
                                                             .setTitleText("Good job!")
                                                             .setContentText("You Accepted  to self deliver the order!")
@@ -1110,7 +1108,7 @@ public class OrderDetailsFragment extends Fragment {
                                                     sDialog.setCancelable(false);
                                                     sDialog.show();
                                                 }
-                                                else if (selection.equals("Self PickUp")) {
+                                                else if (selection.equalsIgnoreCase("Self PickUp")) {
                                                     SweetAlertDialog sDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
                                                             .setTitleText("Good job!")
                                                             .setContentText("Your order will be self picked by customer shortly!")

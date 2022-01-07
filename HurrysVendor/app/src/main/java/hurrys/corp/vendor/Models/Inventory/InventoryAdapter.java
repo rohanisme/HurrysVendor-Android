@@ -365,20 +365,28 @@ public class InventoryAdapter  extends RecyclerView.Adapter<InventoryAdapter.Vie
 
                 if(holder.linear.getAlpha()==1.0f) {
                     if (on) {
-                        if(Integer.parseInt(inventory.Stock)>0) {
+                        if(session.getcategory().equals("Home Food")) {
+                            if (Integer.parseInt(inventory.Stock) > 0) {
+                                FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername())
+                                        .child("Products").child(holder.pushid.getText().toString()).child("Status").setValue("Active");
+                                holder.toggle.setToggleOn(true);
+                                holder.status.setText("In Stock");
+                                holder.status.setTextColor(Color.parseColor("#00B246"));
+                            } else {
+                                FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername())
+                                        .child("Products").child(holder.pushid.getText().toString()).child("Status").setValue("InActive");
+                                holder.status.setText("Out of Stock");
+                                holder.status.setTextColor(Color.parseColor("#FF0000"));
+                                holder.toggle.setToggleOff(true);
+                                Toast.makeText(holder.view.getContext(), "Update the stock to make it active", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        else{
                             FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername())
                                     .child("Products").child(holder.pushid.getText().toString()).child("Status").setValue("Active");
                             holder.toggle.setToggleOn(true);
                             holder.status.setText("In Stock");
                             holder.status.setTextColor(Color.parseColor("#00B246"));
-                        }
-                        else{
-                            FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername())
-                                    .child("Products").child(holder.pushid.getText().toString()).child("Status").setValue("InActive");
-                            holder.status.setText("Out of Stock");
-                            holder.status.setTextColor(Color.parseColor("#FF0000"));
-                            holder.toggle.setToggleOff(true);
-                            Toast.makeText(holder.view.getContext(),"Update the stock to make it active",Toast.LENGTH_LONG).show();
                         }
                     } else {
                         FirebaseDatabase.getInstance().getReference().child("Vendor").child(session.getusername())

@@ -49,9 +49,10 @@ public class CompleteOrderDetails extends Fragment {
     private RecyclerView mRecyclerView;
     private DatabaseReference mref;
     private TextView orderid, date, daname, address,support,reason;
-
+    private LinearLayout deliveryrow,deliveryamountrow;
+    double gtot = 0;
     private TextView subtotal,discount,commision,delivery,tax,grandtotal,status;
-
+    String selection="";
     private Button neworder;
 
 
@@ -63,7 +64,6 @@ public class CompleteOrderDetails extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
 
@@ -80,17 +80,15 @@ public class CompleteOrderDetails extends Fragment {
         support = v.findViewById(R.id.support);
         status = v.findViewById(R.id.status);
         reason = v.findViewById(R.id.reason);
-
+        deliveryrow = v.findViewById(R.id.deliveryrow);
         subtotal=v.findViewById(R.id.subtotal);
         delivery=v.findViewById(R.id.delivery);
         commision=v.findViewById(R.id.commision);
         tax=v.findViewById(R.id.tax);
         grandtotal=v.findViewById(R.id.grandtotal);
         neworder=v.findViewById(R.id.neworder);
-
-
+        discount=v.findViewById(R.id.discount);
         reason.setVisibility(View.GONE);
-
 
         ImageView back=v.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +108,6 @@ public class CompleteOrderDetails extends Fragment {
         mRecyclerView = v.findViewById(R.id.recyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
-
 
         support.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,22 +141,32 @@ public class CompleteOrderDetails extends Fragment {
                             orderid.setText(dataSnapshot.child("OrderNo").getValue().toString());
 
 
+                            if (dataSnapshot.child("DeliverySelection").exists()) {
+                                selection = dataSnapshot.child("DeliverySelection").getValue().toString();
+                            }
 
                             double price = Double.parseDouble(subtotal.getText().toString().substring(1));
                             double del = Double.parseDouble(delivery.getText().toString().substring(1));
+//                            double taxes = Double.parseDouble(tax.getText().toString().substring(1));
+                            double disc = Double.parseDouble(discount.getText().toString().substring(1));
                             double com = 25;
 
-                            double tot = price * (com/100.0);
+                            double tot = price * (com / 100.0);
 
 
-                            double gtot = (price - tot - del );
+                            gtot = (price - tot );
+
+                            if(selection.equalsIgnoreCase("Self")){
+                                gtot = gtot + del;
+                            }
+
 
                             commision.setText("\u00a3"+form.format(Math.round(tot*100.0)/100.0));
                             tax.setText("\u00a3"+form.format(0.00));
                             grandtotal.setText("\u00a3"+form.format(Math.round(gtot*100.0)/100.0));
 
 
-                            address.setText(dataSnapshot.child("Address").getValue().toString());
+                            address.setText(dataSnapshot.child("Flat").getValue().toString()+","+dataSnapshot.child("Address").getValue().toString());
                             daname.setText(dataSnapshot.child("CName").getValue().toString());
 
                             if(dataSnapshot.child("Status").getValue().toString().equals("5")) {

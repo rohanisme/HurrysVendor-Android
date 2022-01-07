@@ -220,6 +220,19 @@
                     android:textColor="#0e4d97"
                     android:textSize="16dp" />
 
+                <TextView
+                    android:id="@+id/deliveryStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/cera_pro_medium"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text=""
+                    android:visibility="gone"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14dp" />
+
             </LinearLayout>
 
 

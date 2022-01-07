@@ -50,7 +50,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public void setDetails(Context ctx, String CName, String Address, String Subtotal, String Pushid, String OrderNo, String OrderDateTime, String Qty, String Payment, String Status, String DeliveryPartner, String DeliveryNumber, String DeliveryImage,String Taxes,String DeliveryPrice,String DeliverySelection) {
 
         CardView cardView;
-        TextView name, date, amount, payment, pushid, address, items, orderid, status, number;
+        TextView name, date, amount, payment, pushid, address, items, orderid, status, number,deliveryStatus;
         LinearLayout addressrow, deliveryrow;
         CircleImageView pp;
         TextView deliveryname;
@@ -72,6 +72,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         deliveryname = mView.findViewById(R.id.deliveryname);
         call = mView.findViewById(R.id.call);
         number = mView.findViewById(R.id.number);
+        deliveryStatus = mView.findViewById(R.id.deliveryStatus);
 
 
         double price = Double.parseDouble(Subtotal);
@@ -108,6 +109,20 @@ public class ViewHolder extends RecyclerView.ViewHolder {
             cardView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
         }
 
+        if(DeliverySelection.equalsIgnoreCase("Self PickUp")) {
+            deliveryStatus.setText("Self Pickup");
+        }
+        else if(DeliverySelection.equalsIgnoreCase("Self")) {
+            deliveryStatus.setText("Self Delivery");
+        }
+        else{
+            deliveryStatus.setText(DeliverySelection);
+        }
+
+        deliveryStatus.setTextColor(Color.parseColor("#b38400"));
+        deliveryStatus.setBackgroundColor(Color.parseColor("#FFF0C5"));
+        deliveryStatus.setVisibility(View.GONE);
+
         if (!TextUtils.isEmpty(DeliveryPartner)) {
             addressrow.setVisibility(View.GONE);
             deliveryrow.setVisibility(View.VISIBLE);
@@ -127,7 +142,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public void setDetailsOngoing(Context ctx, String CName, String Address, String Subtotal, String Pushid, String OrderNo, String OrderDateTime, String Qty, String Payment, String Status, String DeliveryPartner, String DeliveryNumber, String DeliveryImage,String Taxes,String DeliveryPrice,String DeliverySelection) {
 
         CardView cardView;
-        TextView name, date, amount, payment, pushid, address, items, orderid, status, number;
+        TextView name, date, amount, payment, pushid, address, items, orderid, status, number,deliveryStatus;
         LinearLayout addressrow, deliveryrow;
         CircleImageView pp;
         TextView deliveryname;
@@ -135,6 +150,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
         cardView = mView.findViewById(R.id.card);
         name = mView.findViewById(R.id.name);
+        deliveryStatus = mView.findViewById(R.id.deliveryStatus);
         date = mView.findViewById(R.id.date);
         amount = mView.findViewById(R.id.amount);
         payment = mView.findViewById(R.id.payment);
@@ -191,6 +207,19 @@ public class ViewHolder extends RecyclerView.ViewHolder {
             cardView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
         }
 
+        if(DeliverySelection.equalsIgnoreCase("Self PickUp")) {
+            deliveryStatus.setText("Self Pickup");
+        }
+        else if(DeliverySelection.equalsIgnoreCase("Self")) {
+            deliveryStatus.setText("Self Delivery");
+        }
+        else{
+            deliveryStatus.setText(DeliverySelection);
+        }
+
+        deliveryStatus.setTextColor(Color.parseColor("#b38400"));
+        deliveryStatus.setBackgroundColor(Color.parseColor("#FFF0C5"));
+
         if (!TextUtils.isEmpty(DeliveryPartner)) {
             addressrow.setVisibility(View.GONE);
             deliveryrow.setVisibility(View.VISIBLE);
@@ -210,13 +239,14 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public void setDetails1(Context ctx, String CName, String Address, String Subtotal, String Pushid, String OrderNo, String OrderDateTime, String Qty, String Payment, String Status,String Taxes,String DeliveryPrice,String DeliverySelection) {
 
         CardView cardView;
-        TextView name, date, amount, payment, pushid, address, items, orderid, status;
+        TextView name, date, amount, payment, pushid, address, items, orderid, status,deliveryStatus;
 
 
         cardView = mView.findViewById(R.id.card);
         name = mView.findViewById(R.id.name);
         date = mView.findViewById(R.id.date);
         amount = mView.findViewById(R.id.amount);
+        deliveryStatus = mView.findViewById(R.id.deliveryStatus);
         payment = mView.findViewById(R.id.payment);
         pushid = mView.findViewById(R.id.pushid);
         address = mView.findViewById(R.id.address);
@@ -248,6 +278,19 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         payment.setText(Payment);
         address.setText(Address);
         name.setText(CName);
+        if(DeliverySelection.equalsIgnoreCase("Self PickUp")) {
+            deliveryStatus.setText("Self Pickup");
+        }
+        else if(DeliverySelection.equalsIgnoreCase("Self")) {
+            deliveryStatus.setText("Self Delivery");
+        }
+        else{
+            deliveryStatus.setText(DeliverySelection);
+        }
+
+        deliveryStatus.setTextColor(Color.parseColor("#b38400"));
+        deliveryStatus.setBackgroundColor(Color.parseColor("#FFF0C5"));
+
         if (Status.equals("5")) {
             status.setText("DELIVERED");
             status.setTextColor(Color.parseColor("#00B246"));
