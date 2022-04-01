@@ -124,7 +124,7 @@ public class Location extends Fragment implements
         coord=v.findViewById(R.id.coord);
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
-        Places.initialize(getContext(), "AIzaSyCnaq_nQX-2yYsEQHJifUmS2q3Je5N-f7c");
+        Places.initialize(getContext(), "AIzaSyBpffV9yHzav26I5CBZxT0BdJuo06MsK3I");
         placesClient = Places.createClient(getContext());
         final AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
 

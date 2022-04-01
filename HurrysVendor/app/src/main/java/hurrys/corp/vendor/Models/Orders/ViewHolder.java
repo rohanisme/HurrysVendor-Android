@@ -255,53 +255,88 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         status = mView.findViewById(R.id.status);
 
 
-        double price = Double.parseDouble(Subtotal);
-        double del = Double.parseDouble(DeliveryPrice);
-        double taxes = Double.parseDouble(Taxes);
-        double com = 25;
-        double tot = price * (com / 100.0);
-        double gtot = price - tot ;
+        try {
+            double price = Double.parseDouble(Subtotal);
+            double del = Double.parseDouble(DeliveryPrice);
+            double taxes = Double.parseDouble(Taxes);
+            double com = 25;
+            double tot = price * (com / 100.0);
+            double gtot = price - tot;
 
-        if(!TextUtils.isEmpty(DeliverySelection)) {
-            if (DeliverySelection.equals("Self")) {
-                gtot = gtot + del;
+            if (!TextUtils.isEmpty(DeliverySelection)) {
+                if (DeliverySelection.equals("Self")) {
+                    gtot = gtot + del;
+                }
+            }
+
+            DecimalFormat form = new DecimalFormat("0.00");
+
+            pushid.setText(Pushid);
+            orderid.setText("Order ID # " + OrderNo.substring(5));
+            date.setText(OrderDateTime);
+            amount.setText("\u00a3 " + form.format(Math.round(gtot * 100.0) / 100.0));
+            items.setText(Qty + " items");
+            payment.setText(Payment);
+            address.setText(Address);
+            name.setText(CName);
+            if (DeliverySelection.equalsIgnoreCase("Self PickUp")) {
+                deliveryStatus.setText("Self Pickup");
+            } else if (DeliverySelection.equalsIgnoreCase("Self")) {
+                deliveryStatus.setText("Self Delivery");
+            } else {
+                deliveryStatus.setText(DeliverySelection);
+            }
+
+            deliveryStatus.setTextColor(Color.parseColor("#b38400"));
+            deliveryStatus.setBackgroundColor(Color.parseColor("#FFF0C5"));
+
+            if (Status.equals("5")) {
+                status.setText("DELIVERED");
+                status.setTextColor(Color.parseColor("#00B246"));
+                status.setBackgroundColor(Color.parseColor("#e5f7ec"));
+            } else if (Status.equals("10")) {
+                status.setText("CANCELLED");
+                status.setTextColor(Color.parseColor("#FF0000"));
+                status.setBackgroundColor(Color.parseColor("#F1B2B2"));
+            } else {
+                cardView.setVisibility(View.GONE);
+                cardView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
             }
         }
+        catch (Exception e){
 
-        DecimalFormat form = new DecimalFormat("0.00");
 
-        pushid.setText(Pushid);
-        orderid.setText("Order ID # " + OrderNo.substring(5));
-        date.setText(OrderDateTime);
-        amount.setText("\u00a3 " + form.format(Math.round(gtot * 100.0) / 100.0));
-        items.setText(Qty + " items");
-        payment.setText(Payment);
-        address.setText(Address);
-        name.setText(CName);
-        if(DeliverySelection.equalsIgnoreCase("Self PickUp")) {
-            deliveryStatus.setText("Self Pickup");
-        }
-        else if(DeliverySelection.equalsIgnoreCase("Self")) {
-            deliveryStatus.setText("Self Delivery");
-        }
-        else{
-            deliveryStatus.setText(DeliverySelection);
-        }
+            pushid.setText(Pushid);
+            orderid.setText("Order ID # " + OrderNo.substring(5));
+            date.setText(OrderDateTime);
+            amount.setText("\u00a3 Error" );
+            items.setText(Qty + " items");
+            payment.setText(Payment);
+            address.setText(Address);
+            name.setText(CName);
+            if (DeliverySelection.equalsIgnoreCase("Self PickUp")) {
+                deliveryStatus.setText("Self Pickup");
+            } else if (DeliverySelection.equalsIgnoreCase("Self")) {
+                deliveryStatus.setText("Self Delivery");
+            } else {
+                deliveryStatus.setText(DeliverySelection);
+            }
 
-        deliveryStatus.setTextColor(Color.parseColor("#b38400"));
-        deliveryStatus.setBackgroundColor(Color.parseColor("#FFF0C5"));
+            deliveryStatus.setTextColor(Color.parseColor("#b38400"));
+            deliveryStatus.setBackgroundColor(Color.parseColor("#FFF0C5"));
 
-        if (Status.equals("5")) {
-            status.setText("DELIVERED");
-            status.setTextColor(Color.parseColor("#00B246"));
-            status.setBackgroundColor(Color.parseColor("#e5f7ec"));
-        } else if (Status.equals("10")) {
-            status.setText("CANCELLED");
-            status.setTextColor(Color.parseColor("#FF0000"));
-            status.setBackgroundColor(Color.parseColor("#F1B2B2"));
-        } else {
-            cardView.setVisibility(View.GONE);
-            cardView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+            if (Status.equals("5")) {
+                status.setText("DELIVERED");
+                status.setTextColor(Color.parseColor("#00B246"));
+                status.setBackgroundColor(Color.parseColor("#e5f7ec"));
+            } else if (Status.equals("10")) {
+                status.setText("CANCELLED");
+                status.setTextColor(Color.parseColor("#FF0000"));
+                status.setBackgroundColor(Color.parseColor("#F1B2B2"));
+            } else {
+                cardView.setVisibility(View.GONE);
+                cardView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+            }
         }
 
     }

@@ -426,7 +426,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cera_pro_medium"
                 android:paddingStart="8dp"
-                android:text="Safety Standards"
+                android:text="More Information"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 

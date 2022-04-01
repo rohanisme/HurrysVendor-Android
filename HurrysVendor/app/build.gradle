@@ -3,14 +3,14 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.0"
 
     defaultConfig {
         applicationId "hurrys.corp.vendor"
         minSdkVersion 19
-        targetSdkVersion 29
-        versionCode 21
+        targetSdkVersion 30
+        versionCode 24
         versionName "1.0.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

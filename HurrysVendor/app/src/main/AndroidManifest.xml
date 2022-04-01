@@ -69,7 +69,7 @@
             android:value="@string/default_notification_channel_id" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCnaq_nQX-2yYsEQHJifUmS2q3Je5N-f7c" />
+            android:value="AIzaSyBpffV9yHzav26I5CBZxT0BdJuo06MsK3I" />
 
         <service
             android:name=".Configurations.MyFirebaseMessagingService"

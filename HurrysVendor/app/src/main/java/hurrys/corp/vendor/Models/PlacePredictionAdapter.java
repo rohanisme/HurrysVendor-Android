@@ -125,7 +125,7 @@ public class PlacePredictionAdapter extends RecyclerView.Adapter<PlacePrediction
 
     private void geocodePlaceAndDisplay(final AutocompletePrediction placePrediction) {
         // Construct the request URL
-        final String apiKey = "AIzaSyCnaq_nQX-2yYsEQHJifUmS2q3Je5N-f7c";
+        final String apiKey = "AIzaSyBpffV9yHzav26I5CBZxT0BdJuo06MsK3I";
         final String url = "https://maps.googleapis.com/maps/api/geocode/json?place_id=%s&key=%s";
         final String requestURL = String.format(url, placePrediction.getPlaceId(), apiKey);
 
